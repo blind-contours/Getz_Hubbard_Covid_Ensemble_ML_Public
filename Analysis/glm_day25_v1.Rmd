@@ -1,0 +1,201 @@
+---
+title: "COVID_day25_glm"
+author: "Whitney Mgbara"
+date: "4/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(root.dir = '/tmp', echo = TRUE)
+```
+
+### Load Libraries
+```{r libraries, message=FALSE, results="hide", warning=FALSE}
+
+require(tidyverse)
+require(ggplot2)
+require(readxl)
+# require(sandwich)
+# require(msm)
+
+require(moonBook)
+require(ggiraph)
+require(ggiraphExtra)
+require(plyr)
+require(gridExtra) # grid.arrange(plot1, plot2, ncol=2)
+
+require(leaps)
+
+```
+
+
+
+
+### Load data
+```{r data}
+day25 <- read_excel("Data/day25.xls")
+
+# head(day25)
+
+summary(day25)
+```
+
+
+
+
+
+#### Create new variable popland from Population and log(LandArea)
+```{r popland}
+  
+day25$popland <- day25$Population/log(day25$LandArea)
+
+```
+
+
+
+
+### Single variable 
+#### 1. Fit1: ConfirmedCasesDay25 = $\beta_0$ + $\beta_1$ * CommutingByPublicTransportation
+```{r fit1, warning=FALSE}
+
+fit1 <- lm(ConfirmedCasesDay25 ~ CommutingByPublicTransportation, data=day25)
+
+summary(fit1)
+
+# ggPredict(fit1,se=TRUE,interactive=TRUE)
+```
+
+
+
+
+
+#### 2. Plot log transform with x = log(CommutingByPublicTransportation)
+```{r logPlot1}
+ggplot(data = day25, aes(x = log(CommutingByPublicTransportation), y = log(ConfirmedCasesDay25), colour=State)) +
+  geom_point()
+```
+
+
+
+
+
+#### 3. Fit2: log(ConfirmedCasesDay25) = $\beta_0$ + $\beta_1$ log(CommutingByPublicTransportation)
+```{r fit2}
+
+fit2 <- lm(log1p(ConfirmedCasesDay25) ~ log1p(CommutingByPublicTransportation), data=day25)
+
+summary(fit2)
+
+```
+
+
+
+#### 4. Plot line from fit2 with y = log(ConfirmedCasesDay25) and x = log(CommutingByPublicTransportation)
+```{r logPlot2}
+plot(log(day25$ConfirmedCasesDay25), log(day25$CommutingByPublicTransportation))
+abline(fit2)
+```
+
+
+
+
+
+###  Multivariate 
+#### 1. Plot log of variables x = CommutingByPublicTransportation, Population, popland, and GDP with y = ConfirmedCasesDay25
+```{r logPlots,warning=FALSE, echo=FALSE}
+l <- 
+  ggplot(data = day25, aes(x = log(CommutingByPublicTransportation), y = log(ConfirmedCasesDay25))) +
+  geom_point() 
+
+
+m <- 
+  ggplot(data = day25, aes(x = log(Population), y = log(ConfirmedCasesDay25))) +
+  geom_point()
+
+
+n <- 
+  ggplot(data = day25, aes(x = log(popland), y = log(ConfirmedCasesDay25))) +
+  geom_point()
+
+
+o <- 
+  ggplot(data = day25, aes(x = log(GDP), y = log(ConfirmedCasesDay25))) +
+  geom_point()
+
+
+grid.arrange(l, m, n, o, ncol=2)
+
+
+```
+
+
+
+
+#### 2. Fit3: log(ConfirmedCasesDay25) = $\beta_0$ + $\beta_1$ log(CommutingByPublicTransportation) + $\beta_2$ log(GDP) + $\beta_3$ log(popland)
+```{r fit3}
+
+fit3 = lm(log1p(ConfirmedCasesDay25) ~ log1p(CommutingByPublicTransportation)+log1p(GDP)+log1p(Population)+log1p(popland),data=day25)
+
+
+summary(fit3)
+
+```
+
+
+
+
+#### 3. Fit4: log(ConfirmedCasesDay25) = $\beta_0$ + $\beta_1$ log(CommutingByPublicTransportation) + $\beta_2$ log(GDP) + $\beta_3$ log(Population) + $\beta_4$ log(popland) +  $\beta_5$ log(popland * Population)
+```{r fit4}
+fit4 = lm(log1p(ConfirmedCasesDay25) ~ log1p(CommutingByPublicTransportation)+log1p(GDP)+log1p(Population)+log1p(popland)+log1p(Population)*log1p(popland),data=day25)
+
+
+summary(fit4)
+```
+
+
+
+
+
+
+
+#### 4. Select 4 best models for each subset size (1 predictor, 2 predictors, etc.)
+Playing around with subsets. Not quite sure how to interpret this yet. If anyone else knows please share. Or, maybe this is not the best for the question we want to answer.  
+```{r leaps}
+# library(leaps)
+attach(day25)
+leaps<-regsubsets(log1p(ConfirmedCasesDay25) ~ log1p(CommutingByPublicTransportation)+log(Population)+log1p(GDP)+log1p(popland),data=day25,nbest=4)
+
+# view results
+# summary(leaps)
+
+# plot a table of models showing variables in each model.
+# models are ordered by the selection statistic.
+plot(leaps,scale="r2")
+```
+
+
+```{r}
+drop1( glm(log1p(ConfirmedCasesDay25) ~ log1p(CommutingByPublicTransportation)+log(Population)+log1p(GDP),data=day25 ), test="Chisq",k=log(460))
+```
+
+
+
+
+### Multivariate Multiple Regression
+
+#### 1. Plotting y = log(ConfirmedCasesDay25) and  y = log(DayOfFirstCases) with x = log(CommutingByPublicTransportation)
+```{r multiYplot}
+ggplot(data = day25, aes(x = log(CommutingByPublicTransportation), y = log(ConfirmedCasesDay25))) +
+  geom_point(color='darkblue') +
+  geom_point(aes(y = log(DayOfFirstCases)), alpha=.5, position=position_jitter(h=.2))
+```
+
+
+#### 2. Model with y = log(ConfirmedCasesDay25) and  y = log(DayOfFirstCases)
+```{r multiY}
+
+mlm1 <- lm(cbind(DayOfFirstCases, ConfirmedCasesDay25) ~ CommutingByPublicTransportation+GDP+popland,data=day25,family=poisson())
+
+summary(mlm1)
+```
+

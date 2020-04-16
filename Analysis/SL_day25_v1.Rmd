@@ -1,0 +1,277 @@
+---
+title: "COVID_day25_SL"
+author: "Whitney Mgbara"
+date: "4/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries, include=FALSE}
+library(here)
+library(dplyr)
+library(SuperLearner)
+library(tmle3)
+library(varimpact)
+library(readxl)
+library(readr)
+library(data.table)
+library(tidyverse)
+library(sl3)
+library(sjPlot)
+library(ggplot2)
+library(car)
+library(msm)
+
+data(efc)
+theme_set(theme_sjplot())
+
+#remotes::install_github("tlverse/origami@devel")
+#remotes::install_github("tlverse/sl3@timeseries-overhaul")
+
+
+
+```
+
+
+case and covariate data import 
+```{r import}
+day25 <- read_excel("Data/day25.xls")
+day25$popland <- day25$Population/(day25$LandArea)
+
+#diabetes  <- read_csv("Data/DiabetesAtlasCountyData.csv", skip = 2)
+
+analytic_data2020 <- read_csv("Data/analytic_data2020.csv")
+#analytic_data2020 <- analytic_data2020[-1,]
+colnames(analytic_data2020)[which(names(analytic_data2020) == "State Abbreviation")] <- "State"
+
+eco_vars_of_int <- c("State", "Name","Poor or fair health raw value", "Adult smoking raw value",
+                     "Food environment index raw value", "Physical inactivity raw value",
+                     "Excessive drinking raw value", "Sexually transmitted infections raw value",
+                     "Primary care physicians raw value", "Flu vaccinations raw value",
+                     "High school graduation raw value", "Unemployment raw value", 
+                     "Air pollution - particulate matter raw value", "Drinking water violations raw value",
+                     "Diabetes prevalence raw value", "HIV prevalence raw value", "Food insecurity raw value", 
+                     "Drug overdose deaths raw value", "Median household income raw value", 
+                     "% below 18 years of age raw value",
+                     "% 65 and older raw value", 
+                     "% Hispanic raw value", "% Females raw value", "% Rural raw value")
+
+eco_health_covars <- names(analytic_data2020) %in% eco_vars_of_int
+
+covars <- analytic_data2020[eco_health_covars]
+
+#diabetes$State <- state.abb[match(diabetes$State,state.name)]
+
+day25_covars <- merge(day25, covars, by = c("Name", "State"))
+
+median = median(day25$CommutingByPublicTransportation)
+day25$Pub_trans_binary <- ifelse(day25$CommutingByPublicTransportation >= median, "below_median", "above_median")
+```
+
+
+
+Google mobility data import
+```{r mobility data}
+google_mobility_us <- read_csv("Data/google-mobility-us.csv")
+
+```
+
+
+Linear Model
+```{r running simple linear model}
+
+day25$log_pop_dense <- log(day25$popland+1)
+day25$log_GDP <- log(day25$GDP+1)
+day25$log_Pub_Trans <- log(day25$CommutingByPublicTransportation+1)
+
+percentile_log_10_90 <- quantile(day25$log_Pub_Trans, c(.10, .90))
+percentile_10_90 <- quantile(day25$CommutingByPublicTransportation, c(.10, .90))
+
+marginal_data_10 <- day25
+marginal_data_90 <- day25
+
+#log quantiles
+marginal_data_10$log_Pub_Trans <-  percentile_log_10_90[[1]]
+marginal_data_90$log_Pub_Trans <-  percentile_log_10_90[[2]]
+
+#quantiles
+marginal_data_10$CommutingByPublicTransportation <-  percentile_10_90[[1]]
+marginal_data_90$CommutingByPublicTransportation <-  percentile_10_90[[2]]
+
+est1.log_model <- glm(ConfirmedCasesDay25~ log_pop_dense*log_GDP*log_Pub_Trans, family = "gaussian", data = day25)
+est1.model <- glm(ConfirmedCasesDay25~ popland*GDP*CommutingByPublicTransportation, family = "gaussian", data = day25)
+
+summary(est1.log_model)
+summary(est1.model)
+
+bootstrapCI <- function(model, newdata) {
+  nr <- nrow(model$data)
+  data <- model$data
+  data <- data[sample(1:nr, size = nr, replace = TRUE), ]
+  up <- update(model, data = data)
+  predict(up, newdata = newdata, type = "response")
+}
+
+newdata <- data.frame(day25)
+but <- replicate(1000, bootstrapCI(model = est1.log_model, newdata = newdata))
+
+day25$uci.ci3 <- apply(but, MARGIN = 1, FUN = quantile, probs = 0.925, na.rm=TRUE)
+day25$lci.ci3 <- apply(but, MARGIN = 1, FUN = quantile, probs = 0.025, na.rm=TRUE)
+day25$fit3 <- apply(but, MARGIN = 1, FUN = quantile, probs = 0.5, na.rm=TRUE)
+
+g3 <- ggplot(day25, aes(x = day25$CommutingByPublicTransportation, y = ConfirmedCasesDay25)) +
+  theme_bw() +
+  geom_point() +
+  geom_line(aes(y = fit3)) +
+  geom_ribbon(aes(ymin = lci.ci3, ymax = uci.ci3), alpha = 0.3)
+
+g3
+#predictions for 10 and 90 quantiles log model
+predict.log_est_10 <- predict(est1.log_model, newdata = marginal_data_10, type='response')
+predict.log_est_90 <- predict(est1.log_model, newdata = marginal_data_90, type='response')
+
+#predictions for 10 and 90 quantiles 
+predict.est_10 <- predict(est1.model, newdata = marginal_data_10, type='response')
+predict.est_90 <- predict(est1.model, newdata = marginal_data_90, type='response')
+
+mean(predict.log_est_90 - predict.log_est_10, na.rm = TRUE)
+mean(predict.est_90 - predict.est_10, na.rm = TRUE)
+
+```
+
+
+Setting Up SuperLearner and TMLE
+```{r setup spec}
+
+node_list <- list(
+  W = c('popland', 'GDP',eco_vars_of_int[-c(1,2)]),
+  A = "Pub_trans_binary",
+  Y = "ConfirmedCasesDay25"
+)
+
+processed <- process_missing(day25_covars, node_list)
+COVID_data <- processed$data
+node_list <- processed$node_list
+
+ate_spec <- tmle_ATE(
+  treatment_level = "below_median",
+  control_level = "above_median"
+)
+
+sl3_list_learners("continuous")
+sl3_list_learners("binomial")
+
+# choose y learners 
+lrnr_mean <- make_learner(Lrnr_mean)
+lrnr_xgboost <- make_learner(Lrnr_xgboost)
+Lrnr_glm <- make_learner(Lrnr_glm)
+
+
+Lrnr_hal9001 <- make_learner(Lrnr_hal9001)
+
+# choose a learners 
+Lrnr_randomForest <- make_learner(Lrnr_randomForest)
+
+
+# define metalearners appropriate to data types
+ls_metalearner <- make_learner(Lrnr_nnls)
+#mn_metalearner <- make_learner(Lrnr_solnp, metalearner_linear_multinomial,
+                               #loss_loglik_multinomial)
+
+sl_Y <- Lrnr_sl$new(learners = list(lrnr_mean, lrnr_xgboost, Lrnr_glm, Lrnr_hal9001),
+                    metalearner = ls_metalearner)
+
+sl_A <- Lrnr_sl$new(learners = list(lrnr_mean, lrnr_xgboost, Lrnr_glm))
+                    
+learner_list <- list(A = sl_A, Y = sl_Y)
+
+```
+
+
+```{r fit_TMLE}
+
+tmle_fit <- tmle3(ate_spec, COVID_data, node_list, learner_list)
+tmle_fit
+estimates <- tmle_fit$summary$psi_transformed
+estimates
+
+```
+
+
+```{r matrix}
+
+States <- unique(day25$State)
+CV.risk <- matrix(NA, nrow=length(States), ncol=6)
+
+#estimates<- matrix(NA, nrow=500, ncol=4)
+ObsData <- day25
+
+for(i in States){
+  
+idx <- match(i,States)
+  
+validation_data <- ObsData %>% filter(State == i)
+training_data <- ObsData %>% filter(State != i)
+
+est1.model <- glm(ConfirmedCasesDay25 ~ popland + GDP + CommutingByPublicTransportation, family = "gaussian", data = training_data)
+
+est2.model <- glm(ConfirmedCasesDay25 ~ popland + GDP + CommutingByPublicTransportation, family = "poisson", data = training_data)
+
+est3.model <- glm(ConfirmedCasesDay25 ~ popland *GDP * CommutingByPublicTransportation, family = "gaussian", data = training_data)
+
+est4.model <- glm(ConfirmedCasesDay25 ~ popland *GDP * CommutingByPublicTransportation, family = "poisson", data = training_data)
+
+est5.model <- glm(ConfirmedCasesDay25 ~ popland + GDP , family = "gaussian", data = training_data)
+
+est6.model <- glm(ConfirmedCasesDay25 ~ popland + GDP , family = "poisson", data = training_data)
+
+
+predict.est1 <- predict(est1.model, newdata = validation_data)
+predict.est2 <- predict(est2.model, newdata = validation_data)
+predict.est3 <- predict(est3.model, newdata = validation_data)
+predict.est4 <- predict(est4.model, newdata = validation_data)
+predict.est5 <- predict(est5.model, newdata = validation_data)
+predict.est6 <- predict(est6.model, newdata = validation_data)
+#predict.est7 <- predict(est7.model, newdata = validation_data)
+
+l2.hat1 <- mean((validation_data$ConfirmedCasesDay25 - predict.est1)^2)
+l2.hat2 <- mean((validation_data$ConfirmedCasesDay25 - predict.est2)^2)
+l2.hat3 <- mean((validation_data$ConfirmedCasesDay25 - predict.est3)^2)
+l2.hat4 <- mean((validation_data$ConfirmedCasesDay25 - predict.est4)^2)
+l2.hat5 <- mean((validation_data$ConfirmedCasesDay25 - predict.est5)^2)
+l2.hat6 <- mean((validation_data$ConfirmedCasesDay25 - predict.est6)^2)
+#l2.hat7 <- mean((validation_data$ConfirmedCasesDay25 - predict.est7)^2)
+
+CV.risk[idx,] <- c(l2.hat1, l2.hat2, l2.hat3, l2.hat4,l2.hat5,l2.hat6)
+} 
+
+colnames(CV.risk) <- c("l2.est1", "l2.est2", "l2.est3", "l2.est4", "l2.est5", "l2.est6")
+CV.risk <- as.data.frame(CV.risk)
+
+CV.risk
+mses <- colMeans(CV.risk, na.rm = TRUE)
+
+match(mses, min(mses))
+```
+
+```{r modeling}
+Y <- day25$ConfirmedCasesDay25
+X <-  subset(day25, select= -ConfirmedCasesDay25)
+X <- as.data.frame(X)
+
+Q_lib <- c("SL.mean", "SL.glmnet", "SL.ranger", "SL.rpartPrune", "SL.bayesglm")
+g_lib <- c("SL.mean", "SL.glmnet")
+
+
+vim <- varimpact(Y = Y, data = X, Q.library = Q_lib, g.library = g_lib, family="gaussian" )
+vim$results_all
+
+plot_var("Population", vim)
+
+
+```
+
+
