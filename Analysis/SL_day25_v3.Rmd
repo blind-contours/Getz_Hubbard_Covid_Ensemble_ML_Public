@@ -1,0 +1,414 @@
+---
+title: "COVID_day25_SL"
+author: "Whitney Mgbara"
+date: "4/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load Libraries
+```{r libraries, include=FALSE}
+library(here)
+library(dplyr)
+library(SuperLearner)
+library(tmle3)
+library(varimpact)
+library(readxl)
+library(readr)
+library(data.table)
+library(tidyverse)
+library(sl3)
+library(sjPlot)
+library(ggplot2)
+library(car)
+library(msm)
+
+data(efc)
+theme_set(theme_sjplot())
+
+#remotes::install_github("tlverse/origami@devel")
+#remotes::install_github("tlverse/sl3@timeseries-overhaul")
+
+
+```
+
+Import case data and covariates
+```{r import}
+# Case data
+day25 <- read_excel("Data/day25.xls")
+day25$popland <- day25$Population/(day25$LandArea)
+
+# Covariate Data
+analytic_data2020 <- read_csv("Data/analytic_data2020.csv")
+colnames(analytic_data2020)[which(names(analytic_data2020) == "State Abbreviation")] <- "State"
+
+eco_vars_of_int <- c("State", "Name","Poor or fair health raw value", "Adult smoking raw value",
+                     "Food environment index raw value", "Physical inactivity raw value",
+                     "Excessive drinking raw value", "Sexually transmitted infections raw value",
+                     "Primary care physicians raw value", "Flu vaccinations raw value",
+                     "High school graduation raw value", "Unemployment raw value", 
+                     "Air pollution - particulate matter raw value", "Drinking water violations raw value",
+                     "Diabetes prevalence raw value", "HIV prevalence raw value", "Food insecurity raw value", 
+                     "Drug overdose deaths raw value", "Median household income raw value", 
+                     "% below 18 years of age raw value",
+                     "% 65 and older raw value", 
+                     "% Hispanic raw value", "% Females raw value", "% Rural raw value")
+
+eco_health_covars <- names(analytic_data2020) %in% eco_vars_of_int
+
+covars <- analytic_data2020[eco_health_covars]
+
+# Diabetes data
+#diabetes  <- read_csv("Data/DiabetesAtlasCountyData.csv", skip = 2)
+#diabetes$State <- state.abb[match(diabetes$State,state.name)]
+
+# Merge case data with covarites
+day25_covars <- merge(day25, covars, by = c("Name", "State"))
+
+day25_covars <- day25_covars %>%
+    mutate(pub_trans_quantile = ntile(CommutingByPublicTransportation, 10))
+```
+
+Import Google mobility data 
+```{r mobility data, message=FALSE, results="hide", warning=FALSE}
+
+# Data 1
+grocery_pharmacy <- read_csv("Data/Mobility/google-mobility-us-groceryAndPharmacy.csv")
+
+df.1 <- 
+  grocery_pharmacy %>%
+  gather(key = date, value = value, -State)
+df.1$type <- "grocery_pharmacy"
+
+
+# Data 2
+parks <- read_csv("Data/Mobility/google-mobility-us-parks.csv")
+
+df.2 <- 
+  parks %>%
+  gather(key = date, value = value, -State)
+df.2$type <- "parks"
+
+
+# Data 3
+residential <- read_csv("Data/Mobility/google-mobility-us-residential.csv")
+
+df.3 <- 
+  residential %>%
+  gather(key = date, value = value, -State)
+df.3$type <- "residential"
+
+
+# Data 4
+retailAndRecreation <- read_csv("Data/Mobility/google-mobility-us-retailAndRecreation.csv")
+
+df.4 <- 
+  retailAndRecreation %>%
+  gather(key = date, value = value, -State)
+df.4$type <- "retailAndRecreation"
+
+
+# Data 5
+transitStations <- read_csv("Data/Mobility/google-mobility-us-transitStations.csv")
+
+df.5 <- 
+  transitStations %>%
+  gather(key = date, value = value, -State)
+df.5$type <- "transitStations"
+
+
+# Data 6
+workplaces <- read_csv("Data/Mobility/google-mobility-us-workplaces.csv")
+
+df.6 <- 
+  workplaces %>%
+  gather(key = date, value = value, -State)
+df.6$type <- "workplaces"
+
+mobility.data <-
+  left_join(df.1, df.2, by = c("State", "date", "value", "type")) %>%
+  left_join(df.3) %>%
+  left_join(df.4) %>%
+  left_join(df.5) %>%
+  left_join(df.6)
+    
+
+```
+
+
+Run Simple Triple Interaction Model and get Marginal Effects for Transportation
+```{r running simple linear model}
+
+## set up bootstrap CI function
+
+ bootstrapCI <- function(model, perc) {
+  nr <- nrow(model$data)
+  data <- model$data
+  new_data <- data[sample(1:nr, size = nr, replace = TRUE), ]
+  up <- update(model, data = new_data)
+  
+  norm <- mean(predict(up, newdata = new_data), na.rm = TRUE)
+  
+  new_data[,"log_Pub_Trans"] <- day25$log_Pub_Trans - (day25$log_Pub_Trans*perc)
+  perc_red <- mean(predict(up, newdata = new_data), na.rm = TRUE)
+  
+  return(norm-perc_red)
+ }
+
+#set up percentiles for trans reduction
+percents <- c(0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90) 
+
+#log transformation because the data is skewed
+day25$log_pop_dense <- log(day25$popland+1)
+day25$log_GDP <- log(day25$GDP+1)
+day25$log_Pub_Trans <- log(day25$CommutingByPublicTransportation + 1)
+
+#models
+est1.log_model <- glm(ConfirmedCasesDay25~ log_pop_dense*log_GDP*log_Pub_Trans, family = "gaussian", data = day25)
+est1.pois_model <- glm(ConfirmedCasesDay25~ log_pop_dense*log_GDP*log_Pub_Trans, family = "poisson", data = day25)
+est1.model <- glm(ConfirmedCasesDay25~ popland*GDP*CommutingByPublicTransportation, family = "gaussian", data = day25)
+est1.model_first_case <- glm(DayOfFirstCases~ log_pop_dense*log_GDP*log_Pub_Trans, family = "gaussian", data = day25)
+
+model <- est1.log_model
+
+results <- as.data.frame(matrix(nrow = length(percents), ncol = 4))
+colnames(results) <- c('Percent Pub Trans Reduction','Marginal Diff', 'Boot Low' , 'Boot High')
+
+for (i in 1:length(percents)) {
+  
+  perc <- percents[i]
+  #predictions high
+  day25temp <- day25
+  pred_norm <- predict(model, newdata=day25temp)
+  
+  ##predictions reduced 
+  
+  day25temp[,"log_Pub_Trans"] <- day25$log_Pub_Trans - (day25$log_Pub_Trans*perc)
+  pred_perc_red <- predict(model, newdata=day25temp)
+  
+  pred_diff <- pred_norm - pred_perc_red
+  #est <- (sum(day25$ConfirmedCasesDay25)-sum(predLow, na.rm = TRUE))/sum(day25$ConfirmedCasesDay25, na.rm = TRUE)
+  
+  mean_diff <- mean(pred_diff, na.rm = TRUE)
+  
+  boot <- replicate(1000, bootstrapCI(model = model, 
+                                      perc =  perc))
+  
+  mean_boot_diff <- mean(boot, na.rm = TRUE)
+  
+  CI_boot <- quantile(boot, probs = c(0.025,0.975))
+  
+  results[i,1] <- perc
+  results[i,2] <- mean_diff
+  results[i,3] <- CI_boot[[1]]
+  results[i,4] <- CI_boot[[2]]
+}
+
+
+```
+
+Plot cases over time marginally attributed to each reduction level
+```{r plot}
+
+ggplot(results, aes(x=`Percent Pub Trans Reduction`, y=`Marginal Diff`)) + 
+    geom_errorbar(aes(ymin=`Boot Low`, ymax=`Boot High`), width=.1) +
+    geom_line() +
+    geom_point()
+
+```
+
+
+
+Setting Up SuperLearner and TMLE
+```{r setup spec, eval=FALSE}
+##set up node list
+
+node_list <- list(
+  W = c('popland', 'GDP',eco_vars_of_int[-c(1,2)]),
+  A = "pub_trans_quantile",
+  Y = "ConfirmedCasesDay25"
+) 
+
+#process missing
+processed <- process_missing(day25_covars, node_list)
+COVID_data <- processed$data
+node_list <- processed$node_list
+
+ate_spec <- tmle_ATE(
+  treatment_level = 10,
+  control_level = 1
+)
+
+sl3_list_learners("continuous")
+sl3_list_learners("binomial")
+sl3_list_learners("categorical")
+
+# choose y learners 
+lrnr_mean <- make_learner(Lrnr_mean)
+lrnr_xgboost <- make_learner(Lrnr_xgboost)
+Lrnr_glm <- make_learner(Lrnr_glm)
+Lrnr_hal9001 <- make_learner(Lrnr_hal9001)
+
+# choose a learners 
+Lrnr_grf <- make_learner(Lrnr_grf)
+#Lrnr_multivariate <- make_learner(Lrnr_multivariate)
+
+
+# define metalearners appropriate to data types
+ls_metalearner <- make_learner(Lrnr_nnls)
+#mn_metalearner <- make_learner(Lrnr_solnp, metalearner_linear_multinomial,
+                               #loss_loglik_multinomial)
+
+sl_Y <- Lrnr_sl$new(learners = list(lrnr_mean, lrnr_xgboost, Lrnr_glm, Lrnr_hal9001),
+                    metalearner = ls_metalearner)
+
+sl_A <- Lrnr_sl$new(learners = list(Lrnr_grf))
+                    
+learner_list <- list(A = sl_A, Y = sl_Y)
+
+```
+
+
+```{r fit_TMLE, eval = FALSE}
+
+tmle_fit <- tmle3(ate_spec, COVID_data, node_list, learner_list)
+tmle_fit
+estimates <- tmle_fit$summary$psi_transformed
+estimates
+
+```
+
+
+```{r matrix, eval=FALSE}
+
+States <- unique(day25$State)
+CV.risk <- matrix(NA, nrow=length(States), ncol=6)
+
+#estimates<- matrix(NA, nrow=500, ncol=4)
+ObsData <- day25
+
+for(i in States){
+  
+idx <- match(i,States)
+  
+validation_data <- ObsData %>% filter(State == i)
+training_data <- ObsData %>% filter(State != i)
+
+est1.model <- glm(ConfirmedCasesDay25 ~ popland + GDP + CommutingByPublicTransportation, family = "gaussian", data = training_data)
+
+est2.model <- glm(ConfirmedCasesDay25 ~ popland + GDP + CommutingByPublicTransportation, family = "poisson", data = training_data)
+
+est3.model <- glm(ConfirmedCasesDay25 ~ popland *GDP * CommutingByPublicTransportation, family = "gaussian", data = training_data)
+
+est4.model <- glm(ConfirmedCasesDay25 ~ popland *GDP * CommutingByPublicTransportation, family = "poisson", data = training_data)
+
+est5.model <- glm(ConfirmedCasesDay25 ~ popland + GDP , family = "gaussian", data = training_data)
+
+est6.model <- glm(ConfirmedCasesDay25 ~ popland + GDP , family = "poisson", data = training_data)
+
+
+predict.est1 <- predict(est1.model, newdata = validation_data)
+predict.est2 <- predict(est2.model, newdata = validation_data)
+predict.est3 <- predict(est3.model, newdata = validation_data)
+predict.est4 <- predict(est4.model, newdata = validation_data)
+predict.est5 <- predict(est5.model, newdata = validation_data)
+predict.est6 <- predict(est6.model, newdata = validation_data)
+#predict.est7 <- predict(est7.model, newdata = validation_data)
+
+l2.hat1 <- mean((validation_data$ConfirmedCasesDay25 - predict.est1)^2)
+l2.hat2 <- mean((validation_data$ConfirmedCasesDay25 - predict.est2)^2)
+l2.hat3 <- mean((validation_data$ConfirmedCasesDay25 - predict.est3)^2)
+l2.hat4 <- mean((validation_data$ConfirmedCasesDay25 - predict.est4)^2)
+l2.hat5 <- mean((validation_data$ConfirmedCasesDay25 - predict.est5)^2)
+l2.hat6 <- mean((validation_data$ConfirmedCasesDay25 - predict.est6)^2)
+#l2.hat7 <- mean((validation_data$ConfirmedCasesDay25 - predict.est7)^2)
+
+CV.risk[idx,] <- c(l2.hat1, l2.hat2, l2.hat3, l2.hat4,l2.hat5,l2.hat6)
+} 
+
+colnames(CV.risk) <- c("l2.est1", "l2.est2", "l2.est3", "l2.est4", "l2.est5", "l2.est6")
+CV.risk <- as.data.frame(CV.risk)
+
+CV.risk
+mses <- colMeans(CV.risk, na.rm = TRUE)
+
+match(mses, min(mses))
+```
+
+```{r modeling, eval=FALSE}
+Y <- day25$ConfirmedCasesDay25
+X <-  subset(day25, select= -ConfirmedCasesDay25)
+X <- as.data.frame(X)
+
+Q_lib <- c("SL.mean", "SL.glmnet", "SL.ranger", "SL.rpartPrune", "SL.bayesglm")
+g_lib <- c("SL.mean", "SL.glmnet")
+
+
+vim <- varimpact(Y = Y, data = X, Q.library = Q_lib, g.library = g_lib, family="gaussian" )
+vim$results_all
+
+plot_var("Population", vim)
+
+
+```
+
+Junk Drawer
+
+
+```{r junk_drawer, eval = FALSE}
+
+boot_log <- replicate(1000, bootstrapCI(model = est1.log_model, newdata = newdata))
+
+day25$uci_log <- apply(boot_log, MARGIN = 1, FUN = quantile, probs = 0.925, na.rm=TRUE)
+day25$lci_log <- apply(boot_log, MARGIN = 1, FUN = quantile, probs = 0.025, na.rm=TRUE)
+day25$fit_log <- apply(boot_log, MARGIN = 1, FUN = quantile, probs = 0.5, na.rm=TRUE)
+
+day25$uci <- apply(boot, MARGIN = 1, FUN = quantile, probs = 0.925, na.rm=TRUE)
+day25$lci <- apply(boot, MARGIN = 1, FUN = quantile, probs = 0.025, na.rm=TRUE)
+day25$fit <- apply(boot, MARGIN = 1, FUN = quantile, probs = 0.5, na.rm=TRUE)
+
+
+
+g3_log <- ggplot(day25, aes(x = day25$CommutingByPublicTransportation, y = ConfirmedCasesDay25)) +
+  theme_bw() +
+  geom_point() +
+  geom_line(aes(y = fit)) +
+  geom_ribbon(aes(ymin = lci, ymax = uci), alpha = 0.3)
+
+g3_log
+
+g3 <- ggplot(day25, aes(x = day25$CommutingByPublicTransportation, y = ConfirmedCasesDay25)) +
+  theme_bw() +
+  geom_point() +
+  geom_line(aes(y = fit_log)) +
+  geom_ribbon(aes(ymin = lci_log, ymax = uci_log), alpha = 0.3)
+
+g3
+
+
+#predictions for 10 and 90 quantiles log model
+predict.log_est_10 <- predict(est1.log_model, newdata = marginal_data_10, type='response')
+predict.log_est_90 <- predict(est1.log_model, newdata = marginal_data_90, type='response')
+
+#predictions for 10 and 90 quantiles 
+predict.est_10 <- predict(est1.model, newdata = marginal_data_10, type='response')
+predict.est_90 <- predict(est1.model, newdata = marginal_data_90, type='response')
+
+log_marg_10_90_diff <- mean(predict.log_est_90 - predict.log_est_10, na.rm = TRUE)
+marg_10_90_diff <- mean(predict.est_90 - predict.est_10, na.rm = TRUE)
+```
+
+The marginal differences for public transportation at 90 vs. 10 percentile
+```{r marg diff with conf int, eval = FALSE}
+marg_10_90_diff
+log_marg_10_90_diff
+```
+
+
+
+
+
+
