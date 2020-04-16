@@ -2,7 +2,9 @@
 title: "COVID_day25_SL"
 author: "Whitney Mgbara"
 date: "4/15/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -25,6 +27,7 @@ library(sjPlot)
 library(ggplot2)
 library(car)
 library(msm)
+library(MASS)
 
 data(efc)
 theme_set(theme_sjplot())
@@ -45,31 +48,42 @@ day25$popland <- day25$Population/(day25$LandArea)
 analytic_data2020 <- read_csv("Data/analytic_data2020.csv")
 colnames(analytic_data2020)[which(names(analytic_data2020) == "State Abbreviation")] <- "State"
 
-eco_vars_of_int <- c("State", "Name","Poor or fair health raw value", "Adult smoking raw value",
-                     "Food environment index raw value", "Physical inactivity raw value",
-                     "Excessive drinking raw value", "Sexually transmitted infections raw value",
-                     "Primary care physicians raw value", "Flu vaccinations raw value",
-                     "High school graduation raw value", "Unemployment raw value", 
-                     "Air pollution - particulate matter raw value", "Drinking water violations raw value",
-                     "Diabetes prevalence raw value", "HIV prevalence raw value", "Food insecurity raw value", 
-                     "Drug overdose deaths raw value", "Median household income raw value", 
+eco_vars_of_int <- c("State", 
+                     "Name",
+                     "Poor or fair health raw value", 
+                     "Adult smoking raw value",
+                     "Food environment index raw value", 
+                     "Physical inactivity raw value",
+                     "Excessive drinking raw value", 
+                     "Sexually transmitted infections raw value",
+                     "Primary care physicians raw value", 
+                     "Flu vaccinations raw value",
+                     "High school graduation raw value", 
+                     "Unemployment raw value", 
+                     "Air pollution - particulate matter raw value", 
+                     "Drinking water violations raw value",
+                     "Diabetes prevalence raw value", 
+                     "HIV prevalence raw value", 
+                     "Food insecurity raw value", 
+                     "Drug overdose deaths raw value", 
+                     "Median household income raw value", 
                      "% below 18 years of age raw value",
                      "% 65 and older raw value", 
-                     "% Hispanic raw value", "% Females raw value", "% Rural raw value")
+                     "% Hispanic raw value", 
+                     "% Females raw value", "% Rural raw value",
+                     "Adult obesity raw value",
+                     "Income inequality raw value",
+                     "Uninsured adults raw value")
 
 eco_health_covars <- names(analytic_data2020) %in% eco_vars_of_int
 
 covars <- analytic_data2020[eco_health_covars]
 
-# Diabetes data
-#diabetes  <- read_csv("Data/DiabetesAtlasCountyData.csv", skip = 2)
-#diabetes$State <- state.abb[match(diabetes$State,state.name)]
-
 # Merge case data with covarites
 day25_covars <- merge(day25, covars, by = c("Name", "State"))
 
-day25_covars <- day25_covars %>%
-    mutate(pub_trans_quantile = ntile(CommutingByPublicTransportation, 10))
+day25_covars$log_pop_dense <- log(day25_covars$Population/(day25_covars$LandArea))
+
 ```
 
 Import Google mobility data 
@@ -128,95 +142,124 @@ df.6 <-
   gather(key = date, value = value, -State)
 df.6$type <- "workplaces"
 
+
 mobility.data <-
   left_join(df.1, df.2, by = c("State", "date", "value", "type")) %>%
   left_join(df.3) %>%
   left_join(df.4) %>%
   left_join(df.5) %>%
   left_join(df.6)
-    
+
+mobility_data_long <- rbind(df.1, df.2,df.3,df.4,df.5,df.6)
+mobility_data_wide <- spread(mobility_data_long, date, value)
+
 
 ```
 
 
 Run Simple Triple Interaction Model and get Marginal Effects for Transportation
+
+
 ```{r running simple linear model}
 
 ## set up bootstrap CI function
-
- bootstrapCI <- function(model, perc) {
+ bootstrapCI <- function(model, perc, boot_pred_data) {
   nr <- nrow(model$data)
   data <- model$data
   new_data <- data[sample(1:nr, size = nr, replace = TRUE), ]
   up <- update(model, data = new_data)
   
-  norm <- mean(predict(up, newdata = new_data), na.rm = TRUE)
+  #norm <- sum(predict(up, newdata = new_data, type = 'response'), na.rm = TRUE)
   
-  new_data[,"log_Pub_Trans"] <- day25$log_Pub_Trans - (day25$log_Pub_Trans*perc)
-  perc_red <- mean(predict(up, newdata = new_data), na.rm = TRUE)
+  boot_pred_data[,"log_Pub_Trans"] <- boot_pred_data$log_Pub_Trans - (boot_pred_data$log_Pub_Trans*perc)
+  perc_red <- sum(predict(up, newdata = boot_pred_data, type = 'response'), na.rm=TRUE)
   
-  return(norm-perc_red)
+  return(perc_red)
  }
 
 #set up percentiles for trans reduction
-percents <- c(0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90) 
+percents <- c(0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90) 
 
-#log transformation because the data is skewed
+#log transformation because the data is skewed forday 25 only
 day25$log_pop_dense <- log(day25$popland+1)
 day25$log_GDP <- log(day25$GDP+1)
 day25$log_Pub_Trans <- log(day25$CommutingByPublicTransportation + 1)
 
+#log transformation because the data is skewed forday 25 covars - 8 regions reduced compared to day25 data only
+
+day25_covars$log_pop_dense <- log(day25_covars$popland+1)
+day25_covars$log_GDP <- log(day25_covars$GDP+1)
+day25_covars$log_Pub_Trans <- log(day25_covars$CommutingByPublicTransportation + 1)
+
+
 #models
-est1.log_model <- glm(ConfirmedCasesDay25~ log_pop_dense*log_GDP*log_Pub_Trans, family = "gaussian", data = day25)
-est1.pois_model <- glm(ConfirmedCasesDay25~ log_pop_dense*log_GDP*log_Pub_Trans, family = "poisson", data = day25)
-est1.model <- glm(ConfirmedCasesDay25~ popland*GDP*CommutingByPublicTransportation, family = "gaussian", data = day25)
-est1.model_first_case <- glm(DayOfFirstCases~ log_pop_dense*log_GDP*log_Pub_Trans, family = "gaussian", data = day25)
+est.pois_model <- glm(ConfirmedCasesDay25~ log_pop_dense+log_GDP*log_Pub_Trans + 
+                        log(Population) + 
+                        `% Females raw value` + 
+                        `% 65 and older raw value` + 
+                        `Adult obesity raw value`+ 
+                        `Physical inactivity raw value` + 
+                        `Unemployment raw value` +
+                        `Income inequality raw value` +
+                        `Poor or fair health raw value`+
+                        `Uninsured adults raw value` +
+                        `Adult smoking raw value`,
+                       family = "poisson", 
+                       data = day25_covars, 
+                       offset(log(Population)))
 
-model <- est1.log_model
+##too many parameters I think here to get convergence based on starting likelihood value, could use Poisson to jump start
+# est2.nb_model <- glm.nb(ConfirmedCasesDay25~ log_pop_dense*log_GDP*log_Pub_Trans, 
+#                        data = day25, 
+#                        offset(log(Population)))
 
-results <- as.data.frame(matrix(nrow = length(percents), ncol = 4))
-colnames(results) <- c('Percent Pub Trans Reduction','Marginal Diff', 'Boot Low' , 'Boot High')
+model <- est.pois_model
+
+results <- as.data.frame(matrix(nrow = length(percents), ncol = 6))
+colnames(results) <- c('Percent Pub Trans Reduction','Total Cases', 'Boot Pred', 'Boot Low' , 'Boot High', 'Init. Model Pred')
 
 for (i in 1:length(percents)) {
   
   perc <- percents[i]
-  #predictions high
-  day25temp <- day25
-  pred_norm <- predict(model, newdata=day25temp)
+  data_temp <- day25_covars
   
-  ##predictions reduced 
+  data_temp$log_Pub_Trans <- day25_covars$log_Pub_Trans - (day25_covars$log_Pub_Trans*perc)
+  pred_perc_red <- predict(model, newdata = data_temp, type = 'response')
   
-  day25temp[,"log_Pub_Trans"] <- day25$log_Pub_Trans - (day25$log_Pub_Trans*perc)
-  pred_perc_red <- predict(model, newdata=day25temp)
-  
-  pred_diff <- pred_norm - pred_perc_red
-  #est <- (sum(day25$ConfirmedCasesDay25)-sum(predLow, na.rm = TRUE))/sum(day25$ConfirmedCasesDay25, na.rm = TRUE)
-  
-  mean_diff <- mean(pred_diff, na.rm = TRUE)
+  sum_perc_red <- sum(pred_perc_red, na.rm = TRUE)
   
   boot <- replicate(1000, bootstrapCI(model = model, 
-                                      perc =  perc))
+                                      perc =  perc, 
+                                      boot_pred_data = day25_covars))
   
-  mean_boot_diff <- mean(boot, na.rm = TRUE)
+  #mean_boot_diff <- mean(boot, na.rm = TRUE)
   
-  CI_boot <- quantile(boot, probs = c(0.025,0.975))
+  CI_boot <- quantile(boot, probs = c(0.025,0.50, 0.975), na.rm = TRUE)
   
   results[i,1] <- perc
-  results[i,2] <- mean_diff
-  results[i,3] <- CI_boot[[1]]
-  results[i,4] <- CI_boot[[2]]
+  results[i,2] <- sum_perc_red
+  results[i,3] <- CI_boot[[2]]
+  results[i,4] <- CI_boot[[1]]
+  results[i,5] <- CI_boot[[3]]
+  results[i,6] <- sum_perc_red
 }
-
 
 ```
 
 Plot cases over time marginally attributed to each reduction level
 ```{r plot}
 
-ggplot(results, aes(x=`Percent Pub Trans Reduction`, y=`Marginal Diff`)) + 
+ggplot(results, aes(x=`Percent Pub Trans Reduction`, y=`Boot Pred`)) + 
     geom_errorbar(aes(ymin=`Boot Low`, ymax=`Boot High`), width=.1) +
     geom_line() +
     geom_point()
+
+ggplot(results, aes(x=`Percent Pub Trans Reduction`, y=`Init. Model Pred`)) + 
+    geom_errorbar(aes(ymin=`Boot Low`, ymax=`Boot High`), width=.1) +
+    geom_line() +
+    geom_point()
+
+
 
 ```
 
