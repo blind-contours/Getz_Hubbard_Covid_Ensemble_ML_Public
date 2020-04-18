@@ -1,0 +1,173 @@
+---
+title: "Adding Lat and Long to Case Data"
+author: "Whitney Mgbara"
+date: "4/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+#### Data Sources:
+
+US Cities & Counties (us-cities):
+
+- https://simplemaps.com/data/us-cities
+
+
+Airports:
+
+- https://github.com/datasets/airport-codes
+
+- https://www.census.gov/data/tables/time-series/demo/popest/2010s-total-metro-and-micro-statistical-areas.html#par_textimage
+
+- https://data.humdata.org/dataset/ourairports-usa
+
+
+Enplanements:
+
+- https://www.faa.gov/airports/planning_capacity/passenger_allcargo_stats/passenger/
+
+
+Metropolitan statistical areas:
+
+- https://en.wikipedia.org/wiki/California_statistical_areas
+
+- https://en.wikipedia.org/wiki/New_York_statistical_areas
+
+- https://en.wikipedia.org/wiki/Washington_statistical_areas
+
+- https://en.wikipedia.org/wiki/New_Jersey_statistical_areas
+
+
+Shapefiles:
+
+- diva-gis.org/datadown
+
+
+
+
+
+Libraries
+```{r}
+
+require(tidyverse)
+require(readr)
+
+require(ggplot2)
+
+require(ggmap)
+require(sf) 
+require(raster)
+```
+
+
+
+Case and geo county data
+```{r}
+
+geocounties <- read.csv("Visulizations/county_lat_lon.csv", header=TRUE, stringsAsFactors=F)
+
+day25 <- read_excel("Analysis/Data/day25.xls")
+
+geoday25 <- left_join(day25, geocounties, by = "FIPS") %>%
+  select( -c( "ID", "State.y", "County", "County.Seat.s."))
+  
+
+qmplot(Longitude, Latitude, data = test, colour = I('red'), size = I(0.5), darken = .3)
+
+```
+
+
+
+Plotting the lat and long for counties based on the range of values for Day of First Case
+```{r}
+
+#Some sample data
+x <- sort(runif(100))
+dat <- data.frame(x = x,y = x^2 + 1)
+# Some external vector for the color scale
+col <- sort(rnorm(100))
+
+qplot(x, y, data=dat, colour=col) + scale_colour_gradient(low="red", high="blue")
+
+#Some sample data
+x <- sort(runif(100))
+dat <- data.frame(x = x,y = x^2 + 1)
+# Some external vector for the color scale
+col <- sort(test$DayOfFirstCases)
+
+qplot(Longitude, Latitude, data=test, colour=col) + scale_colour_gradient(low="red", high="blue")
+
+```
+
+
+
+
+```{r}
+
+partyUSA <- st_read("Visulizations/USA_adm/USA_adm1.shp")
+
+```
+
+
+
+
+
+
+Averages By metropolitan statistical area
+```{r}
+
+metroAreas <- read.csv("Visulizations/metro_stat_area.csv", header=TRUE, stringsAsFactors=F)
+
+
+test123 <- left_join(test, metroAreas, by = "Name") %>%
+  filter(State.x == c("NY", "CA")) %>%
+  subset(Core_Based_Statistical_Area != "none")
+
+test123$popland <- test123$Population/test123$LandArea
+
+
+df <- 
+  test123 %>% 
+  group_by(Core_Based_Statistical_Area, State.x) %>%
+  summarize(DayOfFirstCases = mean(DayOfFirstCases),
+            ConfirmedCasesDay25 = sum(ConfirmedCasesDay25),
+            CommutingByPublicTransportation =
+              mean(CommutingByPublicTransportation), 
+            GDP = mean(GDP),
+            popland = mean(popland))
+
+df
+
+
+```
+
+
+
+```{r}
+
+testing123 <- data.frame(
+  y = log(test123$ConfirmedCasesDay25), 
+  x = log(test123$CommutingByPublicTransportation)) 
+
+sp <- ggplot(testing123, aes(x=x, y=y)) +
+  geom_point() +
+  theme(legend.title = element_blank())
+sp 
+
+```
+
+
+
+```{r}
+
+plot(testing123$x)
+```
+
+
+
+
