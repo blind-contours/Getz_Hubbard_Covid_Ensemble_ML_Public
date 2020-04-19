@@ -1,0 +1,121 @@
+---
+title: "Joining data for one dataset on airports in each county"
+author: "Whitney Mgbara"
+date: "4/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+Libraries
+```{r}
+require(tidyverse)
+require(readr)
+
+
+require(ggmap)
+```
+
+
+Airport lon, lat data
+```{r}
+
+airports <- read.csv("airports1.csv")
+
+# airports <- filter(airports, iso_country == "US")
+names(airports)[names(airports)=="City"] <- "city"
+
+
+```
+
+
+
+Let's load the dataset with us cities and airport codes
+```{r}
+
+getwd()
+enplane <- read.csv("cy18-commercial-service-enplanements.csv")
+
+
+# iata_city_country <- filter(iata_city_country, Country == "USA")
+
+
+```
+
+
+
+We will join it with the airport dataset
+```{r}
+
+airport_complete <- left_join(enplane, airports, by = c("ICAO", "IATA")) %>%
+  filter(Longitude != "NA")  %>%
+  filter(Country == "United States") %>%
+  select( -c("Role", "Airport.ID", "DST"))
+
+
+airport_complete2 <- left_join(enplane, airports, by = c("city", "IATA")) 
+
+
+```
+
+
+```{r}
+
+qmplot(Longitude, Latitude, data = airport_complete, colour = I('red'), size = I(1), darken = .3)
+
+```
+
+
+
+
+```{r}
+
+city_state <- read.csv("city_state.csv")
+
+airport_complete3 <- left_join(city_state, airport_complete2, by = c("city", "ST")) %>%
+  filter(Longitude != "NA") %>%
+  select(
+    c("city", "city_ascii", "ST", "state_name",
+      "IATA", "Name", "CY.18.Enplanements",
+      "CY.17.Enplanements", "X..Change", "Latitude", 
+      "Longitude", "Altitude", "Timezone", "DST",
+      "Tz.database", "Type", "Source")
+  )
+
+
+
+```
+
+
+
+
+Adding counties in
+```{r}
+
+uscities <- read.csv("uscities.csv")
+
+airport_complete4 <- left_join(uscities, airport_complete3, by = c("city","city_ascii", "state_name", "ST")) %>%
+  dplyr::select( -c("population", "density", "military", "incorporated", "ranking", "id") ) %>%
+  filter(Longitude != "NA")
+  
+airport_complete4$CY.18.Enplanements <- gsub(",","", airport_complete4$CY.18.Enplanements)
+airport_complete4$CY.18.Enplanements <- as.numeric(airport_complete4$CY.18.Enplanements)
+
+airport_complete4$CY.17.Enplanements <- gsub(",","", airport_complete4$CY.17.Enplanements)
+airport_complete4$CY.17.Enplanements <- as.numeric(airport_complete4$CY.17.Enplanements)
+
+
+
+```
+
+
+
+Final result
+```{r}
+head(airport_complete4)
+```
+

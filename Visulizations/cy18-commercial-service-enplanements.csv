@@ -1,4 +1,4 @@
-Rank,RO,ST,Locid,city,Airport Name,S/L,Hub,CY 18 Enplanements,CY 17 Enplanements,% Change
+Rank,RO,ST,IATA,city,Airport Name,S/L,Hub,CY 18 Enplanements,CY 17 Enplanements,% Change
 1,SO,GA,ATL,Atlanta,Hartsfield - Jackson Atlanta International,P,L,"51,865,797","50,251,964",3.21%
 2,WP,CA,LAX,Los Angeles,Los Angeles International,P,L,"42,624,050","41,232,432",3.38%
 3,GL,IL,ORD,Chicago,Chicago O'Hare International,P,L,"39,873,927","38,593,028",3.32%
@@ -398,7 +398,6 @@ Rank,RO,ST,Locid,city,Airport Name,S/L,Hub,CY 18 Enplanements,CY 17 Enplanements
 413,NM,MT,SDY,Sidney,Sidney-Richland Regional,P,N,"10,055","8,429",19.29%
 414,AL,AK,VDZ,Valdez,Valdez Pioneer Field,P,N,"10,050","11,321",-11.23%
 425,NM,MT,WYS,West Yellowstone,Yellowstone,P,N,"8,200","8,786",-6.67%
-,,,266,,Nonhub Primary ,,,,,
 415,SO,MS,PIB,Moselle,Hattiesburg-Laurel Regional,CS,None,"9,813","11,726",-16.31%
 416,GL,IL,DEC,Decatur,Decatur,CS,None,"9,519","8,324",14.36%
 417,AL,AK,GAL,Galena,Edward G Pitka Sr,CS,None,"9,440","9,664",-2.32%
@@ -522,5 +521,3 @@ Rank,RO,ST,Locid,city,Airport Name,S/L,Hub,CY 18 Enplanements,CY 17 Enplanements
 561,AL,AK,AKI,Akiak,Akiak,CS,None,"2,525","1,966",28.43%
 562,AL,AK,RSH,Russian Mission,Russian Mission,CS,None,"2,506","2,132",17.54%
 563,AL,AK,AFM,Ambler,Ambler,CS,None,"2,501","2,175",14.99%
-,,,123,,"Nonhub Primary, Commercial Service",,,,,
-,,,519,,Total Commercial Service ,,,,,

@@ -11,46 +11,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-#### Data Sources:
-
-US Cities & Counties (us-cities):
-
-- https://simplemaps.com/data/us-cities
-
-
-Airports:
-
-- https://github.com/datasets/airport-codes
-
-- https://www.census.gov/data/tables/time-series/demo/popest/2010s-total-metro-and-micro-statistical-areas.html#par_textimage
-
-- https://data.humdata.org/dataset/ourairports-usa
-
-
-Enplanements:
-
-- https://www.faa.gov/airports/planning_capacity/passenger_allcargo_stats/passenger/
-
-
-Metropolitan statistical areas:
-
-- https://en.wikipedia.org/wiki/California_statistical_areas
-
-- https://en.wikipedia.org/wiki/New_York_statistical_areas
-
-- https://en.wikipedia.org/wiki/Washington_statistical_areas
-
-- https://en.wikipedia.org/wiki/New_Jersey_statistical_areas
-
-
-Shapefiles:
-
-- diva-gis.org/datadown
-
-
-
-
-
 Libraries
 ```{r}
 
@@ -61,6 +21,7 @@ require(ggplot2)
 
 require(ggmap)
 require(sf) 
+require(rgdal)
 require(raster)
 ```
 
@@ -69,15 +30,13 @@ require(raster)
 Case and geo county data
 ```{r}
 
-geocounties <- read.csv("Visulizations/county_lat_lon.csv", header=TRUE, stringsAsFactors=F)
+geocounties <- read.csv("county_lat_lon.csv", header=TRUE, stringsAsFactors=F)
 
-day25 <- read_excel("Analysis/Data/day25.xls")
+day25 <- read.csv("day25.csv", header=TRUE, stringsAsFactors=F)
 
-geoday25 <- left_join(day25, geocounties, by = "FIPS") %>%
-  select( -c( "ID", "State.y", "County", "County.Seat.s."))
-  
+geoday25 <- left_join(day25, geocounties, by = "FIPS") 
 
-qmplot(Longitude, Latitude, data = test, colour = I('red'), size = I(0.5), darken = .3)
+qmplot(Longitude, Latitude, data = geoday25, colour = I('red'), size = I(0.5), darken = .3)
 
 ```
 
@@ -98,9 +57,9 @@ qplot(x, y, data=dat, colour=col) + scale_colour_gradient(low="red", high="blue"
 x <- sort(runif(100))
 dat <- data.frame(x = x,y = x^2 + 1)
 # Some external vector for the color scale
-col <- sort(test$DayOfFirstCases)
+col <- sort(geoday25$DayOfFirstCases)
 
-qplot(Longitude, Latitude, data=test, colour=col) + scale_colour_gradient(low="red", high="blue")
+qplot(Longitude, Latitude, data=geoday25, colour=col) + scale_colour_gradient(low="red", high="blue")
 
 ```
 
@@ -109,8 +68,12 @@ qplot(Longitude, Latitude, data=test, colour=col) + scale_colour_gradient(low="r
 
 ```{r}
 
-partyUSA <- st_read("Visulizations/USA_adm/USA_adm1.shp")
+partyUSA <- st_read("C:/Users/Whitney/Downloads/USA_adm/USA_adm1.shp")
 
+# partyUSA <- st_read("C:/Users/Whitney/Downloads/cb_2018_us_csa_20m")
+
+
+plot(partyUSA[7])
 ```
 
 
@@ -121,10 +84,10 @@ partyUSA <- st_read("Visulizations/USA_adm/USA_adm1.shp")
 Averages By metropolitan statistical area
 ```{r}
 
-metroAreas <- read.csv("Visulizations/metro_stat_area.csv", header=TRUE, stringsAsFactors=F)
+metroAreas <- read.csv("metro_stat_area.csv", header=TRUE, stringsAsFactors=F)
 
 
-test123 <- left_join(test, metroAreas, by = "Name") %>%
+test123 <- left_join(geoday25, metroAreas, by = "Name") %>%
   filter(State.x == c("NY", "CA")) %>%
   subset(Core_Based_Statistical_Area != "none")
 
