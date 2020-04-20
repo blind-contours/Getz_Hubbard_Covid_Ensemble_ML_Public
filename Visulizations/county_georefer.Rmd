@@ -32,12 +32,26 @@ Case and geo county data
 
 geocounties <- read.csv("county_lat_lon.csv", header=TRUE, stringsAsFactors=F)
 
+geocounties <- dplyr::select(geocounties, -c("ID", "County", "County.Seat.s."))
+
+```
+
+
+Join with case data and plot
+```{r}
 day25 <- read.csv("day25.csv", header=TRUE, stringsAsFactors=F)
 
-geoday25 <- left_join(day25, geocounties, by = "FIPS") 
+geoday25 <- left_join(day25, geocounties, by = c("FIPS", "State")) 
 
 qmplot(Longitude, Latitude, data = geoday25, colour = I('red'), size = I(0.5), darken = .3)
+```
 
+
+Final result
+```{r}
+# head(airport_complete4)
+
+write.csv(geoday25,"MyairportData.csv", row.names = FALSE)
 ```
 
 
@@ -75,9 +89,6 @@ partyUSA <- st_read("C:/Users/Whitney/Downloads/USA_adm/USA_adm1.shp")
 
 plot(partyUSA[7])
 ```
-
-
-
 
 
 

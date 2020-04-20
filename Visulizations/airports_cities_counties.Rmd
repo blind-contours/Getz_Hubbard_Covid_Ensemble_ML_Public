@@ -26,7 +26,8 @@ Airport lon, lat data
 
 airports <- read.csv("airports1.csv")
 
-# airports <- filter(airports, iso_country == "US")
+airports <- filter(airports, Country == "United States")
+
 names(airports)[names(airports)=="City"] <- "city"
 
 
@@ -34,12 +35,12 @@ names(airports)[names(airports)=="City"] <- "city"
 
 
 
-Let's load the dataset with us cities and airport codes
+Commercial 2018 and 2017 enplanements for US airports
 ```{r}
 
-getwd()
+# getwd()
 enplane <- read.csv("cy18-commercial-service-enplanements.csv")
-
+airports <- filter(airports, IATA != "NA")
 
 # iata_city_country <- filter(iata_city_country, Country == "USA")
 
@@ -51,13 +52,18 @@ enplane <- read.csv("cy18-commercial-service-enplanements.csv")
 We will join it with the airport dataset
 ```{r}
 
-airport_complete <- left_join(enplane, airports, by = c("ICAO", "IATA")) %>%
+airport_complete <- left_join(enplane, airports, by = c("IATA", "city")) %>%
   filter(Longitude != "NA")  %>%
-  filter(Country == "United States") %>%
-  select( -c("Role", "Airport.ID", "DST"))
+  # filter(Country == "United States") %>%
+  select( c("IATA" , "ICAO", "city", "ST", "Airport.Name",
+             "Type","CY.18.Enplanements", "CY.17.Enplanements",
+             "X..Change", "Longitude", "Latitude", "Altitude",
+             "Timezone",
+             "DST", "Tz.database", "Source"))
 
 
-airport_complete2 <- left_join(enplane, airports, by = c("city", "IATA")) 
+
+# airport_complete2 <- left_join(enplane, airports, by = c("city", "IATA")) 
 
 
 ```
@@ -76,11 +82,11 @@ qmplot(Longitude, Latitude, data = airport_complete, colour = I('red'), size = I
 
 city_state <- read.csv("city_state.csv")
 
-airport_complete3 <- left_join(city_state, airport_complete2, by = c("city", "ST")) %>%
+airport_complete3 <- left_join(city_state, airport_complete, by = c("city", "ST")) %>%
   filter(Longitude != "NA") %>%
   select(
     c("city", "city_ascii", "ST", "state_name",
-      "IATA", "Name", "CY.18.Enplanements",
+      "IATA", "Airport.Name", "CY.18.Enplanements",
       "CY.17.Enplanements", "X..Change", "Latitude", 
       "Longitude", "Altitude", "Timezone", "DST",
       "Tz.database", "Type", "Source")
@@ -99,7 +105,10 @@ Adding counties in
 uscities <- read.csv("uscities.csv")
 
 airport_complete4 <- left_join(uscities, airport_complete3, by = c("city","city_ascii", "state_name", "ST")) %>%
-  dplyr::select( -c("population", "density", "military", "incorporated", "ranking", "id") ) %>%
+  dplyr::select( -c("county_name","county_fips_all","lat", "lng",
+                    "source", "timezone", "zips", 
+                    "population", "density", "military",
+                    "incorporated", "ranking", "id") ) %>%
   filter(Longitude != "NA")
   
 airport_complete4$CY.18.Enplanements <- gsub(",","", airport_complete4$CY.18.Enplanements)
@@ -108,7 +117,7 @@ airport_complete4$CY.18.Enplanements <- as.numeric(airport_complete4$CY.18.Enpla
 airport_complete4$CY.17.Enplanements <- gsub(",","", airport_complete4$CY.17.Enplanements)
 airport_complete4$CY.17.Enplanements <- as.numeric(airport_complete4$CY.17.Enplanements)
 
-
+names(airport_complete4)[names(airport_complete4)=="county_fips"] <- "FIPS"
 
 ```
 
@@ -116,6 +125,8 @@ airport_complete4$CY.17.Enplanements <- as.numeric(airport_complete4$CY.17.Enpla
 
 Final result
 ```{r}
-head(airport_complete4)
+# head(airport_complete4)
+
+write.csv(airport_complete4,"MyairportData.csv", row.names = FALSE)
 ```
 
