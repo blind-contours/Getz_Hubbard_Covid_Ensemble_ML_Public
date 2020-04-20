@@ -1,4 +1,4 @@
-"FIPS","Name","city","ST","state_name","lat","lng","timezone","zips"
+"FIPS","Name","city","State","state_name","lat","lng","timezone","zips"
 1003,"Baldwin County","Gulf Shores","AL","Alabama",30.2758,-87.7014,"America/Chicago","36542 36547"
 1003,"Baldwin County","Lillian","AL","Alabama",30.4122,-87.432,"America/Chicago","36549"
 1003,"Baldwin County","Spanish Fort","AL","Alabama",30.7257,-87.8601,"America/Chicago","36507 36527 36578 36577"

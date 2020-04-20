@@ -27,16 +27,18 @@ require(raster)
 
 
 
-Case and geo county data
+US cities and county data
 ```{r}
+# Counties
+county_lat_lon <- read.csv("county_lat_lon.csv", header=TRUE, stringsAsFactors=F)
+county_lat_lon <- dplyr::select(county_lat_lon, -c("ID", "County", "County.Seat.s."))
+names(county_lat_lon)[names(county_lat_lon)=="Longitude"] <- "lon"
+names(county_lat_lon)[names(county_lat_lon)=="Latitude"] <- "lat"
 
-geocounties <- read.csv("county_lat_lon.csv", header=TRUE, stringsAsFactors=F)
-geocounties <- dplyr::select(geocounties, -c("ID", "County", "County.Seat.s."))
-
-
-geocounties2 <- read.csv("uscities.csv")
-names(geocounties2)[names(geocounties2)=="county_fips"] <- "FIPS"
-names(geocounties2)[names(geocounties2)=="ST"] <- "State"
+# Cities
+uscities <- read.csv("uscities.csv")
+names(uscities)[names(uscities)=="county_fips"] <- "FIPS"
+names(uscities)[names(uscities)=="ST"] <- "State"
 
 ```
 
@@ -51,16 +53,16 @@ day25 <- read.csv("day25.csv", header=TRUE, stringsAsFactors=F)
 
 ```{r}
 
-# with case data
-geoday25_1 <- left_join(day25, geocounties, by = c("FIPS", "State")) 
+# Matching counties in day25 to lat/lon in county_lat_lon
+geoday25_1 <- left_join(day25, county_lat_lon, by = c("FIPS", "State")) 
 
 
 
-# Without case data
-geoday25_2 <- left_join(day25, geocounties2, by = c("FIPS", "State")) %>%
+# Matching every city in uscities to a county in day25
+geoday25_2 <- left_join(day25, uscities, by = c("FIPS", "State")) %>%
   dplyr::select("FIPS", "Name", "city", "State", "state_name", 
                 "lat", "lng", "timezone", "zips")
-names(geoday25_2)[names(geoday25_2)=="State"] <- "ST"
+names(uscities)[names(uscities)=="State"] <- "ST"
 
 
 
@@ -68,50 +70,63 @@ names(geoday25_2)[names(geoday25_2)=="State"] <- "ST"
 
 
 
-Join with airport data
+Match up day25 counties to airport enplanement data
 ```{r}
 
-airportss <- read.csv("firstAirportData.csv")
-# names(airportss)[names(airportss)=="ST"] <- "State"
+# Can call Rmarkdown file in same folder to create
+# firstAirportData.csv
+# source("airports_cities_counties.Rmd")
+
+enplane <- read.csv("cy18-commercial-service-enplanements.csv")
+enplane <- filter(enplane, CY.18.Enplanements != "NA")
+
+test <- merge(enplane, uscities)
+test$CY.18.Enplanements <- as.numeric(test$CY.18.Enplanements)
+test$CY.17.Enplanements <- as.numeric(test$CY.17.Enplanements)
+test$X..Change <- as.numeric(test$X..Change)
+
+df1 <- 
+  test %>% 
+  group_by(FIPS) %>%
+  summarize(CY.18.Enplanements =
+              sum(CY.18.Enplanements),
+            CY.17.Enplanements = sum(CY.17.Enplanements),
+            X..Change = sum(X..Change)
+            )
+
+test1 <- left_join(geoday25_1, df1)
 
 
-airport_up <- merge(airportss,day25) %>%
-  dplyr::select(
-    -c("city_ascii", "county_name_all", "State")
-    )
-airport_up$day25 <- 1 
+df2 <- 
+  test %>% 
+  group_by(FIPS, IATA) %>%
+  summarize(CY.18.Enplanements =
+              sum(CY.18.Enplanements),
+            CY.17.Enplanements = sum(CY.17.Enplanements),
+            X..Change = sum(X..Change)
+            )
 
+test2 <- left_join(geoday25_1, df2)
+```
 
-# I want to put together the airports that match with a county in the day25 dataset and the all airports in the US
-county_air <- data.frame(Longitude = airport_up$Longitude, Latitude = airport_up$Latitude, day25 = airport_up$day25)
+Data set with all airplane lat/lon and day25 county lat/lon 
+```{r}
+usairports <- read.csv("us-airports.csv")
+names(usairports)[names(usairports)=="municipality"] <- "city"
+usairports <- dplyr::select (usairports,-c(continent))
 
-terst <- left_join(airportss, county_air, by=c("Longitude", "Latitude"))
-
-for(i in (1:nrow(terst))){
-  if(is.na(terst$day25[i])){
-    terst$day25[i] <- 0
-  }
-}  
-  
-
-# airports_update <- left_join(geoday25_2, airportss, by = c("ST", "FIPS", "city", "state_name")) %>%
-#   filter(Latitude != "NA") %>%
-#   dplyr::select(
-#     -c("lat", "lng", "zips", "city_ascii", "county_name_all", 
-#        "timezone")
-#   )
+trial <- merge(usairports, enplane, by = c("IATA", "city"))
 
 ```
 
 
-
-Final result
+Save final result
 ```{r}
 # head(airport_complete4)
 
-write.csv(terst,"MyairportData.csv", row.names = FALSE)
+write.csv(trial,"MyairportData.csv", row.names = FALSE)
 
-write.csv(geoday25_2,"Counties_Allcities.csv", row.names = FALSE)
+# write.csv(geoday25_2,"Counties_Allcities.csv", row.names = FALSE)
 
 write.csv(geoday25_1,"Mygeday25Data.csv", row.names = FALSE)
 ```
@@ -119,23 +134,19 @@ write.csv(geoday25_1,"Mygeday25Data.csv", row.names = FALSE)
 
 Plot the new dataset with cases
 ```{r}
-qmplot(Longitude, Latitude, data = geoday25_1, colour = I('red'), size = I(0.5), darken = .3)
+qmplot(lon, lat, data = geoday25_1, colour = I('red'), size = I(0.5), darken = .3)
 ```
 
 
 
 Plot all airports
 ```{r}
-qmplot(Longitude, Latitude, data = airportss, colour = I('red'), size = I(0.5), darken = .3)
+qmplot(longitude_deg, latitude_deg, data = trial, colour = I('red'), size = I(0.5), darken = .3)
 ```
 
 
 
 
-Plot dataset of the airports for counties that had cases
-```{r}
-qmplot(Longitude, Latitude, data = airports_update, colour = I('red'), size = I(0.5), darken = .3)
-```
 
 
 
@@ -156,7 +167,7 @@ dat <- data.frame(x = x,y = x^2 + 1)
 # Some external vector for the color scale
 col <- sort(geoday25_1$DayOfFirstCases)
 
-qplot(Longitude, Latitude, data=geoday25_1, colour=col) + scale_colour_gradient(low="red", high="blue")
+qplot(lon, lat, data=geoday25_1, colour=col) + scale_colour_gradient(low="red", high="blue")
 
 ```
 
@@ -224,8 +235,5 @@ sp
 
 plot(testing123$x)
 ```
-
-
-
 
 

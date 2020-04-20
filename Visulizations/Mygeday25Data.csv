@@ -1,4 +1,4 @@
-"FIPS","Name","State","Population","LandArea","TotalArea","CommutingByPublicTransportation","GDP","DayOfFirstCases","ConfirmedCasesDay25","Latitude","Longitude"
+"FIPS","Name","State","Population","LandArea","TotalArea","CommutingByPublicTransportation","GDP","DayOfFirstCases","ConfirmedCasesDay25","lat","lon"
 1003,"Baldwin County","AL",223234,4117546676,5250602512,82,6606080,53,364,30.66,-87.75
 1051,"Elmore County","AL",81209,1601769095,1701726818,42,1902516,52,257,32.6,-86.14
 1073,"Jefferson County","AL",658573,2878465205,2911350249,2694,46959136,52,4649,33.55,-86.9
