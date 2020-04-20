@@ -16,13 +16,13 @@ Load Libraries
 library(here)
 library(dplyr)
 library(SuperLearner)
-library(tmle3)
-library(varimpact)
+# library(tmle3)
+# library(varimpact)
 library(readxl)
 library(readr)
 library(data.table)
 library(tidyverse)
-library(sl3)
+# library(sl3)
 library(sjPlot)
 library(ggplot2)
 library(car)
@@ -82,6 +82,17 @@ day25_covars$log_pop_dense <- log(day25_covars$Population/(day25_covars$LandArea
 
 ```
 
+
+```{r airports, error=FALSE, message=FALSE, warning=FALSE}
+
+# airports <- read_csv("Data/MyairportData.csv")
+# city_county_metro <- read_csv("Data/Mygeday25Data.csv")
+
+```
+
+
+
+
 Import Google mobility data 
 ```{r mobility data, message=FALSE, results="hide", warning=FALSE}
 
@@ -139,12 +150,12 @@ df.6 <-
 df.6$type <- "workplaces"
 
 
-mobility.data <-
-  left_join(df.1, df.2, by = c("State", "date", "value", "type")) %>%
-  left_join(df.3) %>%
-  left_join(df.4) %>%
-  left_join(df.5) %>%
-  left_join(df.6)
+# mobility.data <-
+#   left_join(df.1, df.2, by = c("State", "date", "value", "type")) %>%
+#   left_join(df.3) %>%
+#   left_join(df.4) %>%
+#   left_join(df.5) %>%
+#   left_join(df.6)
 
 mobility_data_long <- rbind(df.1, df.2,df.3,df.4,df.5,df.6)
 mobility_data_wide <- spread(mobility_data_long, date, value)
@@ -153,9 +164,11 @@ mobility_data_wide <- spread(mobility_data_long, date, value)
 ```
 
 
+
+
+
+
 Run Simple Triple Interaction Model and get Marginal Effects for Transportation
-
-
 ```{r running simple linear model}
 
 ## set up bootstrap CI function

@@ -55,7 +55,7 @@ We will join it with the airport dataset
 airport_complete <- left_join(enplane, airports, by = c("IATA", "city")) %>%
   filter(Longitude != "NA")  %>%
   # filter(Country == "United States") %>%
-  select( c("IATA" , "ICAO", "city", "ST", "Airport.Name",
+  dplyr::select( c("IATA" , "ICAO", "city", "ST", "Airport.Name",
              "Type","CY.18.Enplanements", "CY.17.Enplanements",
              "X..Change", "Longitude", "Latitude", "Altitude",
              "Timezone",
@@ -84,7 +84,7 @@ city_state <- read.csv("city_state.csv")
 
 airport_complete3 <- left_join(city_state, airport_complete, by = c("city", "ST")) %>%
   filter(Longitude != "NA") %>%
-  select(
+  dplyr::select(
     c("city", "city_ascii", "ST", "state_name",
       "IATA", "Airport.Name", "CY.18.Enplanements",
       "CY.17.Enplanements", "X..Change", "Latitude", 
@@ -127,6 +127,6 @@ Final result
 ```{r}
 # head(airport_complete4)
 
-write.csv(airport_complete4,"MyairportData.csv", row.names = FALSE)
+write.csv(airport_complete4,"firstAirportData.csv", row.names = FALSE)
 ```
 

@@ -31,8 +31,12 @@ Case and geo county data
 ```{r}
 
 geocounties <- read.csv("county_lat_lon.csv", header=TRUE, stringsAsFactors=F)
-
 geocounties <- dplyr::select(geocounties, -c("ID", "County", "County.Seat.s."))
+
+
+geocounties2 <- read.csv("uscities.csv")
+names(geocounties2)[names(geocounties2)=="county_fips"] <- "FIPS"
+names(geocounties2)[names(geocounties2)=="ST"] <- "State"
 
 ```
 
@@ -41,17 +45,65 @@ Join with case data and plot
 ```{r}
 day25 <- read.csv("day25.csv", header=TRUE, stringsAsFactors=F)
 
-geoday25 <- left_join(day25, geocounties, by = c("FIPS", "State")) 
 
-qmplot(Longitude, Latitude, data = geoday25, colour = I('red'), size = I(0.5), darken = .3)
 ```
+
+
+```{r}
+
+# with case data
+geoday25_1 <- left_join(day25, geocounties, by = c("FIPS", "State")) 
+
+
+
+# Without case data
+geoday25_2 <- left_join(day25, geocounties2, by = c("FIPS", "State")) %>%
+  dplyr::select("FIPS", "Name", "city", "State", "state_name", 
+                "lat", "lng", "timezone", "zips")
+names(geoday25_2)[names(geoday25_2)=="State"] <- "ST"
+
+
+```
+
+
+
+Join with airport data
+```{r}
+
+airportss <- read.csv("firstAirportData.csv")
+
+geoday25_2$case <- "yes"
+
+airports_update <- left_join(geoday25_2, airportss, by = c("ST", "FIPS", "city", "state_name")) %>%
+  filter(Latitude != "NA") %>%
+  dplyr::select(
+    -c("lat", "lng", "zips", "city_ascii", "county_name_all", 
+       "timezone")
+  )
+
+```
+
 
 
 Final result
 ```{r}
 # head(airport_complete4)
 
-write.csv(geoday25,"MyairportData.csv", row.names = FALSE)
+write.csv(geoday25_2,"MyairportData.csv", row.names = FALSE)
+
+write.csv(geoday25_1,"Mygeday25Data.csv", row.names = FALSE)
+```
+
+
+Plot the new dataset with cases
+```{r}
+qmplot(Longitude, Latitude, data = geoday25_1, colour = I('red'), size = I(0.5), darken = .3)
+```
+
+
+Plot dataset of the counties with airports that had cases
+```{r}
+qmplot(Longitude, Latitude, data = airports_update, colour = I('red'), size = I(0.5), darken = .3)
 ```
 
 
@@ -73,7 +125,7 @@ dat <- data.frame(x = x,y = x^2 + 1)
 # Some external vector for the color scale
 col <- sort(geoday25$DayOfFirstCases)
 
-qplot(Longitude, Latitude, data=geoday25, colour=col) + scale_colour_gradient(low="red", high="blue")
+qplot(Longitude, Latitude, data=geoday25_1, colour=col) + scale_colour_gradient(low="red", high="blue")
 
 ```
 
@@ -98,7 +150,7 @@ Averages By metropolitan statistical area
 metroAreas <- read.csv("metro_stat_area.csv", header=TRUE, stringsAsFactors=F)
 
 
-test123 <- left_join(geoday25, metroAreas, by = "Name") %>%
+test123 <- left_join(geoday25_1, metroAreas, by = "Name") %>%
   filter(State.x == c("NY", "CA")) %>%
   subset(Core_Based_Statistical_Area != "none")
 
