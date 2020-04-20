@@ -24,7 +24,7 @@ require(ggmap)
 Airport lon, lat data
 ```{r}
 
-airports <- read.csv("airports1.csv")
+airports <- read.csv("airports1.csv", header=TRUE, stringsAsFactors=F)
 
 airports <- filter(airports, Country == "United States")
 

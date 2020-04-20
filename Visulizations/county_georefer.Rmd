@@ -63,6 +63,7 @@ geoday25_2 <- left_join(day25, geocounties2, by = c("FIPS", "State")) %>%
 names(geoday25_2)[names(geoday25_2)=="State"] <- "ST"
 
 
+
 ```
 
 
@@ -71,15 +72,34 @@ Join with airport data
 ```{r}
 
 airportss <- read.csv("firstAirportData.csv")
+# names(airportss)[names(airportss)=="ST"] <- "State"
 
-geoday25_2$case <- "yes"
 
-airports_update <- left_join(geoday25_2, airportss, by = c("ST", "FIPS", "city", "state_name")) %>%
-  filter(Latitude != "NA") %>%
+airport_up <- merge(airportss,day25) %>%
   dplyr::select(
-    -c("lat", "lng", "zips", "city_ascii", "county_name_all", 
-       "timezone")
-  )
+    -c("city_ascii", "county_name_all", "State")
+    )
+airport_up$day25 <- 1 
+
+
+# I want to put together the airports that match with a county in the day25 dataset and the all airports in the US
+county_air <- data.frame(Longitude = airport_up$Longitude, Latitude = airport_up$Latitude, day25 = airport_up$day25)
+
+terst <- left_join(airportss, county_air, by=c("Longitude", "Latitude"))
+
+for(i in (1:nrow(terst))){
+  if(is.na(terst$day25[i])){
+    terst$day25[i] <- 0
+  }
+}  
+  
+
+# airports_update <- left_join(geoday25_2, airportss, by = c("ST", "FIPS", "city", "state_name")) %>%
+#   filter(Latitude != "NA") %>%
+#   dplyr::select(
+#     -c("lat", "lng", "zips", "city_ascii", "county_name_all", 
+#        "timezone")
+#   )
 
 ```
 
@@ -89,7 +109,9 @@ Final result
 ```{r}
 # head(airport_complete4)
 
-write.csv(geoday25_2,"MyairportData.csv", row.names = FALSE)
+write.csv(terst,"MyairportData.csv", row.names = FALSE)
+
+write.csv(geoday25_2,"Counties_Allcities.csv", row.names = FALSE)
 
 write.csv(geoday25_1,"Mygeday25Data.csv", row.names = FALSE)
 ```
@@ -101,7 +123,16 @@ qmplot(Longitude, Latitude, data = geoday25_1, colour = I('red'), size = I(0.5),
 ```
 
 
-Plot dataset of the counties with airports that had cases
+
+Plot all airports
+```{r}
+qmplot(Longitude, Latitude, data = airportss, colour = I('red'), size = I(0.5), darken = .3)
+```
+
+
+
+
+Plot dataset of the airports for counties that had cases
 ```{r}
 qmplot(Longitude, Latitude, data = airports_update, colour = I('red'), size = I(0.5), darken = .3)
 ```
@@ -123,7 +154,7 @@ qplot(x, y, data=dat, colour=col) + scale_colour_gradient(low="red", high="blue"
 x <- sort(runif(100))
 dat <- data.frame(x = x,y = x^2 + 1)
 # Some external vector for the color scale
-col <- sort(geoday25$DayOfFirstCases)
+col <- sort(geoday25_1$DayOfFirstCases)
 
 qplot(Longitude, Latitude, data=geoday25_1, colour=col) + scale_colour_gradient(low="red", high="blue")
 
@@ -193,6 +224,7 @@ sp
 
 plot(testing123$x)
 ```
+
 
 
 
