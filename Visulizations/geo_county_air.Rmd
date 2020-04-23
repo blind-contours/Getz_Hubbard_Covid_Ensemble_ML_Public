@@ -1,0 +1,275 @@
+---
+title: "Adding Lat and Long to Case Data"
+author: "Whitney Mgbara"
+date: "4/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+Libraries
+```{r}
+
+require(tidyverse)
+require(readr)
+
+require(ggplot2)
+
+require(ggmap)
+require(sf) 
+require(rgdal)
+require(raster)
+```
+
+
+## County lat/lon
+
+US cities and county data
+```{r}
+# Counties
+county_lat_lon <- read.csv("county_lat_lon.csv", header=TRUE, stringsAsFactors=F)
+county_lat_lon <- dplyr::select(county_lat_lon, -c("ID", "County", "County.Seat.s."))
+names(county_lat_lon)[names(county_lat_lon)=="Longitude"] <- "lon"
+names(county_lat_lon)[names(county_lat_lon)=="Latitude"] <- "lat"
+
+```
+
+
+Join with case data and plot
+```{r}
+day25 <- read.csv("day25.csv", header=TRUE, stringsAsFactors=F)
+
+
+```
+
+
+```{r}
+
+# Matching counties in day25 to lat/lon in county_lat_lon
+geoday25_1 <- left_join(day25, county_lat_lon, by = c("FIPS", "State")) 
+
+
+```
+
+
+
+Match up day25 counties to airport enplanement data
+```{r}
+
+# Can call Rmarkdown file in same folder to create
+# firstAirportData.csv
+# source("airports_cities_counties.Rmd")
+
+enplane <- read.csv("cy18-commercial-service-enplanements.csv")
+enplane <- filter(enplane, CY.18.Enplanements != "NA")
+
+test <- merge(enplane, uscities)
+test$CY.18.Enplanements <- as.numeric(test$CY.18.Enplanements)
+test$CY.17.Enplanements <- as.numeric(test$CY.17.Enplanements)
+test$X..Change <- as.numeric(test$X..Change)
+
+df1 <- 
+  test %>% 
+  group_by(FIPS) %>%
+  summarize(CY.18.Enplanements =
+              sum(CY.18.Enplanements),
+            CY.17.Enplanements = sum(CY.17.Enplanements),
+            X..Change = sum(X..Change)
+            )
+
+test1 <- left_join(geoday25_1, df1)
+
+
+df2 <- 
+  test %>% 
+  group_by(FIPS, IATA) %>%
+  summarize(CY.18.Enplanements =
+              sum(CY.18.Enplanements),
+            CY.17.Enplanements = sum(CY.17.Enplanements),
+            X..Change = sum(X..Change)
+            )
+
+test2 <- left_join(geoday25_1, df2)
+```
+
+
+
+Plot the new dataset with cases
+```{r}
+qmplot(lon, lat, data = geoday25_1, colour = I('red'), size = I(0.5), darken = .3)
+```
+
+
+
+Plot all airports
+```{r}
+qmplot(longitude_deg, latitude_deg, data = trial, colour = I('red'), size = I(0.5), darken = .3)
+```
+
+
+
+
+
+
+
+Plotting the lat and long for counties based on the range of values for Day of First Case
+```{r}
+
+#Some sample data
+x <- sort(runif(100))
+dat <- data.frame(x = x,y = x^2 + 1)
+# Some external vector for the color scale
+col <- sort(rnorm(100))
+
+qplot(x, y, data=dat, colour=col) + scale_colour_gradient(low="red", high="blue")
+
+#Some sample data
+x <- sort(runif(100))
+dat <- data.frame(x = x,y = x^2 + 1)
+# Some external vector for the color scale
+col <- sort(geoday25_1$DayOfFirstCases)
+
+qplot(lon, lat, data=geoday25_1, colour=col) + scale_colour_gradient(low="red", high="blue")
+
+```
+
+
+
+
+```{r}
+
+partyUSA <- st_read("C:/Users/Whitney/Downloads/USA_adm/USA_adm1.shp")
+
+# partyUSA <- st_read("C:/Users/Whitney/Downloads/cb_2018_us_csa_20m")
+
+
+plot(partyUSA[7])
+```
+
+
+
+Averages By metropolitan statistical area
+```{r}
+
+metroAreas <- read.csv("metro_stat_area.csv", header=TRUE, stringsAsFactors=F)
+
+
+test123 <- left_join(geoday25_1, metroAreas, by = "Name") %>%
+  filter(State.x == c("NY", "CA")) %>%
+  subset(Core_Based_Statistical_Area != "none")
+
+test123$popland <- test123$Population/test123$LandArea
+
+
+df <- 
+  test123 %>% 
+  group_by(Core_Based_Statistical_Area, State.x) %>%
+  summarize(DayOfFirstCases = mean(DayOfFirstCases),
+            ConfirmedCasesDay25 = sum(ConfirmedCasesDay25),
+            CommutingByPublicTransportation =
+              mean(CommutingByPublicTransportation), 
+            GDP = mean(GDP),
+            popland = mean(popland))
+
+df
+
+
+```
+
+
+
+
+
+## Airplane lat/lon
+
+
+us cities and counties
+```{r}
+# Cities
+uscities <- read_csv("Visulizations/uscities.csv") 
+
+uscities <- uscities %>%
+  dplyr::select("city", "state_name", "county_fips", "county_name")
+names(uscities)[names(uscities)=="county_fips"] <- "FIPS"
+names(uscities)[names(uscities)=="ST"] <- "State"
+names(uscities)[names(uscities)=="city"] <- "Location"
+```
+
+
+us commerical enplanement data
+```{r}
+enaplane <- read.csv("cy18-commercial-service-enplanements.csv")
+```
+
+
+top us airports 
+```{r}
+air1 <- read.csv("topairports.csv")
+
+# all us airports
+air2 <- read.csv("us-airports.csv")
+air3 <- data.frame(state_abrev = air2$iso_region, Location = air2$municipality, IATA = air2$IATA)
+```
+
+
+
+Get lat lon for top us airports 
+```{r}
+
+# Needs airportr library
+for (i in 1:nrow(air1)) {
+  air1_lat_lon[i,] <- add_row(airport_location(air1$IATA[i], input_type = "IATA"))
+  
+  # j+1
+}
+
+
+```
+
+
+Combine airport data
+```{r}
+aye <- cbind(air1, test) %>%
+  left_join(again, by = c("Location", "IATA")) %>%
+  left_join(enplane, by = "IATA") %>%
+  left_join(uscities, by = c("Location", "State")) %>%
+  dplyr::select(-c("RO", "S.L", "ST", "city","Official.AirportWebsite"))
+```
+
+
+
+Plot top us airports airports
+```{r}
+qmplot(Longitude, Latitude, data = test, colour = I('red'), size = I(3), darken = .3)
+```
+
+
+
+
+Data set with all airplane lat/lon and day25 county lat/lon 
+```{r}
+
+names(usairports)[names(usairports)=="municipality"] <- "city"
+
+trial <- merge(usairports, enplane, by = c("IATA", "city"))
+
+```
+
+
+Save data
+```{r}
+# head(airport_complete4)
+
+write.csv(trial,"MyairportData.csv", row.names = FALSE)
+
+# write.csv(geoday25_2,"Counties_Allcities.csv", row.names = FALSE)
+
+write.csv(geoday25_1,"Mygeday25Data.csv", row.names = FALSE)
+```
+
+
+
