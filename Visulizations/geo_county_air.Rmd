@@ -212,6 +212,32 @@ inday25 <- data.frame(FIPS = day25$FIPS,
 
 aye2 <- left_join(aye, inday25, by = c("FIPS", "state_abrev"))
 aye2$inday25 <- aye2$inday25 %>% replace_na(0)
+
+```
+
+
+
+```{r}
+
+get_geo_distance = function(long1, lat1, long2, lat2, units = "miles") {
+  loadNamespace("purrr")
+  loadNamespace("geosphere")
+  longlat1 = purrr::map2(long1, lat1, function(x,y) c(x,y))
+  longlat2 = purrr::map2(long2, lat2, function(x,y) c(x,y))
+  distance_list = purrr::map2(longlat1, longlat2, function(x,y) geosphere::distHaversine(x, y))
+  distance_m = list_extract(distance_list, position = 1)
+  if (units == "km") {
+    distance = distance_m / 1000.0;
+  }
+  else if (units == "miles") {
+    distance = distance_m / 1609.344
+  }
+  else {
+    distance = distance_m
+    # This will return in meter as same way as distHaversine function. 
+  }
+  distance
+}
 ```
 
 
