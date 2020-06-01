@@ -124,17 +124,21 @@ a=a[2:nrow(a),]
 counties=cbind(counties,a[match(counties$FIPS,as.integer(as.character(a$X5.digit.FIPS.Code))),8:ncol(a)])
 
 # Add County_Table_Chronic_Conditions_Prevalence_by_Age_2017.xlsx
-for (i in 2:4) {
-  a=readxl::read_excel(here("Analysis/update_data/data/raw/County_Table_Chronic_Conditions_Prevalence_by_Age_2017.xlsx"), sheet = i,skip = 4)
+age_group <- c("prev all ages", "prev under65", "prev over65")
+for (i in 1:3) {
+  a=readxl::read_excel(here("Analysis/update_data/data/chronic_conditions_prev_by_age_2017.xlsx") ,sheet = i)
   a=a[2:nrow(a),]
-  counties=cbind(counties,a[match(counties$FIPS, as.integer(a$...3)),4:ncol(a)])
+  colnames(a) <- paste(age_group[i], colnames(a))
+  counties=cbind(counties,a[match(counties$FIPS, as.integer(a$`State/County FIPS Code`)),4:ncol(a)])
 }
 
 # Add County_Table_Chronic_Conditions_Spending_2017.xlsx
-for (i in 2:3) {
-  a=readxl::read_excel(here("Analysis/update_data/data/raw/County_Table_Chronic_Conditions_Spending_2017.xlsx") ,sheet = i,skip = 4)
+spending <- c("actual spending for", "standardized spending for")
+for (i in 1:2) {
+  a=readxl::read_excel(here("Analysis/update_data/data/chronic_conditions_actual_per_capita_spending_2017.xlsx"), sheet = i)
   a=a[2:nrow(a),]
-  counties=cbind(counties,a[match(counties$FIPS, as.integer(a$...3)),4:ncol(a)])
+  colnames(a) <- paste(spending[i], colnames(a))
+  counties=cbind(counties,a[match(counties$FIPS, as.integer(a$`State/County FIPS Code`)),4:ncol(a)])
 }
 
 # Add DiabetesAtlasCountyData.csv
