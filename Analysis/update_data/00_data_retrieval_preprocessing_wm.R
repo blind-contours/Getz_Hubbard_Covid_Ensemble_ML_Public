@@ -1,6 +1,11 @@
 # Adding polygon info for counties to get the centroid
 library(tigris) # using the counties() command 
 library(sf)
+
+library(caret)
+library(rvest)
+library(dplyr)
+library(tidyverse)
 library(here)
 
 # Download USFacts data
@@ -201,11 +206,22 @@ for (p in c("tavg","pcp")) {
 # View(CountiesMergedData20200517)
 
 ## removing variables based on NA percent
-class(counties$X2017_prev_over_65_Hepatitis..................................Chronic.Viral.B...C.)
-counties2 <- replace(counties, "\\*", "NA")
-counties3 <- counties2[, which(colMeans(!is.na(counties)) > 0.75)]
+counties2 <- counties[, which(colMeans(!is.na(counties)) > 0.75)]
 
+## removing near zero variance variables
+nz_idx_vector <- nearZeroVar(
+  counties2,
+  freqCut = 95/5,
+  uniqueCut = 10,
+  saveMetrics = FALSE,
+  names = FALSE,
+  foreach = FALSE,
+  allowParallel = TRUE
+)
+
+## what variables are near nonvarying
+counties3 <- counties2[,-nz_idx_vector]
 
 # Write results to a file
-write.csv(counties2,here("Analysis/update_data/data/processed/CountiesMergedData20200517.csv"))
+write.csv(counties3,here("Analysis/update_data/data/processed/CountiesMergedData20200517.csv"))
 
