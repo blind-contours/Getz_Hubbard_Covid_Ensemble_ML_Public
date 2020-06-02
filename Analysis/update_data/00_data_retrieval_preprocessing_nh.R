@@ -124,7 +124,7 @@ a=a[2:nrow(a),]
 counties=cbind(counties,a[match(counties$FIPS,as.integer(as.character(a$X5.digit.FIPS.Code))),c(8,34,39,70,75,105,130,140,153,173,193,218,258,282,307,407,503,691,701,706)])
 
 # Add County_Table_Chronic_Conditions_Prevalence_by_Age_2017.xlsx
-age_group <- c("prev all ages", "prev under65", "prev over65")
+# age_group <- c("prev all ages", "prev under65", "prev over65")
 for (i in 1:3) {
   a=readxl::read_excel(here("Analysis/update_data/data/chronic_conditions_prev_by_age_2017.xlsx") ,sheet = i)
   a=a[2:nrow(a),]
@@ -133,7 +133,7 @@ for (i in 1:3) {
 }
 
 # Add County_Table_Chronic_Conditions_Spending_2017.xlsx
-spending <- c("actual spending for", "standardized spending for")
+# spending <- c("actual spending for", "standardized spending for")
 for (i in 1:2) {
   a=readxl::read_excel(here("Analysis/update_data/data/chronic_conditions_actual_per_capita_spending_2017.xlsx"), sheet = i)
   a=a[2:nrow(a),]
