@@ -127,9 +127,11 @@ counties=cbind(counties,a[match(counties$FIPS,as.integer(as.character(a$X5.digit
 age_group <- c("prev_all_ages_", "prev_under_65_", "prev_over_65_")
 for (i in 1:3) {
   a=readxl::read_excel(here("Analysis/update_data/data/chronic_conditions_prev_by_age_2017.xlsx") ,sheet = i)
-  a=a[2:nrow(a),]
-  colnames(a) <- paste0(age_group[i], colnames(a))
-  counties=cbind(counties,a[match(counties$FIPS, as.integer(a$`State/County FIPS Code`)),4:ncol(a)])
+  # a=a[1:nrow(a),]
+  b = a[ ,4:24]
+  colnames(b) <- paste0(age_group[i], colnames(b))
+  c = data.frame(a[ ,1:3], b)
+  counties=cbind(counties,c[match(counties$FIPS, as.integer(c$State.County.FIPS.Code)),4:ncol(c)])
 }
 
 # Add County_Table_Chronic_Conditions_Spending_2017.xlsx
@@ -175,7 +177,8 @@ states=as.character(unique(usf$State))
 states_fips=purrr::map(states,function(state) usf$stateFIPS[which(usf$State==state)[1]])
 
 # Download average, min and max temperature and precipitation from NOAA
-for (p in c("tavg","tmin","tmax","pcp")) {
+# taking "tmin","tmax" out of the for loop
+for (p in c("tavg","pcp")) {
   # Run over months
   for (m in 1:4) {
     cn=sprintf("%s_m%d",p,m)
