@@ -198,9 +198,14 @@ for (p in c("tavg","pcp")) {
 
 # Results #
 # We may need to take some columns out first
-
 # View(CountiesMergedData20200517)
 
+## removing variables based on NA percent
+class(counties$X2017_prev_over_65_Hepatitis..................................Chronic.Viral.B...C.)
+counties2 <- replace(counties, "\\*", "NA")
+counties3 <- counties2[, which(colMeans(!is.na(counties)) > 0.75)]
+
+
 # Write results to a file
-write.csv(counties,here("Analysis/update_data/data/processed/CountiesMergedData20200517.csv"))
+write.csv(counties2,here("Analysis/update_data/data/processed/CountiesMergedData20200517.csv"))
 
