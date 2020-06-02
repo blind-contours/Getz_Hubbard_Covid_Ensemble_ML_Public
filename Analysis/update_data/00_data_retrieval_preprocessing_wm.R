@@ -169,7 +169,7 @@ for (i in 1:3) {
 # counties=cbind(counties,a[match(counties$FIPS,as.integer(a$FIPStxt)),4:ncol(a)])
 
 # Changed from tester2.csv to 2018ACS.csv
-a=read.csv(here("Analysis/update_data/data/raw/2018ACS.csv"))
+a=read.csv(here("Analysis/update_data/data/2018ACS.csv"))
 counties=cbind(counties,a[match(counties$FIPS,a$GEOID),3:ncol(a)])
 
 # Prepare states to match census state fips to NOAA state fips
