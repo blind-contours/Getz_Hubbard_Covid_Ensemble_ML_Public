@@ -5,7 +5,6 @@ library(knitr)
 library(ggplot2)
 library(here)
 library(R6)
-library(imputeTS)
 library(tidyverse)
 library(readxl)
 
@@ -13,8 +12,7 @@ library(readxl)
 scale = TRUE
 
 ## load data
-covid_data_processed <- read_excel(here("Analysis/update_data/data/processed/cleaned_covid_data_final.xlsx"),sheet = 1)
-#test_previous_data <- readRDS('/Users/davidmccoy/Dropbox/COVID_Project_Getz-Hubbard/Data_Files/Compiled_Data/Covid_DataSet_0421.rds')
+covid_data_processed <- read_csv("Analysis/update_data/data/processed/cleaned_covid_data_final.csv")
 
 ## source the custom learners built for poisson outcomes
 sapply(list.files(path = here("Analysis/poisson_learners"),
@@ -22,7 +20,22 @@ sapply(list.files(path = here("Analysis/poisson_learners"),
                   source)
 
 
-outcomes <- c("CountyRelativeDay25Cases", "TotalCasesUpToDate", "USRelativeDay100Deaths" , "TotalDeathsUpToDate", "FirstCaseDay")
+covid_data_processed$CountyRelativeDay25Cases_PopScale <- covid_data_processed$CountyRelativeDay25Cases / covid_data_processed$Population 
+covid_data_processed$TotalCasesUpToDate_PopScale <- covid_data_processed$TotalCasesUpToDate / covid_data_processed$Population 
+covid_data_processed$USRelativeDay100Deaths_PopScale <- covid_data_processed$USRelativeDay100Deaths / covid_data_processed$Population 
+covid_data_processed$TotalDeathsUpToDate_PopScale <- covid_data_processed$TotalDeathsUpToDate / covid_data_processed$Population
+
+
+outcomes <- c("CountyRelativeDay25Cases", 
+              "TotalCasesUpToDate", 
+              "USRelativeDay100Deaths" , 
+              "TotalDeathsUpToDate", 
+              "FirstCaseDay",
+              "CountyRelativeDay25Cases_PopScale", 
+              "TotalCasesUpToDate_PopScale",
+              "USRelativeDay100Deaths_PopScale",
+              "TotalDeathsUpToDate_PopScale")
+
 
 covars <- colnames(covid_data_processed)[-which(names(covid_data_processed) %in% c(outcomes, 
                                                              "X1", 
@@ -31,16 +44,19 @@ covars <- colnames(covid_data_processed)[-which(names(covid_data_processed) %in%
                                                              "county_names",
                                                              "Row Label",
                                                              'total.population.2018'))]
-features_data <- covid_data_processed %>% 
-  select(-c(outcomes, 'Row Label', 'FIPS', 'county_names'))
+
+
+
+
+
 
 ## use a function to apply task over multiple outcomes 
-run_sl3_poisson_lrns <- function(outcome, data, covars, scale = TRUE){
+run_sl3_poisson_lrns <- function(outcome, data, covars, scale = TRUE, cv = TRUE, outcome_type = "Gaussian", all_outcomes = outcomes) {
   
   if (scale) {
     
-    features_data_scaled <- covid_data_processed %>% 
-      select(-c(outcomes, 'Row Label', 'FIPS', 'county_names', 'total.population.2018')) %>% 
+    features_data_scaled <- data %>% 
+      select(-c(all_outcomes, 'X1', 'FIPS', 'county_names', 'total.population.2018')) %>% 
       scale()  %>% 
       as.data.frame()
     
@@ -48,66 +64,115 @@ run_sl3_poisson_lrns <- function(outcome, data, covars, scale = TRUE){
 
   }
   
-  ## impute mean for NA to avoid funciton failing with sl3 imputation warning: 
-  
-  ## create task - most outcomes only have 1 or 2 NAs so setting drop outcome to true to avoid breaking training
-  task_cv <- make_sl3_Task(
+  if (cv) {
+    
+    task <- make_sl3_Task(
     data = data,
     covariates = covars,
     outcome = outcome,
-    folds = origami::make_folds(data, fold_fun = folds_vfold, V = 5),
-    drop_missing_outcome=TRUE
-  )
+    folds = origami::make_folds(data, fold_fun = folds_vfold, V = 5))
+  } else{
   
-  ## set up the custom learners and some standard ones as well
-  ## set up baseline mean to make sure our other learners are working better than mean
-  mean_lrnr <- Lrnr_mean$new()
-  ## standard poisson GLM I wrote
-  Lrnr_david_pois <- make_learner(Lrnr_david_pois)
+  task <- make_sl3_Task(
+    data = data,
+    covariates = covars,
+    outcome = outcome)
+  }
   
-  ## custom xgboost for poisson outcome with varying parameters (should try grid as well)
-  Lrnr_david_xgboost_pois_850 <- make_learner(Lrnr_david_xgboost_pois, max_depth = 8,  nrounds = 50)
-  Lrnr_david_xgboost_pois_5100 <- make_learner(Lrnr_david_xgboost_pois, max_depth = 5,  nrounds = 100)
-  Lrnr_david_xgboost_pois_10200 <- make_learner(Lrnr_david_xgboost_pois, max_depth = 10,  nrounds = 200)
+  if (outcome_type == "Poisson") {
+    
   
-  ## custom ridge and lass from glmnet poisson
-  ridge_lrnr_pois <- make_learner(Lrnr_david_glmnet_pois,alpha = 0, nfolds = 3)
-  lasso_lrnr_pois <- make_learner(Lrnr_david_glmnet_pois,alpha = 1, nfolds = 3)
+    ## set up the custom learners and some standard ones as well
+    ## set up baseline mean to make sure our other learners are working better than mean
+    mean_lrnr <- Lrnr_mean$new()
+    ## standard poisson GLM I wrote
+    Lrnr_david_pois <- make_learner(Lrnr_david_pois)
+    
+    ## custom xgboost for poisson outcome with varying parameters (should try grid as well)
+    Lrnr_david_xgboost_pois_850 <- make_learner(Lrnr_david_xgboost_pois, max_depth = 8,  nrounds = 50)
+    Lrnr_david_xgboost_pois_5100 <- make_learner(Lrnr_david_xgboost_pois, max_depth = 5,  nrounds = 100)
+    Lrnr_david_xgboost_pois_10200 <- make_learner(Lrnr_david_xgboost_pois, max_depth = 10,  nrounds = 200)
+    
+    ## custom ridge and lass from glmnet poisson
+    ridge_lrnr_pois <- make_learner(Lrnr_david_glmnet_pois,alpha = 0, nfolds = 3)
+    lasso_lrnr_pois <- make_learner(Lrnr_david_glmnet_pois,alpha = 1, nfolds = 3)
+    
+    ## custom gbm and glmnet for poisson with varying parameters
+    Lrnr_david_gbm_pois <- make_learner(Lrnr_david_gbm_pois)
+    Lrnr_david_glmnet_pois_25 <- make_learner(Lrnr_david_glmnet_pois, alpha = 0.25, nfolds = 3)
+    Lrnr_david_glmnet_pois_50 <- make_learner(Lrnr_david_glmnet_pois, alpha = 0.50, nfolds = 3)
+    Lrnr_david_glmnet_pois_75 <- make_learner(Lrnr_david_glmnet_pois, alpha = 0.75, nfolds = 3)
+    
+    ## custom HAL
+    Lrnr_david_hal9001_pois <- make_learner(Lrnr_david_hal9001_pois)
+    ## custom earth
+    #Lrnr_david_earth_pois <- make_learner(Lrnr_david_earth_pois)
+    
+    ## create the stack of learners 
+    stack <- make_learner(
+      Stack,
+      mean_lrnr,
+      #Lrnr_david_pois,
+      #Lrnr_david_xgboost_pois_850,
+      Lrnr_david_xgboost_pois_5100,
+      Lrnr_david_xgboost_pois_10200,
+      ridge_lrnr_pois,
+      lasso_lrnr_pois,
+      Lrnr_david_gbm_pois,
+      Lrnr_david_glmnet_pois_25,
+      Lrnr_david_glmnet_pois_50,
+      Lrnr_david_glmnet_pois_75) #Lrnr_david_earth_pois isn't working and leave out HAL for time restraints but should try
+  } else {
+  # choose base learners
+  lrnr_glm <- make_learner(Lrnr_glm)
+  lrnr_mean <- make_learner(Lrnr_mean)
   
-  ## custom gbm and glmnet for poisson with varying parameters
-  Lrnr_david_gbm_pois <- make_learner(Lrnr_david_gbm_pois)
-  Lrnr_david_glmnet_pois_25 <- make_learner(Lrnr_david_glmnet_pois, alpha = 0.25, nfolds = 3)
-  Lrnr_david_glmnet_pois_50 <- make_learner(Lrnr_david_glmnet_pois, alpha = 0.50, nfolds = 3)
-  Lrnr_david_glmnet_pois_75 <- make_learner(Lrnr_david_glmnet_pois, alpha = 0.75, nfolds = 3)
+  lrnr_ranger10 <- make_learner(Lrnr_ranger, num.trees = 10)
+  lrnr_ranger50 <- make_learner(Lrnr_ranger, num.trees = 50)
+  lrnr_hal_simple <- make_learner(Lrnr_hal9001, max_degree = 2, n_folds = 2)
+  lrnr_lasso <- make_learner(Lrnr_glmnet) # alpha default is 1
+  lrnr_ridge <- make_learner(Lrnr_glmnet, alpha = 0)
+  lrnr_elasticnet <- make_learner(Lrnr_glmnet, alpha = .5)
   
-  ## custom HAL
-  Lrnr_david_hal9001_pois <- make_learner(Lrnr_david_hal9001_pois)
-  ## custom earth
-  #Lrnr_david_earth_pois <- make_learner(Lrnr_david_earth_pois)
+  #lrnr_bayesglm <- Lrnr_pkg_SuperLearner$new("SL.bayesglm")
   
-  ## create the stack of learners 
+  # I like to crock pot my super learners
+  grid_params <- list(max_depth = c(2, 4, 6, 8, 10, 12),
+                      eta = c(0.001, 0.01, 0.1, 0.2, 0.3),
+                      nrounds = c(20, 50))
+  grid <- expand.grid(grid_params, KEEP.OUT.ATTRS = FALSE)
+  params_default <- list(nthread = getOption("sl.cores.learners", 1))
+  xgb_learners <- apply(grid, MARGIN = 1, function(params_tune) {
+    do.call(Lrnr_xgboost$new, c(params_default, as.list(params_tune)))})
+  
+  
   stack <- make_learner(
     Stack,
-    mean_lrnr,
-    Lrnr_david_pois,
-    Lrnr_david_xgboost_pois_850,
-    Lrnr_david_xgboost_pois_5100,
-    Lrnr_david_xgboost_pois_10200,
-    ridge_lrnr_pois,
-    lasso_lrnr_pois,
-    Lrnr_david_gbm_pois,
-    Lrnr_david_glmnet_pois_25,
-    Lrnr_david_glmnet_pois_50,
-    Lrnr_david_glmnet_pois_75) #Lrnr_david_earth_pois isn't working and leave out HAL for time restraints but should try
+    lrnr_glm, 
+    lrnr_mean, 
+    lrnr_ridge, 
+    lrnr_elasticnet, 
+    lrnr_lasso, 
+    xgb_learners[[31]], 
+    xgb_learners[[32]], 
+    xgb_learners[[33]],
+    xgb_learners[[34]],
+    xgb_learners[[40]],
+    lrnr_ranger10, 
+    xgb_learners[[50]], 
+    xgb_learners[[60]]
+  )
+  }
+  
   
   sl <- make_learner(Lrnr_sl,
                      learners = stack
   )
   ## fit the sl3 object
-  sl_fit <- sl$train(task_cv)
+  sl_fit <- sl$train(task)
   
   ## cross validate across the learners in sl3 object to see how learners perform 
-  CVsl <- CV_lrnr_sl(sl_fit, task_cv, loss_squared_error)
+  CVsl <- CV_lrnr_sl(sl_fit, task, loss_squared_error)
   
   ## get variable importance from the sl3 object
   var_importance <- varimp(sl_fit, loss_squared_error, type = "ratio")
@@ -115,45 +180,70 @@ run_sl3_poisson_lrns <- function(outcome, data, covars, scale = TRUE){
   return(list('fit' = sl_fit, 'cv_fit' = CVsl, 'var_imp' = var_importance))
 }
 
-outcome <- "ConfirmedCasesDay25"
-covars <- colnames(test_previous_data)[-which(names(test_previous_data) %in% c(outcome, 
-                                                             "State", 
-                                                             "FIPS", 
-                                                             "Name", 
-                                                             "popland", 
-                                                             "GDP", 
-                                                             "CommutingByPublicTransportation",
-                                                             "Population"
-))]
-
-
-test_output <- run_sl3_poisson_lrns(outcome = outcome, data = test_previous_data, covars = covars)
-
 ptm <- proc.time()
-output1 <- run_sl3_poisson_lrns(outcome = outcomes[1], data = covid_data_processed, covars = covars)
-output2 <- run_sl3_poisson_lrns(outcome = outcomes[2], data = covid_data_processed, covars = covars)
-output3 <- run_sl3_poisson_lrns(outcome = outcomes[3], data = covid_data_processed, covars = covars)
-output4 <- run_sl3_poisson_lrns(outcome = outcomes[4], data = covid_data_processed, covars = covars)
-#output <- map(.x = outcomes, .f = run_sl3_poisson_lrns(outcome = x, data = covid_data_processed, covars = covars))
+ML_pipeline_output <- map(.x = outcomes[5:length(outcomes)], 
+                          .f = run_sl3_poisson_lrns, 
+                          data = covid_data_processed, 
+                          covars = covars,
+                          scale = TRUE,
+                          cv = TRUE,
+                          outcome_type = "Gaussian",
+                          all_outcomes = outcomes)
 proc.time() - ptm
 
+saveRDS(ML_pipeline_output, here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes.RDS"))
 
-var_importance %>%
-  mutate(name = forcats::fct_reorder(X, risk_ratio)) %>%
-  ggplot(aes(x = risk_ratio, y = X)) +
-  geom_dotplot(binaxis = "y", dotsize = 0.5) +
-  labs(x = "Risk Ratio", y = "Covariate", 
-       title = "sl3 Variable Importance for COVID Day 25 Cases")
 
-var_importance %>%
-  arrange(risk_ratio) %>%    # First sort by val. This sort the dataframe but NOT the factor levels
-  mutate(name=factor(X, levels=X)) %>%   # This trick update the factor levels
-  ggplot( aes(x=X, y=risk_ratio)) +
-  geom_segment( aes(xend=name, yend=0)) +
-  geom_point( size=4, color="orange") +
+plot_variable_importance <- function(input_df, plot_label, save_label){
+ 
+  var_importance <- as.data.frame(input_df$var_imp)
+  colnames(var_importance) <- c("County_Features", "Risk_Ratio")
+  
+  var_importance$County_Features <- as.factor(var_importance$County_Features)
+  var_importance$County_Features <- factor(var_importance$County_Features, levels = var_importance$County_Features[order(var_importance$Risk_Ratio)])
+  
+  pdf(paste(here("Visulizations/var_imp/"),save_label , sep = ""))
+  
+  var_imp_plot <- var_importance %>%
+    filter(Risk_Ratio > 1.01)  %>%
+    ggplot(aes(x = County_Features, y = Risk_Ratio)) +
+    geom_dotplot(binaxis = "y", dotsize = 0.25) +
+    labs(x = "County Level Feature", y = "Risk Ratio", 
+         title = plot_label) + 
+    coord_flip() +
+    theme_bw()
+  
+  print(var_imp_plot)
+  
+  dev.off()
+
+  }
+
+plot_variable_importance(input_df = ML_pipeline_output[[1]], plot_label = "Day First Case Outcome", save_label = "day_first_case.pdf")
+plot_variable_importance(input_df = ML_pipeline_output[[2]], plot_label = "Cases Rate at Day 25 Outcome", save_label = "day_25_cases.pdf")
+plot_variable_importance(input_df = ML_pipeline_output[[3]], plot_label = "Cases Rate Total To Date Outcome", save_label = "tota_cases_2date.pdf")
+plot_variable_importance(input_df = ML_pipeline_output[[4]], plot_label = "Mortality at Day 100 Rate Outcome", save_label = "day_100_mortality.pdf")
+plot_variable_importance(input_df = ML_pipeline_output[[5]], plot_label = "Mortality Total Rate Outcome", save_label = "total_deaths_2date.pdf")
+
+
+
+## if things need to be done manually, i.e. running the script within the function rather than running the whole function plotting variable importance dataframe generated 
+## can be plotted here: 
+
+
+#var_importance <- as.data.frame(input_df$var_imp)
+colnames(var_importance) <- c("County_Features", "Risk_Ratio")
+
+var_importance$County_Features <- as.factor(var_importance$County_Features)
+var_importance$County_Features <- factor(var_importance$County_Features, levels = var_importance$County_Features[order(var_importance$Risk_Ratio)])
+
+var_imp_plot <- var_importance %>%
+  filter(Risk_Ratio > 1.01)  %>%
+  ggplot(aes(x = County_Features, y = Risk_Ratio)) +
+  geom_dotplot(binaxis = "y", dotsize = 0.25) +
+  labs(x = "County Level Feature", y = "Risk Ratio", 
+       title = "Day First Case") +  ## you will need to change the title
   coord_flip() +
-  theme_bw() +
-  xlab("")
+  theme_bw()
 
-
-                                                            
+print(var_imp_plot)

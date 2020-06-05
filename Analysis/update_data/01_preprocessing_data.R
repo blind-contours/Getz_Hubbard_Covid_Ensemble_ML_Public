@@ -3,6 +3,7 @@ library(rvest)
 library(dplyr)
 library(tidyverse)
 library(here)
+library(imputeTS)
 
 
 ## NA threshold
@@ -16,6 +17,37 @@ covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/Counties
 
 ## remove columns with NA greater than threshold
 covid_data_processed <- covid_data_unprocessed[, which(colMeans(!is.na(covid_data_unprocessed)) > na_thresh)]
+
+## scale count features to per capita by dividing by population
+
+vars_for_per_capita_scaling <- c("PublicTransportation", 
+                                 "total.female", 
+                                 "white..alone.", 
+                                 "black..alone.", 
+                                 "american.indian.alaskan.native",
+                                 "asian",	
+                                 "hawaiian.or.pacific.islander",	
+                                 "other",	
+                                 "X2.or.more.races", 
+                                 "Male.Public.transportation",
+                                 "Female.Public.transportation",
+                                 "public.transportation..white.only.", 
+                                 "Public.transportation..BLACK.only.",
+                                 "Total..Public.transportation..excluding.taxicab.",
+                                 "Public.transportation..excluding.taxicab....Below.100.percent.of.the.poverty.level",
+                                 "pub.trans.MBSA.occupations",	
+                                 "pub.trans.Sales.and.office.occupations",	
+                                 "pub.trans.PTM.occupations",	
+                                 "Total..In.labor.force..Employed..No.health.insurance.coverage",	
+                                 "total.insurance.coverage",	
+                                 "count_below_pov", 
+                                 "house.hold.size")
+
+for (i in  vars_for_per_capita_scaling) {
+  covid_data_processed[,i] <- covid_data_processed[,i] / covid_data_processed$Population
+}
+
+
 
 
 ## removing near zero variance variables
@@ -69,23 +101,16 @@ char_vars <- names(covid_data_processed[, sapply(covid_data_processed, class) ==
 
 ## pull outcome data
 
-CountyRelativeDay25Cases <- covid_data_processed %>% pull(-CountyRelativeDay25Cases) 
-TotalCasesUpToDate <- covid_data_processed %>% pull(-TotalCasesUpToDate)
-USRelativeDay100Deaths <- covid_data_processed %>% pull(-USRelativeDay100Deaths)
-TotalDeathsUpToDate <- covid_data_processed %>% pull(-TotalDeathsUpToDate)
-FirstCaseDay <- covid_data_processed %>% pull(-FirstCaseDay)
-
+outcomes <- c("CountyRelativeDay25Cases", "TotalCasesUpToDate", "USRelativeDay100Deaths", "TotalDeathsUpToDate", "FirstCaseDay")
+outcome_data <- covid_data_processed[,outcomes]
 
 ## check for na in outcome data
-outcome_data <- cbind(CountyRelativeDay25Cases, TotalCasesUpToDate, USRelativeDay100Deaths, TotalDeathsUpToDate, FirstCaseDay)
 list_na <- colnames(outcome_data)[ apply(outcome_data, 2, anyNA) ]
 
 number_na <- colSums(is.na(outcome_data))
 number_na
 
 ## only a few, we will remove these at the last step
-
-outcomes <- c("CountyRelativeDay25Cases", "TotalCasesUpToDate", "USRelativeDay100Deaths" , "TotalDeathsUpToDate", "FirstCaseDay")
 
 ## remove outcomes
 covid_data_processed_features <- covid_data_processed %>% 

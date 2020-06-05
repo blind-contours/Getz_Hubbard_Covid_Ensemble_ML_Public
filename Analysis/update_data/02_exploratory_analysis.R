@@ -7,15 +7,19 @@ library(readxl)
 library(here)
 
 ## load data after preprocessing
-covid_data_processed <- read_excel(here("Analysis/update_data/data/processed/cleaned_covid_data_final.xlsx"),sheet = 1)
+#covid_data_processed <- read_excel(here("Analysis/update_data/data/processed/cleaned_covid_data_final.xlsx"),sheet = 1)
 
-variable_labels <- variable_labels[9: length(variable_labels)]
+covid_data_processed <- read_csv("Analysis/update_data/data/processed/cleaned_covid_data_final.csv")
+
+## this was previously to create variable types for plotting on the top x axis but I've since removed it for the time being until we are clear on variable types
+
+#variable_labels <- variable_labels[9: length(variable_labels)]
 
 ## create quantiles of the outcome data to use as labels in the clustering analyses
 outcomes <- c("CountyRelativeDay25Cases", "TotalCasesUpToDate", "USRelativeDay100Deaths" , "TotalDeathsUpToDate", "FirstCaseDay")
 
 features_data <- covid_data_processed %>% 
-  select(-c(outcomes, 'Row Label', 'FIPS', 'county_names'))
+  select(-c(outcomes, 'X1', 'FIPS', 'county_names'))
 
 outcomes_data <- covid_data_processed %>% 
   select(outcomes)
@@ -27,29 +31,6 @@ outcome_quantiles <- map(outcomes_data, quantcut, q=4)
 for (i in seq_along(1:length(outcome_quantiles))) {
   levels(outcome_quantiles[[i]]) <-  c("Q1", "Q2", "Q3", "Q4")
 }
-
-
-## run PCA on feature data
-covid_pca <- prcomp(covid_data_processed[c(9:dim(covid_data_processed)[2])], center = TRUE, scale = TRUE)
-summary(covid_pca)
-
-##plot the variance plots to see variance explained over PCs
-screeplot(covid_pca, type = "l", npcs = 15, main = "Screeplot of the first 10 PCs")
-abline(h = 1, col="red", lty=5)
-legend("topright", legend=c("Eigenvalue = 1"),
-       col=c("red"), lty=5, cex=0.6)
-cumpro <- cumsum(covid_pca$sdev^2 / sum(covid_pca$sdev^2))
-plot(cumpro[0:15], xlab = "PC #", ylab = "Amount of explained variance", main = "Cumulative variance plot")
-abline(v = 6, col="blue", lty=5)
-abline(h = 0.88759, col="blue", lty=5)
-legend("topleft", legend=c("Cut-off @ PC6"),
-       col=c("blue"), lty=5, cex=0.6)
-
-## using autoplot to make nicer plots 
-
-autoplot(covid_pca)
-
-## nothing very nice here but maybe there is some trend if we create factors for our outcome data and overlay some plot coloring
 
                     
 ## Heatmap
@@ -87,10 +68,11 @@ my.colors <- c(colorRampPalette(colors = c("blue", "white"))(length(my.breaks)/2
 
 ## set rownames for row dendrogram and column dendrogram
 rownames(oucome_annotation) <-  rownames(covid_num_scale)
-variable_labels <- as.data.frame(t(variable_labels))
-rownames(variable_labels) <-  colnames(covid_num_scale)
 
+#variable_labels <- as.data.frame(t(variable_labels))
+#rownames(variable_labels) <-  colnames(covid_num_scale)
 
+## create the final heatmap
 covid_factors_heatmap <- pheatmap(covid_num_scale,main = "COVID-19 Heatmap",
          annotation_names_row = FALSE,
          annotation_names_col = FALSE,
@@ -100,14 +82,18 @@ covid_factors_heatmap <- pheatmap(covid_num_scale,main = "COVID-19 Heatmap",
          color = my.colors,
          breaks = my.breaks,
          annotation_row = oucome_annotation,
-         annotation_col = variable_labels,
+         #annotation_col = variable_labels,
          cutree_rows = 4,
          cutree_cols = 5)
 
+## get the clusters of variables 
 clusters <- cutree(covid_factors_heatmap$tree_col, k = 5)
 clusters <- as.data.frame(clusters)
 
 colnames_dendro_reordered <- colnames(features_data)[covid_factors_heatmap$tree_col$order]
+
+## this part gets variables assigned to each cluster, i.e. finding what variables are in hotspots that are associated with high numbers of cases/mortality.
+## because the data is changing I will need to figure out how to automate this later.
 
 table(clusters)
 
@@ -117,7 +103,9 @@ hot_spot_3 <- colnames_dendro_reordered[53:83] ## 3
 hot_spot_4 <- colnames_dendro_reordered[84:93] ## 1 
 hot_spot_5 <- colnames_dendro_reordered[93:110] ## 5
 
+hot_spot_high_all <- colnames_dendro_reordered[72:101] ## 5
 
+## ugly change later! don't write code like this, you know better
 clusters[rownames(clusters) %in% hot_spot_1,] ## so it appears that the cluster on the far right is cluster 2 from cut-tree
 clusters[rownames(clusters) %in% hot_spot_2,] ## so it appears that the cluster on the second left is cluster 4 from cut-tree
 clusters[rownames(clusters) %in% hot_spot_3,] ## so it appears that the cluster on the second left is cluster 4 from cut-tree
@@ -125,7 +113,9 @@ clusters[rownames(clusters) %in% hot_spot_4,] ## so it appears that the cluster 
 clusters[rownames(clusters) %in% hot_spot_5,] ## so it appears that the cluster on the second left is cluster 4 from cut-tree
 
 
+clusters[rownames(clusters) %in% hot_spot_high_all,] ## so it appears that the cluster on the second left is cluster 4 from cut-tree
 
 
+subset(clusters, clusters == 4)
 
 
