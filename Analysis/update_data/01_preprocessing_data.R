@@ -3,6 +3,8 @@ library(rvest)
 library(dplyr)
 library(tidyverse)
 library(here)
+
+# install.packages('imputeTS')
 library(imputeTS)
 
 
@@ -12,48 +14,16 @@ na_thresh <- 0.75
 ## run census variable rename? 
 census_data_rename <- FALSE
 
-## load data
-covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData20200517.csv")
+## load data CountiesMergedData_Jun_10.csv
+# covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData20200517.csv")
+
+# Changed to CountiesMergedData_Jun_10.csv
+covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData_Jun_10.csv")
 
 ## remove columns with NA greater than threshold
 covid_data_processed <- covid_data_unprocessed[, which(colMeans(!is.na(covid_data_unprocessed)) > na_thresh)]
 
 ## scale count features to per capita by dividing by population
-
-<<<<<<< HEAD
-=======
-
-# I did the scaling in the script where I pull the census data. I hope that's okay. 
-# I was having trouble keeping track of what needed to be scaled and by what.
-# Your code is still awesome and better than what I did!
-# vars_for_per_capita_scaling <- c("PublicTransportation", 
-#                                  "total.female", 
-#                                  "white..alone.", 
-#                                  "black..alone.", 
-#                                  "american.indian.alaskan.native",
-#                                  "asian",	
-#                                  "hawaiian.or.pacific.islander",	
-#                                  "other",	
-#                                  "X2.or.more.races", 
-#                                  "Male.Public.transportation",
-#                                  "Female.Public.transportation",
-#                                  "public.transportation..white.only.", 
-#                                  "Public.transportation..BLACK.only.",
-#                                  "Total..Public.transportation..excluding.taxicab.",
-#                                  "Public.transportation..excluding.taxicab....Below.100.percent.of.the.poverty.level",
-#                                  "pub.trans.MBSA.occupations",	
-#                                  "pub.trans.Sales.and.office.occupations",	
-#                                  "pub.trans.PTM.occupations",	
-#                                  "Total..In.labor.force..Employed..No.health.insurance.coverage",	
-#                                  "total.insurance.coverage",	
-#                                  "count_below_pov", 
-#                                  "house.hold.size")
-
-for (i in  vars_for_per_capita_scaling) {
-  covid_data_processed[,i] <- covid_data_processed[,i] / covid_data_processed$Population
-}
-
->>>>>>> 55f881f69618952c88efff30d218042a45ca6cd3
 
 # I did the scaling in the script where I pull the census data. I hope that's okay. 
 # I was having trouble keeping track of what needed to be scaled and by what.
@@ -87,11 +57,6 @@ for (i in  vars_for_per_capita_scaling) {
 #   covid_data_processed[,i] <- covid_data_processed[,i] / covid_data_processed$Population
 # }
 
-
-####################################
-# Going to add the rank factors here
-# rank_factors <- 
-####################################
 
 
 ## removing near zero variance variables
