@@ -168,7 +168,7 @@ for (i in 1:3) {
 # Add SVI2018_US_COUNTY.csv
 a=read.csv(here("Analysis/update_data/data/raw/SVI2018_US_COUNTY.csv"))
 a = select(a, c("FIPS", "RPL_THEME1", "RPL_THEME2", "RPL_THEME3", "RPL_THEME4"))
-counties=cbind(counties,a[match(counties$FIPS,a$FIPS),7:ncol(a)])
+counties=cbind(counties,a[match(counties$FIPS,a$FIPS),])
 
 # Add Unemployment.xls
 # a=readxl::read_excel(here("Analysis/update_data/data/raw/Unemployment.xls"), sheet = 1,skip = 7)
@@ -177,7 +177,8 @@ counties=cbind(counties,a[match(counties$FIPS,a$FIPS),7:ncol(a)])
 # Changed from tester2.csv to 2018ACS.csv
 # 06/10/2020 changed 2018ACS to acs_2018_Jun.csv
 a=read.csv(here("Analysis/update_data/data/raw/acs_2018_Jun.csv"))
-counties=cbind(counties,a[match(counties$FIPS,a$GEOID),3:ncol(a)])
+# Changed a$GEOID to a$GEIOD because I missspelled it
+counties=cbind(counties,a[match(counties$FIPS,a$GEIOD),3:ncol(a)])
 
 # Prepare states to match census state fips to NOAA state fips
 states=as.character(unique(usf$State))
@@ -185,8 +186,10 @@ states_fips=purrr::map(states,function(state) usf$stateFIPS[which(usf$State==sta
 
 # Download average, min and max temperature and precipitation from NOAA
 # taking "tmin","tmax" out of the for loop
-NOAA_DIR="./data/raw/NOAA"
-if (!dir.exists(NOAA_DIR)) {dir.create(NOAA_DIR)}
+# dir.create("Analysis/update_data/data/NOAA")
+# NOAA_DIR = dir.create("Analysis/update_data/data/NOAA")
+# NOAA_DIR
+# if (!dir.exists(NOAA_DIR)) {dir.create(NOAA_DIR)}
 for (p in c("tavg","pcp")) {
   # Run over months
   for (m in 1:4) {
@@ -195,7 +198,7 @@ for (p in c("tavg","pcp")) {
     counties[cn]=NA
     # Run over states
     for (n in 1:49) {
-      file_name=sprintf("%s/%s_M%d_ST%d.csv",NOAA_DIR,p,m,n)
+      file_name=sprintf("%s/%s_M%d_ST%d.csv","Analysis/update_data/data/NOAA",p,m,n)
       if (!file.exists(file_name)) {
         url=sprintf("https://www.ncdc.noaa.gov/cag/county/mapping/%d-%s-20200%d-1.csv",n,p,m)
         download.file(url,file_name)
@@ -212,7 +215,7 @@ for (p in c("tavg","pcp")) {
 
 
 # Read commuting data
-commuting=readxl::read_excel("./data/raw/USCommuting2015.xlsx",skip = 6)
+commuting=readxl::read_excel("Analysis/update_data/data/raw/USCommuting2015.xlsx",skip = 6)
 commuting=commuting[1:139433,]
 fips_residence=as.integer(commuting$`State FIPS Code...1`)*1000+as.integer(commuting$`County FIPS Code...2`)
 fips_work=as.integer(commuting$`State FIPS Code...5`)*1000+as.integer(commuting$`County FIPS Code...6`)
@@ -245,5 +248,5 @@ counties$agg_commuting_by_work_place=by_work$x[match(counties$FIPS,by_work$fips)
 
 # Write results to a file
 # write.csv(counties3,here("Analysis/update_data/data/processed/CountiesMergedData20200517.csv"))
-write.csv(counties3,here("Analysis/update_data/data/processed/CountiesMergedData_Jun_10.csv"))
+write.csv(counties,here("Analysis/update_data/data/processed/CountiesMergedData_Jun_10.csv"))
 
