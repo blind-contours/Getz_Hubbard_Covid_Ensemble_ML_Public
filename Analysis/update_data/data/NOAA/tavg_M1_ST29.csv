@@ -1,0 +1,37 @@
+January 2020 New Mexico County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NM-001,"Bernalillo County",35.6,101,3.4,32.2
+NM-003,"Catron County",33.1,95,2.8,30.3
+NM-005,"Chaves County",43.2,111,4.4,38.8
+NM-006,"Cibola County",31.4,84,2.4,29
+NM-007,"Colfax County",30.7,93,2.7,28
+NM-009,"Curry County",39.9,110,4.5,35.4
+NM-011,"De Baca County",41.8,114,5.0,36.8
+NM-013,"Dona Ana County",44.0,103,2.9,41.1
+NM-015,"Eddy County",45.6,106,4.1,41.5
+NM-017,"Grant County",40.9,110,3.2,37.7
+NM-019,"Guadalupe County",39.2,107,4.4,34.8
+NM-021,"Harding County",36.5,104,3.4,33.1
+NM-023,"Hidalgo County",43.4,98,2.5,40.9
+NM-025,"Lea County",44.2,110,4.2,40
+NM-027,"Lincoln County",39.0,104,3.4,35.6
+NM-028,"Los Alamos County",28.7,83,1.9,26.8
+NM-029,"Luna County",43.3,93,2.2,41.1
+NM-031,"McKinley County",30.9,92,3.0,27.9
+NM-033,"Mora County",32.0,98,3.3,28.7
+NM-035,"Otero County",41.5,95,2.8,38.7
+NM-037,"Quay County",40.0,103,4.0,36
+NM-039,"Rio Arriba County",26.1,91,2.5,23.6
+NM-041,"Roosevelt County",41.2,111,4.7,36.5
+NM-043,"Sandoval County",31.1,87,2.3,28.8
+NM-045,"San Juan County",31.2,91,3.2,28
+NM-047,"San Miguel County",36.6,103,3.6,33
+NM-049,"Santa Fe County",31.8,90,2.8,29
+NM-051,"Sierra County",41.1,101,2.8,38.3
+NM-053,"Socorro County",37.2,103,3.2,34
+NM-055,"Taos County",24.4,84,2.3,22.1
+NM-057,"Torrance County",35.4,111,4.8,30.6
+NM-059,"Union County",34.7,98,3.0,31.7
+NM-061,"Valencia County",37.1,99,3.4,33.7

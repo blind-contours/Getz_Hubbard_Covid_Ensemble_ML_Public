@@ -1,0 +1,48 @@
+April 2020 Idaho County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+ID-001,"Ada County",50.6,77,0.7,49.9
+ID-003,"Adams County",41.3,74,0.5,40.8
+ID-005,"Bannock County",42.8,73,0.5,42.3
+ID-007,"Bear Lake County",38.4,74,0.9,37.5
+ID-009,"Benewah County",43.4,69,0.0,43.4
+ID-011,"Bingham County",42.9,66,0.1,42.8
+ID-013,"Blaine County",40.8,75,1.2,39.6
+ID-015,"Boise County",41.3,78,0.8,40.5
+ID-017,"Bonner County",42.3,71,0.4,41.9
+ID-019,"Bonneville County",39.6,63,0.1,39.5
+ID-021,"Boundary County",38.9,52,-0.5,39.4
+ID-023,"Butte County",41.2,77,1.2,40
+ID-025,"Camas County",39.6,79,1.3,38.3
+ID-027,"Canyon County",51.6,74,0.5,51.1
+ID-029,"Caribou County",38.9,66,0.1,38.8
+ID-031,"Cassia County",43.4,71,0.7,42.7
+ID-033,"Clark County",37.9,59,0.2,37.7
+ID-035,"Clearwater County",41.9,73,0.5,41.4
+ID-037,"Custer County",35.7,68,0.6,35.1
+ID-039,"Elmore County",46.1,91,1.9,44.2
+ID-041,"Franklin County",42.1,74,0.8,41.3
+ID-043,"Fremont County",37.4,59,0.0,37.4
+ID-045,"Gem County",47.8,73,0.4,47.4
+ID-047,"Gooding County",48.2,85,1.7,46.5
+ID-049,"Idaho County",39.3,68,0.3,39
+ID-051,"Jefferson County",43.1,67,0.5,42.6
+ID-053,"Jerome County",48.2,89,1.8,46.4
+ID-055,"Kootenai County",44.0,79,0.6,43.4
+ID-057,"Latah County",44.8,81,0.8,44
+ID-059,"Lemhi County",37.0,63,0.3,36.7
+ID-061,"Lewis County",42.9,61,-0.2,43.1
+ID-063,"Lincoln County",45.5,72,1.1,44.4
+ID-065,"Madison County",41.2,68,0.4,40.8
+ID-067,"Minidoka County",45.6,79,1.4,44.2
+ID-069,"Nez Perce County",47.4,79,0.7,46.7
+ID-071,"Oneida County",43.2,69,0.4,42.8
+ID-073,"Owyhee County",45.6,81,1.2,44.4
+ID-075,"Payette County",50.5,71,0.3,50.2
+ID-077,"Power County",43.4,66,0.3,43.1
+ID-079,"Shoshone County",40.3,71,0.2,40.1
+ID-081,"Teton County",36.7,57,-0.2,36.9
+ID-083,"Twin Falls County",45.6,70,0.9,44.7
+ID-085,"Valley County",37.0,77,1.0,36
+ID-087,"Washington County",47.3,89,1.4,45.9

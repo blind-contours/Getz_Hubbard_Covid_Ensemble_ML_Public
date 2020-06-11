@@ -1,0 +1,27 @@
+January 2020 Wyoming County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+WY-001,"Albany County",24.4,108,4.9,19.5
+WY-003,"Big Horn County",25.9,120,9.7,16.2
+WY-005,"Campbell County",27.0,113,7.6,19.4
+WY-007,"Carbon County",22.4,98,3.6,18.8
+WY-009,"Converse County",27.7,112,6.4,21.3
+WY-011,"Crook County",25.9,111,7.2,18.7
+WY-013,"Fremont County",21.8,101,4.7,17.1
+WY-015,"Goshen County",31.5,120,7.3,24.2
+WY-017,"Hot Springs County",25.2,111,6.3,18.9
+WY-019,"Johnson County",27.2,114,7.0,20.2
+WY-021,"Laramie County",30.9,116,6.2,24.7
+WY-023,"Lincoln County",20.1,95,4.1,16
+WY-025,"Natrona County",24.9,107,4.9,20
+WY-027,"Niobrara County",28.6,119,7.9,20.7
+WY-029,"Park County",23.8,116,6.7,17.1
+WY-031,"Platte County",30.6,117,6.4,24.2
+WY-033,"Sheridan County",26.1,112,7.6,18.5
+WY-035,"Sublette County",16.4,96,3.9,12.5
+WY-037,"Sweetwater County",20.8,90,3.2,17.6
+WY-039,"Teton County",19.4,116,5.4,14
+WY-041,"Uinta County",20.7,83,2.5,18.2
+WY-043,"Washakie County",26.3,118,8.3,18
+WY-045,"Weston County",26.4,115,7.7,18.7

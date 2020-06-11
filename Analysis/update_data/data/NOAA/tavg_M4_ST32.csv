@@ -1,0 +1,57 @@
+April 2020 North Dakota County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+ND-001,"Adams County",38.5,24,-3.2,41.7
+ND-003,"Barnes County",38.1,22,-3.4,41.5
+ND-005,"Benson County",35.7,20,-4.2,39.9
+ND-007,"Billings County",38.3,21,-3.9,42.2
+ND-009,"Bottineau County",36.4,26,-3.7,40.1
+ND-011,"Bowman County",38.3,21,-3.6,41.9
+ND-013,"Burke County",36.0,27,-3.6,39.6
+ND-015,"Burleigh County",39.0,30,-2.8,41.8
+ND-017,"Cass County",39.1,22,-3.3,42.4
+ND-019,"Cavalier County",34.5,26,-3.6,38.1
+ND-021,"Dickey County",39.1,20,-3.5,42.6
+ND-023,"Divide County",36.5,29,-3.3,39.8
+ND-025,"Dunn County",38.8,30,-3.0,41.8
+ND-027,"Eddy County",36.4,22,-4.0,40.4
+ND-029,"Emmons County",39.2,22,-3.7,42.9
+ND-031,"Foster County",36.6,20,-4.0,40.6
+ND-033,"Golden Valley County",38.4,20,-4.1,42.5
+ND-035,"Grand Forks County",37.5,21,-3.6,41.1
+ND-037,"Grant County",39.2,28,-3.0,42.2
+ND-039,"Griggs County",36.9,24,-3.5,40.4
+ND-041,"Hettinger County",38.4,24,-3.2,41.6
+ND-043,"Kidder County",37.9,22,-3.2,41.1
+ND-045,"LaMoure County",38.5,20,-3.6,42.1
+ND-047,"Logan County",38.2,23,-3.2,41.4
+ND-049,"McHenry County",37.0,22,-4.3,41.3
+ND-051,"McIntosh County",38.4,22,-3.4,41.8
+ND-053,"McKenzie County",38.6,26,-3.6,42.2
+ND-055,"McLean County",38.2,30,-3.3,41.5
+ND-057,"Mercer County",39.0,30,-3.1,42.1
+ND-059,"Morton County",39.3,29,-2.9,42.2
+ND-061,"Mountrail County",37.3,29,-3.2,40.5
+ND-063,"Nelson County",36.5,26,-3.1,39.6
+ND-065,"Oliver County",39.0,26,-3.1,42.1
+ND-067,"Pembina County",36.3,27,-3.4,39.7
+ND-069,"Pierce County",35.6,21,-4.2,39.8
+ND-071,"Ramsey County",35.8,22,-3.8,39.6
+ND-073,"Ransom County",39.0,20,-3.6,42.6
+ND-075,"Renville County",37.4,28,-3.3,40.7
+ND-077,"Richland County",40.4,26,-2.6,43
+ND-079,"Rolette County",33.9,22,-4.3,38.2
+ND-081,"Sargent County",38.9,19,-4.1,43
+ND-083,"Sheridan County",37.9,32,-2.9,40.8
+ND-085,"Sioux County",39.9,26,-3.2,43.1
+ND-087,"Slope County",38.3,20,-3.8,42.1
+ND-089,"Stark County",38.5,25,-3.4,41.9
+ND-091,"Steele County",37.3,24,-3.7,41
+ND-093,"Stutsman County",37.5,21,-3.7,41.2
+ND-095,"Towner County",34.5,23,-4.0,38.5
+ND-097,"Traill County",38.4,24,-3.6,42
+ND-099,"Walsh County",36.6,27,-3.3,39.9
+ND-101,"Ward County",37.4,27,-3.6,41
+ND-103,"Wells County",36.6,21,-3.8,40.4
+ND-105,"Williams County",37.6,26,-3.4,41

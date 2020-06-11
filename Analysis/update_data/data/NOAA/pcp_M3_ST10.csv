@@ -1,0 +1,48 @@
+March 2020 Idaho County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+ID-001,"Ada County",1.22,66,-0.09,1.31
+ID-003,"Adams County",3.0,59,-0.4,3.4
+ID-005,"Bannock County",2.27,91,0.34,1.93
+ID-007,"Bear Lake County",2.51,90,0.37,2.14
+ID-009,"Benewah County",1.52,10,-1.5,3.02
+ID-011,"Bingham County",1.95,107,0.74,1.21
+ID-013,"Blaine County",1.84,75,-0.02,1.86
+ID-015,"Boise County",3.09,66,-0.22,3.31
+ID-017,"Bonner County",1.88,23,-1.32,3.2
+ID-019,"Bonneville County",2.7,105,0.82,1.88
+ID-021,"Boundary County",2.29,33,-1.14,3.43
+ID-023,"Butte County",1.48,92,0.32,1.16
+ID-025,"Camas County",1.86,48,-0.66,2.52
+ID-027,"Canyon County",0.91,73,-0.08,0.99
+ID-029,"Caribou County",2.77,97,0.6,2.17
+ID-031,"Cassia County",1.31,67,-0.11,1.42
+ID-033,"Clark County",1.56,81,0.09,1.47
+ID-035,"Clearwater County",2.67,14,-1.97,4.64
+ID-037,"Custer County",2.22,77,0.07,2.15
+ID-039,"Elmore County",1.5,41,-0.63,2.13
+ID-041,"Franklin County",2.4,74,0.02,2.38
+ID-043,"Fremont County",2.18,80,0.18,2
+ID-045,"Gem County",2.04,75,0.07,1.97
+ID-047,"Gooding County",0.85,53,-0.23,1.08
+ID-049,"Idaho County",2.94,33,-0.73,3.67
+ID-051,"Jefferson County",1.24,111,0.51,0.73
+ID-053,"Jerome County",1.07,86,0.13,0.94
+ID-055,"Kootenai County",1.76,19,-1.3,3.06
+ID-057,"Latah County",1.82,22,-1.12,2.94
+ID-059,"Lemhi County",1.82,75,0.06,1.76
+ID-061,"Lewis County",1.9,32,-0.53,2.43
+ID-063,"Lincoln County",1.31,97,0.32,0.99
+ID-065,"Madison County",1.76,110,0.59,1.17
+ID-067,"Minidoka County",1.02,93,0.17,0.85
+ID-069,"Nez Perce County",1.55,25,-0.64,2.19
+ID-071,"Oneida County",1.66,74,-0.11,1.77
+ID-073,"Owyhee County",0.84,39,-0.41,1.25
+ID-075,"Payette County",1.17,70,-0.1,1.27
+ID-077,"Power County",1.7,88,0.17,1.53
+ID-079,"Shoshone County",2.9,19,-2.07,4.97
+ID-081,"Teton County",2.76,106,0.8,1.96
+ID-083,"Twin Falls County",1.01,54,-0.19,1.2
+ID-085,"Valley County",3.9,74,0.09,3.81
+ID-087,"Washington County",1.59,47,-0.49,2.08

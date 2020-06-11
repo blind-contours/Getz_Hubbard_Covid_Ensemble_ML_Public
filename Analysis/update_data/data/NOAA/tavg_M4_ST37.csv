@@ -1,0 +1,9 @@
+April 2020 Rhode Island County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+RI-001,"Bristol County",44.4,23,-2.1,46.5
+RI-003,"Kent County",44.0,27,-1.7,45.7
+RI-005,"Newport County",44.0,26,-1.9,45.9
+RI-007,"Providence County",43.9,23,-1.9,45.8
+RI-009,"Washington County",44.1,31,-1.4,45.5

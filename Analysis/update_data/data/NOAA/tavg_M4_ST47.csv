@@ -1,0 +1,76 @@
+April 2020 Wisconsin County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+WI-001,"Adams County",41.8,33,-2.2,44
+WI-003,"Ashland County",36.7,32,-2.3,39
+WI-005,"Barron County",40.2,34,-2.2,42.4
+WI-007,"Bayfield County",37.3,35,-1.8,39.1
+WI-009,"Brown County",41.1,47,-0.8,41.9
+WI-011,"Buffalo County",43.0,34,-2.0,45
+WI-013,"Burnett County",40.2,42,-1.7,41.9
+WI-015,"Calumet County",41.7,46,-1.2,42.9
+WI-017,"Chippewa County",40.9,33,-2.2,43.1
+WI-019,"Clark County",41.2,41,-1.4,42.6
+WI-021,"Columbia County",43.3,39,-1.6,44.9
+WI-023,"Crawford County",43.8,29,-2.5,46.3
+WI-025,"Dane County",44.4,41,-1.1,45.5
+WI-027,"Dodge County",42.3,28,-2.5,44.8
+WI-029,"Door County",38.1,28,-2.1,40.2
+WI-031,"Douglas County",38.3,42,-1.2,39.5
+WI-033,"Dunn County",41.8,32,-2.2,44
+WI-035,"Eau Claire County",42.1,40,-1.6,43.7
+WI-037,"Florence County",35.8,28,-2.7,38.5
+WI-039,"Fond du Lac County",42.2,39,-1.6,43.8
+WI-041,"Forest County",35.7,29,-2.8,38.5
+WI-043,"Grant County",44.5,30,-2.2,46.7
+WI-045,"Green County",44.6,36,-1.7,46.3
+WI-047,"Green Lake County",42.6,36,-1.9,44.5
+WI-049,"Iowa County",44.2,39,-1.5,45.7
+WI-051,"Iron County",35.3,28,-2.9,38.2
+WI-053,"Jackson County",42.8,45,-1.0,43.8
+WI-055,"Jefferson County",43.6,32,-2.2,45.8
+WI-057,"Juneau County",42.2,35,-2.0,44.2
+WI-059,"Kenosha County",43.6,28,-2.2,45.8
+WI-061,"Kewaunee County",40.2,45,-1.0,41.2
+WI-063,"La Crosse County",43.7,37,-1.7,45.4
+WI-065,"Lafayette County",44.6,35,-1.7,46.3
+WI-067,"Langlade County",37.1,32,-2.5,39.6
+WI-069,"Lincoln County",37.6,31,-2.6,40.2
+WI-071,"Manitowoc County",41.0,45,-1.0,42
+WI-073,"Marathon County",39.5,35,-2.2,41.7
+WI-075,"Marinette County",38.0,27,-2.6,40.6
+WI-077,"Marquette County",42.4,35,-2.1,44.5
+WI-078,"Menominee County",39.4,38,-1.8,41.2
+WI-079,"Milwaukee County",43.1,36,-1.6,44.7
+WI-081,"Monroe County",42.0,32,-2.3,44.3
+WI-083,"Oconto County",39.4,38,-1.8,41.2
+WI-085,"Oneida County",36.0,25,-3.0,39
+WI-087,"Outagamie County",41.6,44,-1.3,42.9
+WI-089,"Ozaukee County",41.5,31,-2.0,43.5
+WI-091,"Pepin County",42.7,33,-2.3,45
+WI-093,"Pierce County",43.1,43,-1.4,44.5
+WI-095,"Polk County",41.1,35,-1.8,42.9
+WI-097,"Portage County",41.0,37,-2.1,43.1
+WI-099,"Price County",37.2,33,-2.3,39.5
+WI-101,"Racine County",43.3,29,-2.1,45.4
+WI-103,"Richland County",43.5,29,-2.2,45.7
+WI-105,"Rock County",44.8,35,-1.8,46.6
+WI-107,"Rusk County",39.8,37,-2.0,41.8
+WI-109,"St. Croix County",42.6,43,-1.3,43.9
+WI-111,"Sauk County",43.2,38,-1.8,45
+WI-113,"Sawyer County",38.5,42,-1.4,39.9
+WI-115,"Shawano County",40.1,38,-1.8,41.9
+WI-117,"Sheboygan County",41.3,40,-1.5,42.8
+WI-119,"Taylor County",38.8,33,-2.4,41.2
+WI-121,"Trempealeau County",43.1,37,-1.6,44.7
+WI-123,"Vernon County",42.6,27,-2.5,45.1
+WI-125,"Vilas County",35.1,28,-2.8,37.9
+WI-127,"Walworth County",44.1,34,-1.8,45.9
+WI-129,"Washburn County",39.6,44,-1.3,40.9
+WI-131,"Washington County",41.2,28,-2.6,43.8
+WI-133,"Waukesha County",42.8,31,-2.1,44.9
+WI-135,"Waupaca County",41.4,40,-1.8,43.2
+WI-137,"Waushara County",41.8,40,-1.9,43.7
+WI-139,"Winnebago County",42.4,41,-1.5,43.9
+WI-141,"Wood County",41.5,37,-1.9,43.4

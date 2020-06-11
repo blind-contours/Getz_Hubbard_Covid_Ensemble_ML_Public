@@ -1,0 +1,103 @@
+February 2020 Iowa County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+IA-001,"Adair County",27.6,87,3.2,24.4
+IA-003,"Adams County",28.8,90,3.5,25.3
+IA-005,"Allamakee County",21.3,77,1.7,19.6
+IA-007,"Appanoose County",28.8,82,2.0,26.8
+IA-009,"Audubon County",26.3,86,3.1,23.2
+IA-011,"Benton County",22.9,71,0.6,22.3
+IA-013,"Black Hawk County",22.0,73,0.8,21.2
+IA-015,"Boone County",25.4,84,2.7,22.7
+IA-017,"Bremer County",20.5,70,0.5,20
+IA-019,"Buchanan County",21.4,70,0.5,20.9
+IA-021,"Buena Vista County",22.9,86,2.5,20.4
+IA-023,"Butler County",21.3,73,1.0,20.3
+IA-025,"Calhoun County",23.4,77,1.7,21.7
+IA-027,"Carroll County",25.3,88,3.1,22.2
+IA-029,"Cass County",28.3,90,3.5,24.8
+IA-031,"Cedar County",25.8,82,2.0,23.8
+IA-033,"Cerro Gordo County",19.4,71,0.5,18.9
+IA-035,"Cherokee County",23.4,88,2.8,20.6
+IA-037,"Chickasaw County",18.9,66,-0.1,19
+IA-039,"Clarke County",28.4,86,2.6,25.8
+IA-041,"Clay County",21.6,82,2.3,19.3
+IA-043,"Clayton County",22.1,78,1.6,20.5
+IA-045,"Clinton County",27.1,92,3.1,24
+IA-047,"Crawford County",26.1,91,3.6,22.5
+IA-049,"Dallas County",27.0,86,2.7,24.3
+IA-051,"Davis County",29.3,86,2.4,26.9
+IA-053,"Decatur County",29.1,87,2.5,26.6
+IA-055,"Delaware County",22.5,79,1.6,20.9
+IA-057,"Des Moines County",28.9,84,2.0,26.9
+IA-059,"Dickinson County",20.0,80,1.6,18.4
+IA-061,"Dubuque County",23.7,83,1.9,21.8
+IA-063,"Emmet County",19.6,75,1.3,18.3
+IA-065,"Fayette County",19.8,70,0.1,19.7
+IA-067,"Floyd County",19.6,71,0.3,19.3
+IA-069,"Franklin County",21.3,81,1.5,19.8
+IA-071,"Fremont County",31.2,92,3.5,27.7
+IA-073,"Greene County",25.5,85,2.7,22.8
+IA-075,"Grundy County",22.7,80,1.4,21.3
+IA-077,"Guthrie County",26.6,86,2.9,23.7
+IA-079,"Hamilton County",23.2,82,1.9,21.3
+IA-081,"Hancock County",19.5,71,0.3,19.2
+IA-083,"Hardin County",22.9,83,1.8,21.1
+IA-085,"Harrison County",28.1,89,3.5,24.6
+IA-087,"Henry County",28.1,82,1.6,26.5
+IA-089,"Howard County",17.6,65,-0.2,17.8
+IA-091,"Humboldt County",21.3,72,0.6,20.7
+IA-093,"Ida County",24.9,89,3.2,21.7
+IA-095,"Iowa County",25.8,84,2.2,23.6
+IA-097,"Jackson County",25.5,85,2.4,23.1
+IA-099,"Jasper County",26.2,81,2.1,24.1
+IA-101,"Jefferson County",28.0,83,1.9,26.1
+IA-103,"Johnson County",26.2,83,2.2,24
+IA-105,"Jones County",24.6,83,2.1,22.5
+IA-107,"Keokuk County",27.0,83,2.2,24.8
+IA-109,"Kossuth County",20.3,74,1.1,19.2
+IA-111,"Lee County",29.7,83,1.7,28
+IA-113,"Linn County",24.1,82,1.8,22.3
+IA-115,"Louisa County",27.8,81,1.7,26.1
+IA-117,"Lucas County",28.2,83,2.1,26.1
+IA-119,"Lyon County",21.9,84,2.6,19.3
+IA-121,"Madison County",27.7,83,2.6,25.1
+IA-123,"Mahaska County",27.2,80,2.0,25.2
+IA-125,"Marion County",27.6,79,1.8,25.8
+IA-127,"Marshall County",24.6,83,2.0,22.6
+IA-129,"Mills County",30.3,90,3.5,26.8
+IA-131,"Mitchell County",18.3,69,0.2,18.1
+IA-133,"Monona County",27.2,92,3.8,23.4
+IA-135,"Monroe County",28.3,83,2.0,26.3
+IA-137,"Montgomery County",29.8,92,3.8,26
+IA-139,"Muscatine County",26.9,79,1.7,25.2
+IA-141,"O'Brien County",21.6,81,1.9,19.7
+IA-143,"Osceola County",19.9,76,1.2,18.7
+IA-145,"Page County",30.9,93,3.9,27
+IA-147,"Palo Alto County",20.9,75,1.5,19.4
+IA-149,"Plymouth County",25.0,92,3.7,21.3
+IA-151,"Pocahontas County",21.8,73,1.0,20.8
+IA-153,"Polk County",27.0,83,2.5,24.5
+IA-155,"Pottawattamie County",29.0,90,3.4,25.6
+IA-157,"Poweshiek County",25.5,81,2.0,23.5
+IA-159,"Ringgold County",28.9,88,2.7,26.2
+IA-161,"Sac County",24.2,88,2.8,21.4
+IA-163,"Scott County",28.0,92,3.4,24.6
+IA-165,"Shelby County",27.0,88,3.2,23.8
+IA-167,"Sioux County",23.0,85,2.8,20.2
+IA-169,"Story County",25.1,83,2.4,22.7
+IA-171,"Tama County",23.6,78,1.3,22.3
+IA-173,"Taylor County",29.8,91,3.6,26.2
+IA-175,"Union County",28.1,85,2.8,25.3
+IA-177,"Van Buren County",28.7,82,1.4,27.3
+IA-179,"Wapello County",28.6,87,2.5,26.1
+IA-181,"Warren County",28.0,80,2.3,25.7
+IA-183,"Washington County",27.6,86,2.5,25.1
+IA-185,"Wayne County",28.5,82,1.9,26.6
+IA-187,"Webster County",22.8,76,1.3,21.5
+IA-189,"Winnebago County",18.1,65,-0.3,18.4
+IA-191,"Winneshiek County",19.0,69,0.5,18.5
+IA-193,"Woodbury County",26.3,93,3.9,22.4
+IA-195,"Worth County",18.0,65,-0.1,18.1
+IA-197,"Wright County",21.4,75,1.2,20.2

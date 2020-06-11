@@ -1,0 +1,12 @@
+April 2020 Connecticut County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+CT-001,"Fairfield County",46.5,49,-0.7,47.2
+CT-003,"Hartford County",44.8,28,-1.8,46.6
+CT-005,"Litchfield County",42.8,34,-1.6,44.4
+CT-007,"Middlesex County",44.9,32,-1.6,46.5
+CT-009,"New Haven County",45.5,42,-1.1,46.6
+CT-011,"New London County",44.4,30,-1.6,46
+CT-013,"Tolland County",43.7,28,-1.9,45.6
+CT-015,"Windham County",43.5,21,-2.1,45.6

@@ -1,0 +1,12 @@
+March 2020 Connecticut County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+CT-001,"Fairfield County",3.38,42,-0.84,4.22
+CT-003,"Hartford County",4.1,76,0.02,4.08
+CT-005,"Litchfield County",3.34,47,-0.78,4.12
+CT-007,"Middlesex County",4.22,77,-0.05,4.27
+CT-009,"New Haven County",4.23,69,-0.12,4.35
+CT-011,"New London County",3.95,58,-0.35,4.3
+CT-013,"Tolland County",4.11,75,0.08,4.03
+CT-015,"Windham County",3.96,71,-0.19,4.15

@@ -1,0 +1,33 @@
+January 2020 Utah County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+UT-001,"Beaver County",32.8,110,5.5,27.3
+UT-003,"Box Elder County",28.3,102,4.5,23.8
+UT-005,"Cache County",26.7,106,5.4,21.3
+UT-007,"Carbon County",21.9,65,1.0,20.9
+UT-009,"Daggett County",22.2,79,2.2,20
+UT-011,"Davis County",31.9,112,5.7,26.2
+UT-013,"Duchesne County",21.3,83,2.7,18.6
+UT-015,"Emery County",24.8,52,0.2,24.6
+UT-017,"Garfield County",27.8,73,1.5,26.3
+UT-019,"Grand County",24.8,58,0.5,24.3
+UT-021,"Iron County",32.0,106,4.4,27.6
+UT-023,"Juab County",32.6,110,5.6,27
+UT-025,"Kane County",32.4,88,2.4,30
+UT-027,"Millard County",33.5,113,5.9,27.6
+UT-029,"Morgan County",27.9,111,5.4,22.5
+UT-031,"Piute County",27.6,100,3.7,23.9
+UT-033,"Rich County",22.8,99,4.7,18.1
+UT-035,"Salt Lake County",31.9,112,5.5,26.4
+UT-037,"San Juan County",29.8,71,1.2,28.6
+UT-039,"Sanpete County",26.6,98,3.5,23.1
+UT-041,"Sevier County",27.4,83,2.4,25
+UT-043,"Summit County",22.6,90,3.1,19.5
+UT-045,"Tooele County",32.0,111,5.6,26.4
+UT-047,"Uintah County",20.2,76,1.6,18.6
+UT-049,"Utah County",29.2,102,4.7,24.5
+UT-051,"Wasatch County",24.5,94,3.7,20.8
+UT-053,"Washington County",38.6,102,3.4,35.2
+UT-055,"Wayne County",26.8,58,0.4,26.4
+UT-057,"Weber County",28.9,110,5.8,23.1

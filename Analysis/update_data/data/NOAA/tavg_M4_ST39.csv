@@ -1,0 +1,70 @@
+April 2020 South Dakota County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+SD-003,"Aurora County",44.9,41,-1.3,46.2
+SD-005,"Beadle County",43.8,37,-1.7,45.5
+SD-007,"Bennett County",42.7,29,-2.1,44.8
+SD-009,"Bon Homme County",46.3,39,-1.5,47.8
+SD-011,"Brookings County",42.0,39,-1.7,43.7
+SD-013,"Brown County",40.5,23,-3.2,43.7
+SD-015,"Brule County",44.9,39,-1.5,46.4
+SD-017,"Buffalo County",44.0,36,-1.8,45.8
+SD-019,"Butte County",40.5,22,-3.5,44
+SD-021,"Campbell County",40.0,21,-3.8,43.8
+SD-023,"Charles Mix County",46.0,39,-1.6,47.6
+SD-025,"Clark County",41.1,32,-2.4,43.5
+SD-027,"Clay County",46.4,39,-1.4,47.8
+SD-029,"Codington County",40.1,34,-2.1,42.2
+SD-031,"Corson County",41.0,29,-2.8,43.8
+SD-033,"Custer County",40.3,33,-2.3,42.6
+SD-035,"Davison County",45.2,36,-1.7,46.9
+SD-037,"Day County",39.1,24,-3.3,42.4
+SD-039,"Deuel County",40.7,34,-2.0,42.7
+SD-041,"Dewey County",42.0,29,-2.7,44.7
+SD-043,"Douglas County",45.5,38,-1.5,47
+SD-045,"Edmunds County",40.3,24,-3.4,43.7
+SD-047,"Fall River County",43.0,33,-2.1,45.1
+SD-049,"Faulk County",41.4,31,-2.8,44.2
+SD-051,"Grant County",40.9,34,-2.2,43.1
+SD-053,"Gregory County",45.2,37,-1.6,46.8
+SD-055,"Haakon County",42.4,23,-3.2,45.6
+SD-057,"Hamlin County",41.1,35,-1.8,42.9
+SD-059,"Hand County",43.4,41,-1.5,44.9
+SD-061,"Hanson County",45.1,35,-1.7,46.8
+SD-063,"Harding County",39.4,24,-3.0,42.4
+SD-065,"Hughes County",43.6,34,-2.1,45.7
+SD-067,"Hutchinson County",45.8,41,-1.3,47.1
+SD-069,"Hyde County",42.9,43,-1.4,44.3
+SD-071,"Jackson County",43.0,24,-3.1,46.1
+SD-073,"Jerauld County",44.0,40,-1.5,45.5
+SD-075,"Jones County",43.4,24,-2.9,46.3
+SD-077,"Kingsbury County",42.2,33,-1.9,44.1
+SD-079,"Lake County",42.8,33,-1.9,44.7
+SD-081,"Lawrence County",36.7,24,-3.3,40
+SD-083,"Lincoln County",44.2,31,-2.3,46.5
+SD-085,"Lyman County",44.2,27,-2.3,46.5
+SD-087,"McCook County",44.3,36,-1.7,46
+SD-089,"McPherson County",39.2,22,-3.6,42.8
+SD-091,"Marshall County",38.2,18,-4.3,42.5
+SD-093,"Meade County",40.9,22,-3.7,44.6
+SD-095,"Mellette County",43.8,26,-2.7,46.5
+SD-097,"Miner County",43.5,33,-2.0,45.5
+SD-099,"Minnehaha County",43.2,32,-2.2,45.4
+SD-101,"Moody County",42.9,37,-1.7,44.6
+SD-102,"Oglala Lakota County",43.4,33,-2.1,45.5
+SD-103,"Pennington County",40.5,25,-3.0,43.5
+SD-105,"Perkins County",39.8,23,-3.2,43
+SD-107,"Potter County",41.0,28,-2.9,43.9
+SD-109,"Roberts County",40.3,27,-2.6,42.9
+SD-111,"Sanborn County",44.4,33,-1.9,46.3
+SD-115,"Spink County",42.5,33,-2.4,44.9
+SD-117,"Stanley County",43.2,24,-2.7,45.9
+SD-119,"Sully County",42.7,34,-2.2,44.9
+SD-121,"Todd County",43.1,28,-2.5,45.6
+SD-123,"Tripp County",44.5,36,-2.0,46.5
+SD-125,"Turner County",45.2,37,-1.5,46.7
+SD-127,"Union County",46.2,35,-1.6,47.8
+SD-129,"Walworth County",40.5,23,-3.3,43.8
+SD-135,"Yankton County",46.4,46,-1.0,47.4
+SD-137,"Ziebach County",41.8,28,-2.7,44.5

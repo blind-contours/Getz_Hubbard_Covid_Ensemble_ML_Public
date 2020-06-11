@@ -1,0 +1,25 @@
+March 2020 New Jersey County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NJ-001,"Atlantic County",48.2,123,7.5,40.7
+NJ-003,"Bergen County",45.1,119,6.8,38.3
+NJ-005,"Burlington County",48.0,121,7.1,40.9
+NJ-007,"Camden County",48.3,120,7.0,41.3
+NJ-009,"Cape May County",48.2,123,7.1,41.1
+NJ-011,"Cumberland County",48.6,123,7.3,41.3
+NJ-013,"Essex County",45.6,119,6.8,38.8
+NJ-015,"Gloucester County",48.5,121,7.0,41.5
+NJ-017,"Hudson County",47.0,120,7.1,39.9
+NJ-019,"Hunterdon County",44.4,118,7.0,37.4
+NJ-021,"Mercer County",46.8,119,7.0,39.8
+NJ-023,"Middlesex County",46.8,121,7.2,39.6
+NJ-025,"Monmouth County",47.0,121,7.3,39.7
+NJ-027,"Morris County",43.0,118,6.4,36.6
+NJ-029,"Ocean County",47.2,121,7.1,40.1
+NJ-031,"Passaic County",43.1,118,6.5,36.6
+NJ-033,"Salem County",48.8,121,7.1,41.7
+NJ-035,"Somerset County",45.5,119,7.0,38.5
+NJ-037,"Sussex County",41.4,118,6.3,35.1
+NJ-039,"Union County",46.3,119,7.0,39.3
+NJ-041,"Warren County",43.0,119,7.1,35.9

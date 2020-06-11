@@ -1,0 +1,20 @@
+February 2020 Maine County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+ME-001,"Androscoggin County",24.8,114,5.7,19.1
+ME-003,"Aroostook County",15.6,105,4.6,11
+ME-005,"Cumberland County",25.7,109,5.2,20.5
+ME-007,"Franklin County",18.1,108,4.8,13.3
+ME-009,"Hancock County",25.3,115,5.7,19.6
+ME-011,"Kennebec County",24.7,113,6.1,18.6
+ME-013,"Knox County",26.4,112,5.5,20.9
+ME-015,"Lincoln County",26.7,114,5.9,20.8
+ME-017,"Oxford County",21.1,113,5.5,15.6
+ME-019,"Penobscot County",20.9,109,5.0,15.9
+ME-021,"Piscataquis County",17.0,104,4.7,12.3
+ME-023,"Sagadahoc County",26.7,113,5.9,20.8
+ME-025,"Somerset County",17.2,104,4.4,12.8
+ME-027,"Waldo County",24.4,111,5.4,19
+ME-029,"Washington County",26.0,119,7.5,18.5
+ME-031,"York County",27.1,110,5.3,21.8

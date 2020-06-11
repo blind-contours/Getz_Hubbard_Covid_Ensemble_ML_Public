@@ -1,0 +1,9 @@
+February 2020 Rhode Island County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+RI-001,"Bristol County",3.46,71,0.05,3.41
+RI-003,"Kent County",3.29,60,-0.21,3.5
+RI-005,"Newport County",3.65,78,0.33,3.32
+RI-007,"Providence County",3.26,59,-0.21,3.47
+RI-009,"Washington County",3.24,62,-0.16,3.4

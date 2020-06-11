@@ -1,0 +1,20 @@
+February 2020 Maine County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+ME-001,"Androscoggin County",3.18,71,-0.03,3.21
+ME-003,"Aroostook County",2.59,86,0.29,2.3
+ME-005,"Cumberland County",3.51,82,0.23,3.28
+ME-007,"Franklin County",3.78,102,1.0,2.78
+ME-009,"Hancock County",2.54,26,-0.9,3.44
+ME-011,"Kennebec County",2.77,65,-0.22,2.99
+ME-013,"Knox County",3.46,69,-0.06,3.52
+ME-015,"Lincoln County",3.43,72,0.06,3.37
+ME-017,"Oxford County",3.65,95,0.79,2.86
+ME-019,"Penobscot County",2.51,59,-0.27,2.78
+ME-021,"Piscataquis County",2.69,76,0.11,2.58
+ME-023,"Sagadahoc County",3.39,73,-0.01,3.4
+ME-025,"Somerset County",2.84,85,0.29,2.55
+ME-027,"Waldo County",2.78,43,-0.44,3.22
+ME-029,"Washington County",2.38,28,-0.9,3.28
+ME-031,"York County",3.59,82,0.36,3.23

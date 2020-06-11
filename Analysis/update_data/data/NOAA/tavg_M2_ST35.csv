@@ -1,0 +1,40 @@
+February 2020 Oregon County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+OR-001,"Baker County",31.0,76,1.8,29.2
+OR-003,"Benton County",41.8,57,-0.4,42.2
+OR-005,"Clackamas County",38.4,78,1.0,37.4
+OR-007,"Clatsop County",40.8,62,-0.1,40.9
+OR-009,"Columbia County",40.8,73,0.7,40.1
+OR-011,"Coos County",44.1,66,0.2,43.9
+OR-013,"Crook County",34.0,89,2.0,32
+OR-015,"Curry County",44.6,82,1.2,43.4
+OR-017,"Deschutes County",33.2,89,1.8,31.4
+OR-019,"Douglas County",40.8,68,0.5,40.3
+OR-021,"Gilliam County",40.2,109,4.6,35.6
+OR-023,"Grant County",31.3,77,1.4,29.9
+OR-025,"Harney County",32.6,91,2.4,30.2
+OR-027,"Hood River County",35.4,96,2.5,32.9
+OR-029,"Jackson County",39.3,82,1.2,38.1
+OR-031,"Jefferson County",36.6,94,2.4,34.2
+OR-033,"Josephine County",41.1,86,1.6,39.5
+OR-035,"Klamath County",33.7,98,2.8,30.9
+OR-037,"Lake County",33.5,93,2.7,30.8
+OR-039,"Lane County",39.7,63,-0.0,39.7
+OR-041,"Lincoln County",42.9,56,-0.6,43.5
+OR-043,"Linn County",38.7,65,0.0,38.7
+OR-045,"Malheur County",33.4,77,1.7,31.7
+OR-047,"Marion County",39.5,69,0.2,39.3
+OR-049,"Morrow County",38.8,103,3.7,35.1
+OR-051,"Multnomah County",41.6,86,1.4,40.2
+OR-053,"Polk County",42.2,75,0.6,41.6
+OR-055,"Sherman County",40.1,114,4.8,35.3
+OR-057,"Tillamook County",41.0,74,0.4,40.6
+OR-059,"Umatilla County",37.3,98,3.4,33.9
+OR-061,"Union County",31.7,79,1.8,29.9
+OR-063,"Wallowa County",29.8,72,1.0,28.8
+OR-065,"Wasco County",37.8,102,3.3,34.5
+OR-067,"Washington County",41.6,87,1.3,40.3
+OR-069,"Wheeler County",35.8,91,2.2,33.6
+OR-071,"Yamhill County",41.8,69,0.4,41.4

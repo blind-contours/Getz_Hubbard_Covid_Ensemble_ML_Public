@@ -1,0 +1,68 @@
+February 2020 Louisiana County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+LA-001,"Acadia Parish",3.9,54,-0.6,4.5
+LA-003,"Allen Parish",3.41,44,-1.25,4.66
+LA-005,"Ascension Parish",5.62,85,0.78,4.84
+LA-007,"Assumption Parish",3.66,53,-0.9,4.56
+LA-009,"Avoyelles Parish",5.63,79,0.78,4.85
+LA-011,"Beauregard Parish",3.47,49,-0.87,4.34
+LA-013,"Bienville Parish",8.71,119,4.12,4.59
+LA-015,"Bossier Parish",7.06,115,2.91,4.15
+LA-017,"Caddo Parish",6.54,111,2.5,4.04
+LA-019,"Calcasieu Parish",3.19,47,-0.88,4.07
+LA-021,"Caldwell Parish",8.56,115,3.74,4.82
+LA-023,"Cameron Parish",2.63,39,-1.12,3.75
+LA-025,"Catahoula Parish",7.14,97,2.18,4.96
+LA-027,"Claiborne Parish",7.95,115,3.51,4.44
+LA-029,"Concordia Parish",6.7,92,1.74,4.96
+LA-031,"De Soto Parish",7.66,117,3.35,4.31
+LA-033,"East Baton Rouge Parish",6.19,88,1.12,5.07
+LA-035,"East Carroll Parish",11.12,123,6.11,5.01
+LA-037,"East Feliciana Parish",5.79,77,0.54,5.25
+LA-039,"Evangeline Parish",4.52,70,-0.18,4.7
+LA-041,"Franklin Parish",9.05,117,4.16,4.89
+LA-043,"Grant Parish",5.69,80,0.77,4.92
+LA-045,"Iberia Parish",3.58,52,-0.73,4.31
+LA-047,"Iberville Parish",4.79,74,0.05,4.74
+LA-049,"Jackson Parish",9.3,121,4.59,4.71
+LA-051,"Jefferson Parish",4.81,75,0.2,4.61
+LA-053,"Jefferson Davis Parish",3.33,45,-0.99,4.32
+LA-055,"Lafayette Parish",4.07,63,-0.44,4.51
+LA-057,"Lafourche Parish",3.68,54,-0.71,4.39
+LA-059,"La Salle Parish",6.72,97,1.76,4.96
+LA-061,"Lincoln Parish",9.18,122,4.57,4.61
+LA-063,"Livingston Parish",5.99,86,0.85,5.14
+LA-065,"Madison Parish",10.99,124,5.99,5
+LA-067,"Morehouse Parish",9.64,120,4.82,4.82
+LA-069,"Natchitoches Parish",7.26,106,2.6,4.66
+LA-071,"Orleans Parish",5.07,74,0.32,4.75
+LA-073,"Ouachita Parish",9.22,120,4.48,4.74
+LA-075,"Plaquemines Parish",4.55,69,0.1,4.45
+LA-077,"Pointe Coupee Parish",4.85,65,-0.07,4.92
+LA-079,"Rapides Parish",5.01,71,0.18,4.83
+LA-081,"Red River Parish",8.27,116,3.81,4.46
+LA-083,"Richland Parish",9.84,121,4.98,4.86
+LA-085,"Sabine Parish",6.21,100,1.81,4.4
+LA-087,"St. Bernard Parish",5.14,77,0.49,4.65
+LA-089,"St. Charles Parish",4.58,71,-0.1,4.68
+LA-091,"St. Helena Parish",6.33,90,0.92,5.41
+LA-093,"St. James Parish",4.59,71,-0.09,4.68
+LA-095,"St. John the Baptist Parish",4.49,65,-0.29,4.78
+LA-097,"St. Landry Parish",4.91,71,0.12,4.79
+LA-099,"St. Martin Parish",4.03,60,-0.55,4.58
+LA-101,"St. Mary Parish",3.32,51,-1.08,4.4
+LA-103,"St. Tammany Parish",4.73,61,-0.23,4.96
+LA-105,"Tangipahoa Parish",5.24,69,-0.07,5.31
+LA-107,"Tensas Parish",8.85,114,3.77,5.08
+LA-109,"Terrebonne Parish",3.33,54,-0.85,4.18
+LA-111,"Union Parish",8.92,119,4.25,4.67
+LA-113,"Vermilion Parish",3.2,47,-0.82,4.02
+LA-115,"Vernon Parish",4.16,63,-0.47,4.63
+LA-117,"Washington Parish",5.21,70,-0.21,5.42
+LA-119,"Webster Parish",7.77,116,3.48,4.29
+LA-121,"West Baton Rouge Parish",5.71,81,0.79,4.92
+LA-123,"West Carroll Parish",10.63,124,5.68,4.95
+LA-125,"West Feliciana Parish",4.87,63,-0.22,5.09
+LA-127,"Winn Parish",7.99,109,3.12,4.87

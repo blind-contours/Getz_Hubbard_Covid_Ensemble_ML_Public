@@ -1,0 +1,66 @@
+February 2020 New York County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NY-001,"Albany County",30.0,118,7.4,22.6
+NY-003,"Allegany County",27.2,106,5.0,22.2
+NY-005,"Bronx County",38.9,119,7.7,31.2
+NY-007,"Broome County",28.4,110,5.7,22.7
+NY-009,"Cattaraugus County",27.5,106,5.4,22.1
+NY-011,"Cayuga County",27.8,108,5.2,22.6
+NY-013,"Chautauqua County",28.7,108,5.7,23
+NY-015,"Chemung County",28.7,110,5.6,23.1
+NY-017,"Chenango County",27.0,109,5.9,21.1
+NY-019,"Clinton County",21.3,107,5.4,15.9
+NY-021,"Columbia County",31.4,117,7.3,24.1
+NY-023,"Cortland County",26.0,105,5.1,20.9
+NY-025,"Delaware County",27.9,117,6.9,21
+NY-027,"Dutchess County",33.2,120,8.1,25.1
+NY-029,"Erie County",28.1,105,5.0,23.1
+NY-031,"Essex County",20.6,107,5.2,15.4
+NY-033,"Franklin County",20.4,110,6.0,14.4
+NY-035,"Fulton County",25.4,115,6.0,19.4
+NY-037,"Genesee County",26.9,99,4.1,22.8
+NY-039,"Greene County",29.9,119,7.8,22.1
+NY-041,"Hamilton County",20.8,109,5.7,15.1
+NY-043,"Herkimer County",22.9,110,5.9,17
+NY-045,"Jefferson County",24.0,110,5.9,18.1
+NY-047,"Kings County",39.7,121,7.8,31.9
+NY-049,"Lewis County",22.2,111,6.1,16.1
+NY-051,"Livingston County",28.0,102,4.8,23.2
+NY-053,"Madison County",25.5,105,5.3,20.2
+NY-055,"Monroe County",28.0,103,4.5,23.5
+NY-057,"Montgomery County",27.7,113,6.1,21.6
+NY-059,"Nassau County",38.8,123,7.8,31
+NY-061,"New York County",39.3,120,7.8,31.5
+NY-063,"Niagara County",28.3,103,4.4,23.9
+NY-065,"Oneida County",25.0,109,5.6,19.4
+NY-067,"Onondaga County",27.2,108,5.3,21.9
+NY-069,"Ontario County",27.9,102,4.9,23
+NY-071,"Orange County",33.4,119,7.8,25.6
+NY-073,"Orleans County",27.5,101,4.1,23.4
+NY-075,"Oswego County",26.1,111,5.5,20.6
+NY-077,"Otsego County",26.1,108,5.4,20.7
+NY-079,"Putnam County",33.8,120,7.9,25.9
+NY-081,"Queens County",39.3,120,7.7,31.6
+NY-083,"Rensselaer County",28.9,116,6.9,22
+NY-085,"Richmond County",39.8,122,8.1,31.7
+NY-087,"Rockland County",35.5,120,7.7,27.8
+NY-089,"St. Lawrence County",22.0,112,6.3,15.7
+NY-091,"Saratoga County",26.6,115,6.1,20.5
+NY-093,"Schenectady County",28.8,116,7.0,21.8
+NY-095,"Schoharie County",27.8,113,6.7,21.1
+NY-097,"Schuyler County",27.8,108,5.3,22.5
+NY-099,"Seneca County",28.8,108,5.2,23.6
+NY-101,"Steuben County",27.5,104,5.0,22.5
+NY-103,"Suffolk County",37.2,121,7.3,29.9
+NY-105,"Sullivan County",30.4,119,7.6,22.8
+NY-107,"Tioga County",28.4,109,5.4,23
+NY-109,"Tompkins County",27.3,103,4.9,22.4
+NY-111,"Ulster County",31.3,119,7.8,23.5
+NY-113,"Warren County",23.0,106,5.4,17.6
+NY-115,"Washington County",25.4,107,5.4,20
+NY-117,"Wayne County",27.4,100,4.2,23.2
+NY-119,"Westchester County",35.9,119,7.7,28.2
+NY-121,"Wyoming County",26.2,101,4.7,21.5
+NY-123,"Yates County",28.1,106,5.0,23.1

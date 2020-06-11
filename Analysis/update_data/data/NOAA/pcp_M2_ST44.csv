@@ -1,0 +1,136 @@
+February 2020 Virginia County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+VA-001,"Accomack County",5.58,117,2.26,3.32
+VA-003,"Albemarle County",3.11,83,0.4,2.71
+VA-005,"Alleghany County",4.7,116,1.97,2.73
+VA-007,"Amelia County",4.94,111,1.9,3.04
+VA-009,"Amherst County",4.86,106,1.79,3.07
+VA-011,"Appomattox County",5.06,118,2.03,3.03
+VA-013,"Arlington County",3.82,102,1.1,2.72
+VA-015,"Augusta County",2.73,78,0.31,2.42
+VA-017,"Bath County",4.39,109,1.66,2.73
+VA-019,"Bedford County",4.91,107,1.89,3.02
+VA-021,"Bland County",5.88,120,2.82,3.06
+VA-023,"Botetourt County",4.41,105,1.61,2.8
+VA-025,"Brunswick County",5.54,115,2.24,3.3
+VA-027,"Buchanan County",7.92,123,4.56,3.36
+VA-029,"Buckingham County",4.38,101,1.42,2.96
+VA-031,"Campbell County",5.39,118,2.34,3.05
+VA-033,"Caroline County",3.22,85,0.37,2.85
+VA-035,"Carroll County",7.15,124,3.8,3.35
+VA-036,"Charles City County",4.43,105,1.41,3.02
+VA-037,"Charlotte County",6.5,126,3.34,3.16
+VA-041,"Chesterfield County",4.37,101,1.37,3
+VA-043,"Clarke County",2.48,76,0.2,2.28
+VA-045,"Craig County",4.77,111,1.89,2.88
+VA-047,"Culpeper County",3.23,95,0.72,2.51
+VA-049,"Cumberland County",4.68,108,1.68,3
+VA-051,"Dickenson County",7.96,124,4.56,3.4
+VA-053,"Dinwiddie County",5.08,113,1.97,3.11
+VA-057,"Essex County",3.58,90,0.58,3
+VA-059,"Fairfax County",3.46,94,0.78,2.68
+VA-061,"Fauquier County",2.77,80,0.27,2.5
+VA-063,"Floyd County",6.05,120,2.83,3.22
+VA-065,"Fluvanna County",3.49,91,0.65,2.84
+VA-067,"Franklin County",5.57,118,2.52,3.05
+VA-069,"Frederick County",2.55,80,0.38,2.17
+VA-071,"Giles County",5.79,121,2.76,3.03
+VA-073,"Gloucester County",4.78,111,1.55,3.23
+VA-075,"Goochland County",4.17,101,1.27,2.9
+VA-077,"Grayson County",7.15,125,3.76,3.39
+VA-079,"Greene County",3.34,93,0.71,2.63
+VA-081,"Greensville County",5.73,121,2.38,3.35
+VA-083,"Halifax County",6.35,126,3.17,3.18
+VA-085,"Hanover County",3.82,97,0.91,2.91
+VA-087,"Henrico County",3.95,97,0.99,2.96
+VA-089,"Henry County",7.05,124,3.78,3.27
+VA-091,"Highland County",4.05,100,1.14,2.91
+VA-093,"Isle of Wight County",5.57,117,2.19,3.38
+VA-095,"James City County",4.93,112,1.76,3.17
+VA-097,"King and Queen County",4.06,99,1.0,3.06
+VA-099,"King George County",2.77,71,-0.03,2.8
+VA-101,"King William County",3.94,98,0.93,3.01
+VA-103,"Lancaster County",4.3,102,1.15,3.15
+VA-105,"Lee County",10.2,125,5.89,4.31
+VA-107,"Loudoun County",2.6,66,0.02,2.58
+VA-109,"Louisa County",3.63,95,0.8,2.83
+VA-111,"Lunenburg County",6.39,125,3.22,3.17
+VA-113,"Madison County",3.37,95,0.86,2.51
+VA-115,"Mathews County",5.01,113,1.74,3.27
+VA-117,"Mecklenburg County",6.26,125,2.98,3.28
+VA-119,"Middlesex County",4.43,104,1.28,3.15
+VA-121,"Montgomery County",5.15,119,2.31,2.84
+VA-125,"Nelson County",4.05,97,1.14,2.91
+VA-127,"New Kent County",4.2,102,1.15,3.05
+VA-131,"Northampton County",5.59,120,2.3,3.29
+VA-133,"Northumberland County",3.84,93,0.74,3.1
+VA-135,"Nottoway County",5.3,115,2.21,3.09
+VA-137,"Orange County",3.49,97,0.83,2.66
+VA-139,"Page County",2.81,86,0.51,2.3
+VA-141,"Patrick County",7.56,124,4.01,3.55
+VA-143,"Pittsylvania County",6.67,125,3.51,3.16
+VA-145,"Powhatan County",4.66,108,1.69,2.97
+VA-147,"Prince Edward County",5.91,123,2.82,3.09
+VA-149,"Prince George County",4.89,113,1.88,3.01
+VA-153,"Prince William County",2.95,80,0.3,2.65
+VA-155,"Pulaski County",5.46,120,2.58,2.88
+VA-157,"Rappahannock County",2.79,87,0.47,2.32
+VA-159,"Richmond County",3.6,88,0.56,3.04
+VA-161,"Roanoke County",4.52,108,1.66,2.86
+VA-163,"Rockbridge County",4.34,105,1.55,2.79
+VA-165,"Rockingham County",2.7,77,0.35,2.35
+VA-167,"Russell County",7.68,123,4.15,3.53
+VA-169,"Scott County",8.94,124,5.07,3.87
+VA-171,"Shenandoah County",2.51,82,0.44,2.07
+VA-173,"Smyth County",7.52,124,4.12,3.4
+VA-175,"Southampton County",5.86,122,2.47,3.39
+VA-177,"Spotsylvania County",3.04,84,0.27,2.77
+VA-179,"Stafford County",2.7,77,-0.0,2.7
+VA-181,"Surry County",5.6,120,2.46,3.14
+VA-183,"Sussex County",5.83,121,2.63,3.2
+VA-185,"Tazewell County",7.3,123,3.88,3.42
+VA-187,"Warren County",2.64,85,0.46,2.18
+VA-191,"Washington County",7.84,124,4.25,3.59
+VA-193,"Westmoreland County",3.16,77,0.21,2.95
+VA-195,"Wise County",8.79,123,4.96,3.83
+VA-197,"Wythe County",5.91,121,2.97,2.94
+VA-199,"York County",4.94,111,1.67,3.27
+VA-510,"Alexandria City",3.63,98,0.92,2.71
+VA-520,"Bristol City",8.2,125,4.52,3.68
+VA-530,"Buena Vista City",4.27,103,1.42,2.85
+VA-540,"Charlottesville City",3.1,80,0.32,2.78
+VA-550,"Chesapeake City",5.21,107,1.7,3.51
+VA-570,"Colonial Heights City",4.22,102,1.25,2.97
+VA-580,"Covington City",4.42,113,1.81,2.61
+VA-590,"Danville City",6.55,126,3.36,3.19
+VA-595,"Emporia City",5.82,122,2.47,3.35
+VA-600,"Fairfax City",3.58,95,0.88,2.7
+VA-610,"Falls Church City",3.85,101,1.13,2.72
+VA-620,"Franklin City",5.76,119,2.29,3.47
+VA-630,"Fredericksburg City",2.71,77,-0.01,2.72
+VA-640,"Galax City",7.12,126,3.88,3.24
+VA-650,"Hampton City",4.85,105,1.51,3.34
+VA-660,"Harrisonburg City",2.48,73,0.25,2.23
+VA-670,"Hopewell City",4.04,99,1.08,2.96
+VA-680,"Lynchburg City",5.07,113,2.1,2.97
+VA-683,"Manassas City",3.07,84,0.46,2.61
+VA-685,"Manassas Park City",3.15,88,0.51,2.64
+VA-690,"Martinsville City",7.07,124,3.81,3.26
+VA-700,"Newport News City",5.1,110,1.77,3.33
+VA-710,"Norfolk City",4.69,104,1.3,3.39
+VA-720,"Norton City",8.71,122,4.92,3.79
+VA-730,"Petersburg City",4.55,105,1.55,3
+VA-735,"Poquoson City",4.87,107,1.55,3.32
+VA-740,"Portsmouth City",4.84,104,1.41,3.43
+VA-750,"Radford City",5.31,120,2.49,2.82
+VA-760,"Richmond City",3.97,97,1.01,2.96
+VA-770,"Roanoke City",4.24,101,1.41,2.83
+VA-775,"Salem City",4.33,103,1.5,2.83
+VA-790,"Staunton City",2.09,60,-0.04,2.13
+VA-800,"Suffolk City",5.25,108,1.71,3.54
+VA-810,"Virginia Beach City",4.98,106,1.56,3.42
+VA-820,"Waynesboro City",2.43,76,0.13,2.3
+VA-830,"Williamsburg City",5.04,113,1.82,3.22
+VA-840,"Winchester City",2.58,80,0.38,2.2

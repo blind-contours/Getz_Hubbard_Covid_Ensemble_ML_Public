@@ -1,0 +1,91 @@
+April 2020 Minnesota County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MN-001,"Aitkin County",1.51,38,-0.59,2.1
+MN-003,"Anoka County",1.38,30,-0.84,2.22
+MN-005,"Becker County",1.35,39,-0.5,1.85
+MN-007,"Beltrami County",0.88,22,-0.75,1.63
+MN-009,"Benton County",1.35,34,-0.76,2.11
+MN-011,"Big Stone County",1.37,32,-0.74,2.11
+MN-013,"Blue Earth County",1.49,26,-0.97,2.46
+MN-015,"Brown County",1.16,18,-1.24,2.4
+MN-017,"Carlton County",1.62,44,-0.5,2.12
+MN-019,"Carver County",1.55,33,-0.72,2.27
+MN-021,"Cass County",1.4,36,-0.63,2.03
+MN-023,"Chippewa County",1.0,20,-1.15,2.15
+MN-025,"Chisago County",1.65,42,-0.58,2.23
+MN-027,"Clay County",1.61,68,-0.18,1.79
+MN-029,"Clearwater County",0.83,18,-0.9,1.73
+MN-031,"Cook County",1.28,27,-0.89,2.17
+MN-033,"Cottonwood County",1.02,14,-1.33,2.35
+MN-035,"Crow Wing County",1.96,64,-0.08,2.04
+MN-037,"Dakota County",1.44,27,-0.95,2.39
+MN-039,"Dodge County",1.61,31,-0.99,2.6
+MN-041,"Douglas County",1.27,24,-0.81,2.08
+MN-043,"Faribault County",1.56,30,-0.97,2.53
+MN-045,"Fillmore County",1.4,17,-1.41,2.81
+MN-047,"Freeborn County",1.65,29,-0.96,2.61
+MN-049,"Goodhue County",1.3,16,-1.21,2.51
+MN-051,"Grant County",1.4,35,-0.65,2.05
+MN-053,"Hennepin County",1.42,30,-0.86,2.28
+MN-055,"Houston County",1.91,32,-0.98,2.89
+MN-057,"Hubbard County",1.09,23,-0.94,2.03
+MN-059,"Isanti County",1.7,47,-0.51,2.21
+MN-061,"Itasca County",0.96,24,-0.88,1.84
+MN-063,"Jackson County",0.82,8,-1.55,2.37
+MN-065,"Kanabec County",1.71,49,-0.44,2.15
+MN-067,"Kandiyohi County",1.0,18,-1.07,2.07
+MN-069,"Kittson County",0.58,29,-0.76,1.34
+MN-071,"Koochiching County",0.86,17,-0.84,1.7
+MN-073,"Lac qui Parle County",0.92,13,-1.32,2.24
+MN-075,"Lake County",1.21,25,-0.88,2.09
+MN-077,"Lake of the Woods County",0.97,34,-0.49,1.46
+MN-079,"Le Sueur County",1.53,31,-0.84,2.37
+MN-081,"Lincoln County",1.06,14,-1.25,2.31
+MN-083,"Lyon County",1.39,29,-0.89,2.28
+MN-085,"McLeod County",1.37,28,-0.88,2.25
+MN-087,"Mahnomen County",1.17,37,-0.51,1.68
+MN-089,"Marshall County",0.74,28,-0.68,1.42
+MN-091,"Martin County",1.13,15,-1.39,2.52
+MN-093,"Meeker County",1.02,15,-1.12,2.14
+MN-095,"Mille Lacs County",1.68,43,-0.47,2.15
+MN-097,"Morrison County",1.69,49,-0.38,2.07
+MN-099,"Mower County",1.76,33,-0.94,2.7
+MN-101,"Murray County",1.0,17,-1.3,2.3
+MN-103,"Nicollet County",1.4,24,-1.02,2.42
+MN-105,"Nobles County",0.73,8,-1.63,2.36
+MN-107,"Norman County",1.52,70,-0.16,1.68
+MN-109,"Olmsted County",1.64,30,-1.02,2.66
+MN-111,"Otter Tail County",1.59,46,-0.39,1.98
+MN-113,"Pennington County",0.97,36,-0.5,1.47
+MN-115,"Pine County",1.99,63,-0.14,2.13
+MN-117,"Pipestone County",0.83,12,-1.38,2.21
+MN-119,"Polk County",1.13,45,-0.42,1.55
+MN-121,"Pope County",1.03,21,-1.03,2.06
+MN-123,"Ramsey County",1.41,27,-0.91,2.32
+MN-125,"Red Lake County",1.17,52,-0.37,1.54
+MN-127,"Redwood County",1.31,26,-0.99,2.3
+MN-129,"Renville County",1.15,20,-1.07,2.22
+MN-131,"Rice County",1.37,20,-1.08,2.45
+MN-133,"Rock County",0.77,9,-1.56,2.33
+MN-135,"Roseau County",1.13,56,-0.27,1.4
+MN-137,"St. Louis County",1.05,24,-0.9,1.95
+MN-139,"Scott County",1.59,33,-0.71,2.3
+MN-141,"Sherburne County",1.37,33,-0.8,2.17
+MN-143,"Sibley County",1.44,28,-0.91,2.35
+MN-145,"Stearns County",0.98,18,-1.09,2.07
+MN-147,"Steele County",1.46,27,-1.09,2.55
+MN-149,"Stevens County",1.1,24,-0.98,2.08
+MN-151,"Swift County",0.95,18,-1.13,2.08
+MN-153,"Todd County",1.58,41,-0.45,2.03
+MN-155,"Traverse County",1.8,53,-0.27,2.07
+MN-157,"Wabasha County",1.58,25,-1.08,2.66
+MN-159,"Wadena County",1.63,43,-0.44,2.07
+MN-161,"Waseca County",1.52,29,-1.0,2.52
+MN-163,"Washington County",1.42,29,-0.92,2.34
+MN-165,"Watonwan County",1.13,15,-1.33,2.46
+MN-167,"Wilkin County",1.74,63,-0.15,1.89
+MN-169,"Winona County",1.68,33,-1.08,2.76
+MN-171,"Wright County",1.26,23,-0.96,2.22
+MN-173,"Yellow Medicine County",1.11,21,-1.19,2.3

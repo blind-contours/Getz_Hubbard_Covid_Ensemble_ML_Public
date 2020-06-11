@@ -1,0 +1,19 @@
+April 2020 Arizona County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+AZ-001,"Apache County",50.5,111,3.1,47.4
+AZ-003,"Cochise County",60.3,100,2.0,58.3
+AZ-005,"Coconino County",52.4,104,2.9,49.5
+AZ-007,"Gila County",59.0,109,3.6,55.4
+AZ-009,"Graham County",60.8,107,3.2,57.6
+AZ-011,"Greenlee County",56.2,107,2.9,53.3
+AZ-012,"La Paz County",70.1,94,2.3,67.8
+AZ-013,"Maricopa County",69.2,100,2.9,66.3
+AZ-015,"Mohave County",60.5,93,2.2,58.3
+AZ-017,"Navajo County",52.5,110,3.5,49
+AZ-019,"Pima County",66.3,98,2.6,63.7
+AZ-021,"Pinal County",67.6,100,2.7,64.9
+AZ-023,"Santa Cruz County",58.8,88,1.5,57.3
+AZ-025,"Yavapai County",57.2,90,2.3,54.9
+AZ-027,"Yuma County",71.0,100,2.7,68.3

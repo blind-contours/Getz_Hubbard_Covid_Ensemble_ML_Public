@@ -1,0 +1,27 @@
+March 2020 Wyoming County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+WY-001,"Albany County",33.0,109,5.3,27.7
+WY-003,"Big Horn County",34.8,104,4.1,30.7
+WY-005,"Campbell County",35.6,99,4.2,31.4
+WY-007,"Carbon County",33.1,107,4.8,28.3
+WY-009,"Converse County",36.5,106,4.8,31.7
+WY-011,"Crook County",34.1,96,3.5,30.6
+WY-013,"Fremont County",31.8,95,3.3,28.5
+WY-015,"Goshen County",39.4,107,5.0,34.4
+WY-017,"Hot Springs County",34.1,93,2.7,31.4
+WY-019,"Johnson County",34.0,93,3.1,30.9
+WY-021,"Laramie County",37.4,106,5.0,32.4
+WY-023,"Lincoln County",30.1,104,4.4,25.7
+WY-025,"Natrona County",34.2,93,3.5,30.7
+WY-027,"Niobrara County",38.4,109,5.7,32.7
+WY-029,"Park County",30.2,101,3.7,26.5
+WY-031,"Platte County",38.8,106,5.0,33.8
+WY-033,"Sheridan County",33.7,97,3.8,29.9
+WY-035,"Sublette County",27.0,102,3.8,23.2
+WY-037,"Sweetwater County",32.4,92,3.3,29.1
+WY-039,"Teton County",27.2,108,4.3,22.9
+WY-041,"Uinta County",30.6,90,3.0,27.6
+WY-043,"Washakie County",35.9,97,3.2,32.7
+WY-045,"Weston County",35.8,103,4.4,31.4

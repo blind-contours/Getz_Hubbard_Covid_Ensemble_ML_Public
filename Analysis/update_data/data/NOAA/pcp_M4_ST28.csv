@@ -1,0 +1,25 @@
+April 2020 New Jersey County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NJ-001,"Atlantic County",4.05,86,0.47,3.58
+NJ-003,"Bergen County",4.51,89,0.53,3.98
+NJ-005,"Burlington County",4.3,92,0.69,3.61
+NJ-007,"Camden County",4.16,87,0.55,3.61
+NJ-009,"Cape May County",4.49,99,1.03,3.46
+NJ-011,"Cumberland County",3.92,84,0.43,3.49
+NJ-013,"Essex County",4.06,80,0.02,4.04
+NJ-015,"Gloucester County",4.06,87,0.43,3.63
+NJ-017,"Hudson County",4.11,85,0.19,3.92
+NJ-019,"Hunterdon County",4.08,78,0.19,3.89
+NJ-021,"Mercer County",4.16,88,0.5,3.66
+NJ-023,"Middlesex County",3.45,64,-0.32,3.77
+NJ-025,"Monmouth County",4.07,84,0.34,3.73
+NJ-027,"Morris County",4.12,76,-0.02,4.14
+NJ-029,"Ocean County",4.16,87,0.47,3.69
+NJ-031,"Passaic County",4.27,83,0.21,4.06
+NJ-033,"Salem County",4.17,91,0.62,3.55
+NJ-035,"Somerset County",3.44,62,-0.43,3.87
+NJ-037,"Sussex County",3.44,55,-0.46,3.9
+NJ-039,"Union County",3.5,56,-0.43,3.93
+NJ-041,"Warren County",3.55,57,-0.45,4

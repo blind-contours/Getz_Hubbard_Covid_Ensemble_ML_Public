@@ -1,0 +1,18 @@
+March 2020 Massachusetts County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MA-001,"Barnstable County",41.6,118,5.2,36.4
+MA-003,"Berkshire County",36.6,115,5.7,30.9
+MA-005,"Bristol County",42.4,118,5.7,36.7
+MA-007,"Dukes County",42.2,119,5.3,36.9
+MA-009,"Essex County",41.2,119,6.3,34.9
+MA-011,"Franklin County",38.7,118,6.5,32.2
+MA-013,"Hampden County",40.0,117,5.9,34.1
+MA-015,"Hampshire County",39.3,117,5.9,33.4
+MA-017,"Middlesex County",41.3,119,6.3,35
+MA-019,"Nantucket County",41.8,120,5.4,36.4
+MA-021,"Norfolk County",42.2,118,6.3,35.9
+MA-023,"Plymouth County",42.1,118,5.6,36.5
+MA-025,"Suffolk County",42.5,120,6.5,36
+MA-027,"Worcester County",40.0,118,6.5,33.5

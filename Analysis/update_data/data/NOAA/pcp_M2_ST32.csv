@@ -1,0 +1,57 @@
+February 2020 North Dakota County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+ND-001,"Adams County",0.38,70,-0.04,0.42
+ND-003,"Barnes County",0.06,3,-0.44,0.5
+ND-005,"Benson County",0.01,1,-0.39,0.4
+ND-007,"Billings County",0.38,75,0.01,0.37
+ND-009,"Bottineau County",0.05,3,-0.43,0.48
+ND-011,"Bowman County",0.46,81,0.08,0.38
+ND-013,"Burke County",0.13,14,-0.34,0.47
+ND-015,"Burleigh County",0.2,25,-0.22,0.42
+ND-017,"Cass County",0.06,3,-0.46,0.52
+ND-019,"Cavalier County",0.15,11,-0.44,0.59
+ND-021,"Dickey County",0.27,29,-0.31,0.58
+ND-023,"Divide County",0.27,46,-0.17,0.44
+ND-025,"Dunn County",0.27,41,-0.17,0.44
+ND-027,"Eddy County",0.04,5,-0.39,0.43
+ND-029,"Emmons County",0.16,14,-0.27,0.43
+ND-031,"Foster County",0.04,3,-0.41,0.45
+ND-033,"Golden Valley County",0.56,97,0.18,0.38
+ND-035,"Grand Forks County",0.12,12,-0.39,0.51
+ND-037,"Grant County",0.33,51,-0.12,0.45
+ND-039,"Griggs County",0.05,7,-0.4,0.45
+ND-041,"Hettinger County",0.34,54,-0.11,0.45
+ND-043,"Kidder County",0.19,28,-0.22,0.41
+ND-045,"LaMoure County",0.17,19,-0.37,0.54
+ND-047,"Logan County",0.19,21,-0.25,0.44
+ND-049,"McHenry County",0.04,3,-0.4,0.44
+ND-051,"McIntosh County",0.18,20,-0.3,0.48
+ND-053,"McKenzie County",0.28,53,-0.11,0.39
+ND-055,"McLean County",0.21,34,-0.22,0.43
+ND-057,"Mercer County",0.23,36,-0.19,0.42
+ND-059,"Morton County",0.28,41,-0.18,0.46
+ND-061,"Mountrail County",0.1,9,-0.33,0.43
+ND-063,"Nelson County",0.09,9,-0.37,0.46
+ND-065,"Oliver County",0.27,45,-0.18,0.45
+ND-067,"Pembina County",0.16,11,-0.44,0.6
+ND-069,"Pierce County",0.01,1,-0.42,0.43
+ND-071,"Ramsey County",0.06,6,-0.35,0.41
+ND-073,"Ransom County",0.05,4,-0.49,0.54
+ND-075,"Renville County",0.07,4,-0.4,0.47
+ND-077,"Richland County",0.05,2,-0.53,0.58
+ND-079,"Rolette County",0.02,1,-0.51,0.53
+ND-081,"Sargent County",0.08,7,-0.49,0.57
+ND-083,"Sheridan County",0.08,12,-0.37,0.45
+ND-085,"Sioux County",0.22,29,-0.25,0.47
+ND-087,"Slope County",0.36,60,-0.04,0.4
+ND-089,"Stark County",0.31,54,-0.14,0.45
+ND-091,"Steele County",0.09,10,-0.37,0.46
+ND-093,"Stutsman County",0.1,9,-0.38,0.48
+ND-095,"Towner County",0.03,1,-0.48,0.51
+ND-097,"Traill County",0.11,9,-0.39,0.5
+ND-099,"Walsh County",0.13,14,-0.37,0.5
+ND-101,"Ward County",0.1,8,-0.37,0.47
+ND-103,"Wells County",0.02,2,-0.43,0.45
+ND-105,"Williams County",0.21,27,-0.2,0.41

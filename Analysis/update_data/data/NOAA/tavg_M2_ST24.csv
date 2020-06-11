@@ -1,0 +1,60 @@
+February 2020 Montana County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MT-001,"Beaverhead County",19.9,51,-0.6,20.5
+MT-003,"Big Horn County",26.8,79,2.4,24.4
+MT-005,"Blaine County",25.9,99,7.5,18.4
+MT-007,"Broadwater County",27.1,76,2.5,24.6
+MT-009,"Carbon County",23.4,54,-0.3,23.7
+MT-011,"Carter County",24.4,87,3.7,20.7
+MT-013,"Cascade County",28.4,82,4.4,24
+MT-015,"Chouteau County",29.2,97,7.0,22.2
+MT-017,"Custer County",27.0,96,6.1,20.9
+MT-019,"Daniels County",17.5,94,5.8,11.7
+MT-021,"Dawson County",23.8,94,6.4,17.4
+MT-023,"Deer Lodge County",21.6,62,0.5,21.1
+MT-025,"Fallon County",23.8,90,4.7,19.1
+MT-027,"Fergus County",28.4,89,4.8,23.6
+MT-029,"Flathead County",27.1,96,4.5,22.6
+MT-031,"Gallatin County",22.2,56,0.1,22.1
+MT-033,"Garfield County",26.6,98,6.5,20.1
+MT-035,"Glacier County",25.9,95,5.5,20.4
+MT-037,"Golden Valley County",27.3,76,1.9,25.4
+MT-039,"Granite County",24.4,72,1.9,22.5
+MT-041,"Hill County",25.9,102,8.9,17
+MT-043,"Jefferson County",25.4,72,1.7,23.7
+MT-045,"Judith Basin County",25.7,76,2.5,23.2
+MT-047,"Lake County",29.7,94,3.7,26
+MT-049,"Lewis and Clark County",26.7,82,3.8,22.9
+MT-051,"Liberty County",27.6,104,8.8,18.8
+MT-053,"Lincoln County",28.7,94,3.9,24.8
+MT-055,"McCone County",23.6,99,7.1,16.5
+MT-057,"Madison County",22.2,56,-0.2,22.4
+MT-059,"Meagher County",23.7,73,1.9,21.8
+MT-061,"Mineral County",28.1,78,1.9,26.2
+MT-063,"Missoula County",27.3,82,2.7,24.6
+MT-065,"Musselshell County",29.4,84,4.0,25.4
+MT-067,"Park County",21.7,59,0.1,21.6
+MT-069,"Petroleum County",30.3,98,6.3,24
+MT-071,"Phillips County",24.4,97,6.9,17.5
+MT-073,"Pondera County",27.4,94,6.0,21.4
+MT-075,"Powder River County",26.5,81,3.2,23.3
+MT-077,"Powell County",24.6,76,2.4,22.2
+MT-079,"Prairie County",25.3,94,6.3,19
+MT-081,"Ravalli County",25.7,68,1.4,24.3
+MT-083,"Richland County",22.6,97,7.0,15.6
+MT-085,"Roosevelt County",20.8,98,7.2,13.6
+MT-087,"Rosebud County",27.4,91,5.0,22.4
+MT-089,"Sanders County",29.1,85,2.6,26.5
+MT-091,"Sheridan County",18.9,98,7.1,11.8
+MT-093,"Silver Bow County",23.4,69,1.1,22.3
+MT-095,"Stillwater County",25.8,63,0.6,25.2
+MT-097,"Sweet Grass County",26.2,71,1.2,25
+MT-099,"Teton County",28.0,94,5.5,22.5
+MT-101,"Toole County",28.5,105,8.5,20
+MT-103,"Treasure County",28.8,92,5.2,23.6
+MT-105,"Valley County",20.6,96,6.4,14.2
+MT-107,"Wheatland County",26.3,73,1.7,24.6
+MT-109,"Wibaux County",23.2,92,5.1,18.1
+MT-111,"Yellowstone County",28.7,77,2.9,25.8

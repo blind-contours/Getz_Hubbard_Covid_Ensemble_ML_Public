@@ -1,0 +1,7 @@
+February 2020 Delaware County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+DE-001,"Kent County",41.6,122,7.5,34.1
+DE-003,"New Castle County",40.3,121,7.7,32.6
+DE-005,"Sussex County",42.9,121,7.5,35.4

@@ -1,0 +1,60 @@
+April 2020 Montana County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MT-001,"Beaverhead County",35.1,59,0.3,34.8
+MT-003,"Big Horn County",40.1,24,-3.0,43.1
+MT-005,"Blaine County",38.6,27,-3.5,42.1
+MT-007,"Broadwater County",39.8,53,-0.8,40.6
+MT-009,"Carbon County",37.6,34,-2.0,39.6
+MT-011,"Carter County",39.1,22,-3.3,42.4
+MT-013,"Cascade County",37.9,26,-3.0,40.9
+MT-015,"Chouteau County",39.0,19,-3.8,42.8
+MT-017,"Custer County",40.6,20,-3.5,44.1
+MT-019,"Daniels County",37.0,29,-3.0,40
+MT-021,"Dawson County",39.8,27,-3.1,42.9
+MT-023,"Deer Lodge County",35.7,72,0.8,34.9
+MT-025,"Fallon County",38.6,18,-3.9,42.5
+MT-027,"Fergus County",38.9,25,-3.4,42.3
+MT-029,"Flathead County",37.4,48,-0.6,38
+MT-031,"Gallatin County",37.0,59,0.0,37
+MT-033,"Garfield County",39.8,26,-3.5,43.3
+MT-035,"Glacier County",35.2,41,-1.7,36.9
+MT-037,"Golden Valley County",38.5,17,-3.7,42.2
+MT-039,"Granite County",36.8,68,0.4,36.4
+MT-041,"Hill County",38.5,31,-3.2,41.7
+MT-043,"Jefferson County",38.2,66,0.4,37.8
+MT-045,"Judith Basin County",36.4,31,-2.6,39
+MT-047,"Lake County",41.9,66,0.1,41.8
+MT-049,"Lewis and Clark County",37.2,50,-1.1,38.3
+MT-051,"Liberty County",38.0,30,-2.9,40.9
+MT-053,"Lincoln County",39.1,46,-0.9,40
+MT-055,"McCone County",40.3,31,-2.6,42.9
+MT-057,"Madison County",36.5,59,-0.1,36.6
+MT-059,"Meagher County",35.6,49,-1.1,36.7
+MT-061,"Mineral County",39.7,63,-0.1,39.8
+MT-063,"Missoula County",39.5,65,0.2,39.3
+MT-065,"Musselshell County",40.7,20,-3.2,43.9
+MT-067,"Park County",35.1,54,-0.5,35.6
+MT-069,"Petroleum County",41.6,26,-3.1,44.7
+MT-071,"Phillips County",39.9,29,-3.3,43.2
+MT-073,"Pondera County",37.6,37,-2.0,39.6
+MT-075,"Powder River County",40.2,18,-3.5,43.7
+MT-077,"Powell County",37.1,58,0.1,37
+MT-079,"Prairie County",40.1,24,-3.3,43.4
+MT-081,"Ravalli County",38.5,66,0.3,38.2
+MT-083,"Richland County",39.8,29,-3.0,42.8
+MT-085,"Roosevelt County",39.1,29,-3.0,42.1
+MT-087,"Rosebud County",39.9,16,-4.0,43.9
+MT-089,"Sanders County",40.3,51,-0.9,41.2
+MT-091,"Sheridan County",37.5,29,-3.2,40.7
+MT-093,"Silver Bow County",37.0,74,0.9,36.1
+MT-095,"Stillwater County",37.8,21,-3.1,40.9
+MT-097,"Sweet Grass County",37.7,41,-1.6,39.3
+MT-099,"Teton County",37.3,36,-2.0,39.3
+MT-101,"Toole County",38.4,34,-2.3,40.7
+MT-103,"Treasure County",40.2,11,-4.4,44.6
+MT-105,"Valley County",39.0,32,-2.8,41.8
+MT-107,"Wheatland County",37.4,32,-2.6,40
+MT-109,"Wibaux County",38.8,20,-4.0,42.8
+MT-111,"Yellowstone County",41.0,18,-3.7,44.7

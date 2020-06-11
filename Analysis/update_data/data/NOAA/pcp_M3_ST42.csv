@@ -1,0 +1,33 @@
+March 2020 Utah County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+UT-001,"Beaver County",1.37,70,-0.05,1.42
+UT-003,"Box Elder County",1.13,81,0.09,1.04
+UT-005,"Cache County",3.15,70,0.11,3.04
+UT-007,"Carbon County",2.39,117,1.13,1.26
+UT-009,"Daggett County",1.68,92,0.31,1.37
+UT-011,"Davis County",2.57,61,-0.3,2.87
+UT-013,"Duchesne County",2.13,90,0.42,1.71
+UT-015,"Emery County",1.14,99,0.41,0.73
+UT-017,"Garfield County",1.62,91,0.39,1.23
+UT-019,"Grand County",1.34,90,0.3,1.04
+UT-021,"Iron County",2.03,86,0.3,1.73
+UT-023,"Juab County",1.06,57,-0.16,1.22
+UT-025,"Kane County",2.02,104,0.78,1.24
+UT-027,"Millard County",0.98,62,-0.05,1.03
+UT-029,"Morgan County",2.85,68,-0.0,2.85
+UT-031,"Piute County",1.56,57,-0.32,1.88
+UT-033,"Rich County",2.0,94,0.39,1.61
+UT-035,"Salt Lake County",2.01,45,-0.56,2.57
+UT-037,"San Juan County",1.25,93,0.27,0.98
+UT-039,"Sanpete County",1.97,61,-0.17,2.14
+UT-041,"Sevier County",1.71,69,0.01,1.7
+UT-043,"Summit County",3.41,86,0.28,3.13
+UT-045,"Tooele County",1.14,82,0.12,1.02
+UT-047,"Uintah County",1.57,102,0.5,1.07
+UT-049,"Utah County",1.71,51,-0.32,2.03
+UT-051,"Wasatch County",2.88,82,0.21,2.67
+UT-053,"Washington County",4.12,115,2.21,1.91
+UT-055,"Wayne County",0.83,80,0.05,0.78
+UT-057,"Weber County",2.87,65,-0.05,2.92

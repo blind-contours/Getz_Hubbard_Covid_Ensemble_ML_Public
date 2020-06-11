@@ -1,0 +1,29 @@
+January 2020 Maryland County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MD-001,"Allegany County",35.3,113,6.1,29.2
+MD-003,"Anne Arundel County",40.9,117,6.9,34
+MD-005,"Baltimore County",37.9,116,6.8,31.1
+MD-009,"Calvert County",41.0,116,6.4,34.6
+MD-011,"Caroline County",40.1,115,6.6,33.5
+MD-013,"Carroll County",36.8,116,6.9,29.9
+MD-015,"Cecil County",37.7,115,6.5,31.2
+MD-017,"Charles County",41.4,117,6.8,34.6
+MD-019,"Dorchester County",41.4,117,6.6,34.8
+MD-021,"Frederick County",37.3,116,7.0,30.3
+MD-023,"Garrett County",32.9,116,7.0,25.9
+MD-025,"Harford County",37.0,114,6.0,31
+MD-027,"Howard County",38.4,117,7.0,31.4
+MD-029,"Kent County",38.9,114,6.0,32.9
+MD-031,"Montgomery County",38.7,116,6.8,31.9
+MD-033,"Prince George's County",40.2,117,6.5,33.7
+MD-035,"Queen Anne's County",39.6,115,6.3,33.3
+MD-037,"St. Mary's County",41.4,117,6.2,35.2
+MD-039,"Somerset County",42.4,117,6.5,35.9
+MD-041,"Talbot County",40.9,116,6.5,34.4
+MD-043,"Washington County",36.6,116,6.7,29.9
+MD-045,"Wicomico County",42.1,117,7.0,35.1
+MD-047,"Worcester County",42.8,118,6.7,36.1
+MD-510,"Baltimore City",40.3,118,7.1,33.2
+MD-511,"",40.1,116,6.3,33.8

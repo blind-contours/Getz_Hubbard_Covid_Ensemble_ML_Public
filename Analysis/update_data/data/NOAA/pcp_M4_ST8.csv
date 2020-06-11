@@ -1,0 +1,71 @@
+April 2020 Florida County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+FL-001,"Alachua County",5.92,114,2.91,3.01
+FL-003,"Baker County",6.5,117,3.58,2.92
+FL-005,"Bay County",4.62,77,0.6,4.02
+FL-007,"Bradford County",6.04,120,3.15,2.89
+FL-009,"Brevard County",3.43,97,1.04,2.39
+FL-011,"Broward County",2.88,63,-0.24,3.12
+FL-013,"Calhoun County",4.57,78,0.47,4.1
+FL-015,"Charlotte County",3.57,104,1.35,2.22
+FL-017,"Citrus County",4.29,103,1.63,2.66
+FL-019,"Clay County",5.33,114,2.51,2.82
+FL-021,"Collier County",2.29,71,-0.08,2.37
+FL-023,"Columbia County",6.45,114,3.4,3.05
+FL-027,"DeSoto County",4.13,112,1.78,2.35
+FL-029,"Dixie County",4.54,98,1.46,3.08
+FL-031,"Duval County",5.74,117,2.98,2.76
+FL-033,"Escambia County",4.24,70,-0.35,4.59
+FL-035,"Flagler County",3.56,87,0.75,2.81
+FL-037,"Franklin County",4.06,82,0.41,3.65
+FL-039,"Gadsden County",4.4,77,0.33,4.07
+FL-041,"Gilchrist County",5.1,112,2.06,3.04
+FL-043,"Glades County",2.93,84,0.45,2.48
+FL-045,"Gulf County",4.22,78,0.4,3.82
+FL-047,"Hamilton County",6.86,116,3.62,3.24
+FL-049,"Hardee County",4.37,109,1.88,2.49
+FL-051,"Hendry County",2.29,65,-0.24,2.53
+FL-053,"Hernando County",4.7,110,2.21,2.49
+FL-055,"Highlands County",3.6,99,1.04,2.56
+FL-057,"Hillsborough County",5.23,118,2.92,2.31
+FL-059,"Holmes County",7.47,107,3.08,4.39
+FL-061,"Indian River County",3.67,94,1.02,2.65
+FL-063,"Jackson County",5.03,87,0.94,4.09
+FL-065,"Jefferson County",5.6,99,1.92,3.68
+FL-067,"Lafayette County",5.12,102,1.88,3.24
+FL-069,"Lake County",2.96,86,0.33,2.63
+FL-071,"Lee County",2.31,76,0.18,2.13
+FL-073,"Leon County",4.93,91,1.04,3.89
+FL-075,"Levy County",4.73,104,1.74,2.99
+FL-077,"Liberty County",4.29,75,0.32,3.97
+FL-079,"Madison County",6.13,105,2.66,3.47
+FL-081,"Manatee County",4.8,117,2.47,2.33
+FL-083,"Marion County",4.86,110,1.93,2.93
+FL-085,"Martin County",5.01,110,2.12,2.89
+FL-086,"Miami-Dade County",1.97,48,-1.06,3.03
+FL-087,"Monroe County",1.47,37,-0.99,2.46
+FL-089,"Nassau County",6.22,116,3.32,2.9
+FL-091,"Okaloosa County",3.75,62,-0.76,4.51
+FL-093,"Okeechobee County",3.62,96,1.0,2.62
+FL-095,"Orange County",2.59,78,0.04,2.55
+FL-097,"Osceola County",3.16,91,0.65,2.51
+FL-099,"Palm Beach County",3.18,76,0.14,3.04
+FL-101,"Pasco County",5.16,117,2.78,2.38
+FL-103,"Pinellas County",5.6,119,3.37,2.23
+FL-105,"Polk County",3.49,95,0.95,2.54
+FL-107,"Putnam County",4.73,101,1.8,2.93
+FL-109,"St. Johns County",4.26,96,1.5,2.76
+FL-111,"St. Lucie County",4.38,105,1.57,2.81
+FL-113,"Santa Rosa County",4.07,68,-0.5,4.57
+FL-115,"Sarasota County",4.42,115,2.14,2.28
+FL-117,"Seminole County",2.7,83,0.2,2.5
+FL-119,"Sumter County",3.61,94,1.01,2.6
+FL-121,"Suwannee County",5.85,108,2.62,3.23
+FL-123,"Taylor County",5.64,105,2.29,3.35
+FL-125,"Union County",6.3,119,3.36,2.94
+FL-127,"Volusia County",3.35,96,0.75,2.6
+FL-129,"Wakulla County",4.82,90,1.08,3.74
+FL-131,"Walton County",4.78,74,0.36,4.42
+FL-133,"Washington County",6.0,96,1.83,4.17

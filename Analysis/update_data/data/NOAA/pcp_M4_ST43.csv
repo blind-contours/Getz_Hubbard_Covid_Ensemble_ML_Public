@@ -1,0 +1,18 @@
+April 2020 Vermont County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+VT-001,"Addison County",3.45,85,0.48,2.97
+VT-003,"Bennington County",4.45,93,0.77,3.68
+VT-005,"Caledonia County",3.9,100,0.88,3.02
+VT-007,"Chittenden County",3.04,70,0.07,2.97
+VT-009,"Essex County",3.78,96,0.78,3
+VT-011,"Franklin County",3.47,81,0.28,3.19
+VT-013,"Grand Isle County",2.93,76,0.2,2.73
+VT-015,"Lamoille County",3.78,86,0.55,3.23
+VT-017,"Orange County",4.23,103,1.06,3.17
+VT-019,"Orleans County",3.59,89,0.42,3.17
+VT-021,"Rutland County",3.78,82,0.45,3.33
+VT-023,"Washington County",3.86,95,0.73,3.13
+VT-025,"Windham County",5.11,97,1.11,4
+VT-027,"Windsor County",4.53,97,1.01,3.52

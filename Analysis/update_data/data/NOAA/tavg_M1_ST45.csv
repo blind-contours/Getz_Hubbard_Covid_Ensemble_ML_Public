@@ -1,0 +1,43 @@
+January 2020 Washington County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+WA-001,"Adams County",35.0,114,8.3,26.7
+WA-003,"Asotin County",34.5,114,6.6,27.9
+WA-005,"Benton County",38.5,118,8.2,30.3
+WA-007,"Chelan County",28.4,106,5.0,23.4
+WA-009,"Clallam County",39.8,110,3.6,36.2
+WA-011,"Clark County",42.8,118,5.9,36.9
+WA-013,"Columbia County",35.1,114,7.1,28
+WA-015,"Cowlitz County",41.0,114,5.2,35.8
+WA-017,"Douglas County",29.9,111,6.5,23.4
+WA-019,"Ferry County",26.7,105,6.2,20.5
+WA-021,"Franklin County",37.8,117,8.6,29.2
+WA-023,"Garfield County",35.0,113,6.7,28.3
+WA-025,"Grant County",33.6,113,7.7,25.9
+WA-027,"Grays Harbor County",42.5,112,4.5,38
+WA-029,"Island County",42.3,108,3.9,38.4
+WA-031,"Jefferson County",37.3,104,3.3,34
+WA-033,"King County",37.9,108,4.3,33.6
+WA-035,"Kitsap County",42.4,113,4.2,38.2
+WA-037,"Kittitas County",30.8,108,6.0,24.8
+WA-039,"Klickitat County",36.0,117,7.3,28.7
+WA-041,"Lewis County",37.7,106,4.1,33.6
+WA-043,"Lincoln County",31.5,115,7.4,24.1
+WA-045,"Mason County",40.1,113,4.3,35.8
+WA-047,"Okanogan County",26.3,103,5.3,21
+WA-049,"Pacific County",44.4,123,5.3,39.1
+WA-051,"Pend Oreille County",28.2,115,6.9,21.3
+WA-053,"Pierce County",37.4,104,3.9,33.5
+WA-055,"San Juan County",41.3,93,2.8,38.5
+WA-057,"Skagit County",34.1,92,3.1,31
+WA-059,"Skamania County",35.4,112,5.1,30.3
+WA-061,"Snohomish County",35.3,94,3.3,32
+WA-063,"Spokane County",33.4,117,7.9,25.5
+WA-065,"Stevens County",29.3,114,7.0,22.3
+WA-067,"Thurston County",42.2,114,4.4,37.8
+WA-069,"Wahkiakum County",44.0,121,5.6,38.4
+WA-071,"Walla Walla County",39.4,117,8.5,30.9
+WA-073,"Whatcom County",32.0,91,3.1,28.9
+WA-075,"Whitman County",35.6,116,7.3,28.3
+WA-077,"Yakima County",33.1,111,6.6,26.5

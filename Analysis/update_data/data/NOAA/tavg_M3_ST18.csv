@@ -1,0 +1,29 @@
+March 2020 Maryland County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MD-001,"Allegany County",46.7,120,6.7,40
+MD-003,"Anne Arundel County",51.0,123,7.0,44
+MD-005,"Baltimore County",48.6,122,7.2,41.4
+MD-009,"Calvert County",51.4,123,7.0,44.4
+MD-011,"Caroline County",50.2,123,6.8,43.4
+MD-013,"Carroll County",47.4,121,6.9,40.5
+MD-015,"Cecil County",47.7,119,6.1,41.6
+MD-017,"Charles County",52.1,122,7.2,44.9
+MD-019,"Dorchester County",51.5,123,7.3,44.2
+MD-021,"Frederick County",47.9,121,6.7,41.2
+MD-023,"Garrett County",43.7,121,7.6,36.1
+MD-025,"Harford County",47.6,119,6.1,41.5
+MD-027,"Howard County",49.2,123,7.4,41.8
+MD-029,"Kent County",48.9,120,5.8,43.1
+MD-031,"Montgomery County",49.5,121,7.1,42.4
+MD-033,"Prince George's County",50.8,121,6.8,44
+MD-035,"Queen Anne's County",49.6,121,6.3,43.3
+MD-037,"St. Mary's County",51.9,123,7.1,44.8
+MD-039,"Somerset County",51.4,122,6.9,44.5
+MD-041,"Talbot County",51.1,123,7.0,44.1
+MD-043,"Washington County",47.4,119,6.6,40.8
+MD-045,"Wicomico County",50.9,122,6.9,44
+MD-047,"Worcester County",50.7,123,6.7,44
+MD-510,"Baltimore City",50.6,123,7.6,43
+MD-511,"",50.8,121,6.6,44.2

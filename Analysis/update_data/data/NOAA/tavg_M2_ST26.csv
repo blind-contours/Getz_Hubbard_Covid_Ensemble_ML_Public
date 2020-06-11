@@ -1,0 +1,21 @@
+February 2020 Nevada County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NV-001,"Churchill County",37.7,81,1.9,35.8
+NV-003,"Clark County",49.2,86,1.7,47.5
+NV-005,"Douglas County",37.8,108,3.6,34.2
+NV-007,"Elko County",29.4,61,0.8,28.6
+NV-009,"Esmeralda County",40.2,112,4.5,35.7
+NV-011,"Eureka County",31.6,79,2.0,29.6
+NV-013,"Humboldt County",35.1,79,1.9,33.2
+NV-015,"Lander County",34.2,80,2.0,32.2
+NV-017,"Lincoln County",40.2,83,1.9,38.3
+NV-019,"Lyon County",38.9,98,3.0,35.9
+NV-021,"Mineral County",37.4,102,3.3,34.1
+NV-023,"Nye County",38.0,98,3.1,34.9
+NV-027,"Pershing County",35.9,69,1.0,34.9
+NV-029,"Storey County",38.7,107,3.7,35
+NV-031,"Washoe County",36.4,99,2.9,33.5
+NV-033,"White Pine County",31.0,84,2.0,29
+NV-510,"Carson City",39.0,110,3.8,35.2

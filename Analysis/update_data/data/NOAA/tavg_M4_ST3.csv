@@ -1,0 +1,79 @@
+April 2020 Arkansas County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+AR-001,"Arkansas County",60.3,23,-2.0,62.3
+AR-003,"Ashley County",63.1,62,-0.2,63.3
+AR-005,"Baxter County",54.9,20,-2.4,57.3
+AR-007,"Benton County",55.4,31,-2.0,57.4
+AR-009,"Boone County",54.5,26,-2.3,56.8
+AR-011,"Bradley County",62.5,61,-0.3,62.8
+AR-013,"Calhoun County",62.2,53,-0.6,62.8
+AR-015,"Carroll County",54.7,29,-2.1,56.8
+AR-017,"Chicot County",62.4,38,-1.2,63.6
+AR-019,"Clark County",60.9,39,-1.2,62.1
+AR-021,"Clay County",57.2,27,-1.9,59.1
+AR-023,"Cleburne County",57.0,21,-2.0,59
+AR-025,"Cleveland County",60.8,31,-1.6,62.4
+AR-027,"Columbia County",61.9,40,-1.3,63.2
+AR-029,"Conway County",58.5,27,-1.8,60.3
+AR-031,"Craighead County",57.5,24,-2.2,59.7
+AR-033,"Crawford County",57.7,28,-1.7,59.4
+AR-035,"Crittenden County",59.3,24,-2.1,61.4
+AR-037,"Cross County",58.4,18,-2.6,61
+AR-039,"Dallas County",60.9,33,-1.4,62.3
+AR-041,"Desha County",61.3,31,-1.5,62.8
+AR-043,"Drew County",62.0,46,-0.8,62.8
+AR-045,"Faulkner County",58.4,19,-2.2,60.6
+AR-047,"Franklin County",57.5,27,-1.9,59.4
+AR-049,"Fulton County",55.6,33,-1.4,57
+AR-051,"Garland County",59.2,30,-1.6,60.8
+AR-053,"Grant County",60.1,23,-2.1,62.2
+AR-055,"Greene County",57.2,25,-2.1,59.3
+AR-057,"Hempstead County",60.8,30,-1.6,62.4
+AR-059,"Hot Spring County",60.0,25,-1.8,61.8
+AR-061,"Howard County",59.5,34,-1.6,61.1
+AR-063,"Independence County",56.7,21,-2.3,59
+AR-065,"Izard County",55.5,22,-2.2,57.7
+AR-067,"Jackson County",57.4,22,-2.4,59.8
+AR-069,"Jefferson County",59.9,20,-2.4,62.3
+AR-071,"Johnson County",56.9,30,-1.8,58.7
+AR-073,"Lafayette County",61.9,37,-1.3,63.2
+AR-075,"Lawrence County",57.0,26,-2.0,59
+AR-077,"Lee County",59.8,26,-1.8,61.6
+AR-079,"Lincoln County",60.8,30,-1.7,62.5
+AR-081,"Little River County",61.2,41,-1.1,62.3
+AR-083,"Logan County",58.9,43,-1.3,60.2
+AR-085,"Lonoke County",59.2,18,-2.5,61.7
+AR-087,"Madison County",54.5,28,-2.0,56.5
+AR-089,"Marion County",54.8,22,-2.4,57.2
+AR-091,"Miller County",61.8,34,-1.4,63.2
+AR-093,"Mississippi County",58.4,26,-1.9,60.3
+AR-095,"Monroe County",59.8,22,-2.0,61.8
+AR-097,"Montgomery County",58.7,32,-1.4,60.1
+AR-099,"Nevada County",61.4,39,-1.2,62.6
+AR-101,"Newton County",54.2,27,-2.2,56.4
+AR-103,"Ouachita County",62.0,43,-1.0,63
+AR-105,"Perry County",59.1,28,-1.7,60.8
+AR-107,"Phillips County",60.2,27,-1.8,62
+AR-109,"Pike County",59.6,34,-1.4,61
+AR-111,"Poinsett County",57.8,20,-2.5,60.3
+AR-113,"Polk County",57.4,25,-1.9,59.3
+AR-115,"Pope County",57.6,32,-1.6,59.2
+AR-117,"Prairie County",59.4,23,-2.3,61.7
+AR-119,"Pulaski County",59.0,16,-2.6,61.6
+AR-121,"Randolph County",56.9,31,-1.5,58.4
+AR-123,"St. Francis County",59.2,20,-2.2,61.4
+AR-125,"Saline County",59.0,19,-2.3,61.3
+AR-127,"Scott County",58.1,28,-1.7,59.8
+AR-129,"Searcy County",54.6,20,-2.5,57.1
+AR-131,"Sebastian County",58.8,29,-1.6,60.4
+AR-133,"Sevier County",60.2,36,-1.3,61.5
+AR-135,"Sharp County",56.3,31,-1.5,57.8
+AR-137,"Stone County",55.4,20,-2.5,57.9
+AR-139,"Union County",62.9,58,-0.3,63.2
+AR-141,"Van Buren County",56.0,22,-2.4,58.4
+AR-143,"Washington County",55.6,33,-1.8,57.4
+AR-145,"White County",58.3,21,-2.1,60.4
+AR-147,"Woodruff County",58.4,17,-2.5,60.9
+AR-149,"Yell County",59.6,45,-1.0,60.6

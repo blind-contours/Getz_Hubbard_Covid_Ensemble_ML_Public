@@ -1,0 +1,48 @@
+January 2020 Idaho County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+ID-001,"Ada County",36.4,119,7.0,29.4
+ID-003,"Adams County",27.8,106,5.0,22.8
+ID-005,"Bannock County",28.1,114,5.9,22.2
+ID-007,"Bear Lake County",23.3,106,5.4,17.9
+ID-009,"Benewah County",33.2,117,7.0,26.2
+ID-011,"Bingham County",25.5,102,5.7,19.8
+ID-013,"Blaine County",23.3,94,3.9,19.4
+ID-015,"Boise County",28.3,112,5.4,22.9
+ID-017,"Bonner County",29.6,115,6.6,23
+ID-019,"Bonneville County",24.4,107,5.4,19
+ID-021,"Boundary County",27.5,114,6.8,20.7
+ID-023,"Butte County",18.7,74,2.2,16.5
+ID-025,"Camas County",23.9,96,4.2,19.7
+ID-027,"Canyon County",35.7,114,6.7,29
+ID-029,"Caribou County",24.4,100,4.4,20
+ID-031,"Cassia County",29.4,104,5.2,24.2
+ID-033,"Clark County",19.4,86,3.3,16.1
+ID-035,"Clearwater County",29.8,108,5.3,24.5
+ID-037,"Custer County",21.0,94,3.8,17.2
+ID-039,"Elmore County",31.6,119,6.4,25.2
+ID-041,"Franklin County",26.1,102,5.2,20.9
+ID-043,"Fremont County",21.2,112,5.6,15.6
+ID-045,"Gem County",31.8,106,5.2,26.6
+ID-047,"Gooding County",31.6,121,7.1,24.5
+ID-049,"Idaho County",27.9,111,5.4,22.5
+ID-051,"Jefferson County",20.4,94,4.2,16.2
+ID-053,"Jerome County",32.9,120,7.7,25.2
+ID-055,"Kootenai County",32.8,117,7.3,25.5
+ID-057,"Latah County",33.3,115,6.4,26.9
+ID-059,"Lemhi County",22.2,95,4.3,17.9
+ID-061,"Lewis County",31.9,111,5.5,26.4
+ID-063,"Lincoln County",28.5,117,6.9,21.6
+ID-065,"Madison County",24.3,111,6.2,18.1
+ID-067,"Minidoka County",28.3,111,6.6,21.7
+ID-069,"Nez Perce County",34.9,115,6.2,28.7
+ID-071,"Oneida County",27.2,95,4.3,22.9
+ID-073,"Owyhee County",32.6,113,5.6,27
+ID-075,"Payette County",34.4,117,7.2,27.2
+ID-077,"Power County",28.2,106,5.8,22.4
+ID-079,"Shoshone County",29.2,109,5.8,23.4
+ID-081,"Teton County",23.0,117,6.1,16.9
+ID-083,"Twin Falls County",31.9,110,5.7,26.2
+ID-085,"Valley County",24.3,109,4.9,19.4
+ID-087,"Washington County",30.2,102,5.0,25.2

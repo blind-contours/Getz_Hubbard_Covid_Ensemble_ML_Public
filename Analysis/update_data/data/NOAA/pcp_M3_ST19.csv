@@ -1,0 +1,18 @@
+March 2020 Massachusetts County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MA-001,"Barnstable County",3.58,57,-0.42,4
+MA-003,"Berkshire County",3.19,56,-0.44,3.63
+MA-005,"Bristol County",4.01,68,-0.15,4.16
+MA-007,"Dukes County",3.76,58,-0.33,4.09
+MA-009,"Essex County",3.62,61,-0.26,3.88
+MA-011,"Franklin County",3.55,65,-0.23,3.78
+MA-013,"Hampden County",3.83,67,-0.19,4.02
+MA-015,"Hampshire County",3.77,68,-0.16,3.93
+MA-017,"Middlesex County",3.63,62,-0.27,3.9
+MA-019,"Nantucket County",2.77,32,-1.08,3.85
+MA-021,"Norfolk County",4.22,75,0.17,4.05
+MA-023,"Plymouth County",4.14,72,-0.08,4.22
+MA-025,"Suffolk County",4.05,72,0.02,4.03
+MA-027,"Worcester County",3.76,65,-0.15,3.91

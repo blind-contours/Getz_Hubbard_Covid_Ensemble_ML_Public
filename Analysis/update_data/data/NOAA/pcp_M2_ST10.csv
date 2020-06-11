@@ -1,0 +1,48 @@
+February 2020 Idaho County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+ID-001,"Ada County",1.03,57,-0.31,1.34
+ID-003,"Adams County",2.56,44,-1.35,3.91
+ID-005,"Bannock County",1.04,28,-0.87,1.91
+ID-007,"Bear Lake County",1.89,67,-0.19,2.08
+ID-009,"Benewah County",2.67,54,-0.53,3.2
+ID-011,"Bingham County",0.62,29,-0.53,1.15
+ID-013,"Blaine County",0.57,9,-1.56,2.13
+ID-015,"Boise County",2.44,39,-1.51,3.95
+ID-017,"Bonner County",1.76,21,-1.9,3.66
+ID-019,"Bonneville County",1.72,58,-0.28,2
+ID-021,"Boundary County",2.1,29,-1.75,3.85
+ID-023,"Butte County",0.53,24,-0.72,1.25
+ID-025,"Camas County",0.66,9,-2.41,3.07
+ID-027,"Canyon County",0.59,45,-0.34,0.93
+ID-029,"Caribou County",2.03,64,-0.22,2.25
+ID-031,"Cassia County",0.97,43,-0.43,1.4
+ID-033,"Clark County",1.12,54,-0.24,1.36
+ID-035,"Clearwater County",5.87,82,0.74,5.13
+ID-037,"Custer County",1.27,33,-0.91,2.18
+ID-039,"Elmore County",1.21,29,-1.28,2.49
+ID-041,"Franklin County",1.47,38,-0.81,2.28
+ID-043,"Fremont County",1.54,47,-0.43,1.97
+ID-045,"Gem County",1.47,43,-0.78,2.25
+ID-047,"Gooding County",0.19,4,-1.03,1.22
+ID-049,"Idaho County",5.56,110,1.81,3.75
+ID-051,"Jefferson County",0.28,23,-0.36,0.64
+ID-053,"Jerome County",0.22,11,-0.7,0.92
+ID-055,"Kootenai County",1.71,21,-1.66,3.37
+ID-057,"Latah County",4.42,99,1.17,3.25
+ID-059,"Lemhi County",2.46,102,0.71,1.75
+ID-061,"Lewis County",3.89,118,1.8,2.09
+ID-063,"Lincoln County",0.17,6,-0.91,1.08
+ID-065,"Madison County",0.99,54,-0.22,1.21
+ID-067,"Minidoka County",0.3,17,-0.55,0.85
+ID-069,"Nez Perce County",3.55,121,1.72,1.83
+ID-071,"Oneida County",1.16,42,-0.6,1.76
+ID-073,"Owyhee County",0.62,29,-0.61,1.23
+ID-075,"Payette County",0.63,31,-0.8,1.43
+ID-077,"Power County",1.04,47,-0.43,1.47
+ID-079,"Shoshone County",4.75,57,-0.4,5.15
+ID-081,"Teton County",2.62,86,0.46,2.16
+ID-083,"Twin Falls County",0.59,32,-0.5,1.09
+ID-085,"Valley County",3.57,57,-0.75,4.32
+ID-087,"Washington County",1.21,33,-1.27,2.48

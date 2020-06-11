@@ -1,0 +1,48 @@
+January 2020 Idaho County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+ID-001,"Ada County",2.5,112,0.95,1.55
+ID-003,"Adams County",6.59,110,2.1,4.49
+ID-005,"Bannock County",2.21,78,-0.06,2.27
+ID-007,"Bear Lake County",2.74,90,0.29,2.45
+ID-009,"Benewah County",7.3,118,3.11,4.19
+ID-011,"Bingham County",1.7,96,0.31,1.39
+ID-013,"Blaine County",2.05,64,-0.45,2.5
+ID-015,"Boise County",6.11,99,1.51,4.6
+ID-017,"Bonner County",8.38,120,3.61,4.77
+ID-019,"Bonneville County",3.85,114,1.42,2.43
+ID-021,"Boundary County",9.04,120,4.07,4.97
+ID-023,"Butte County",0.87,41,-0.49,1.36
+ID-025,"Camas County",3.36,71,-0.43,3.79
+ID-027,"Canyon County",1.78,110,0.63,1.15
+ID-029,"Caribou County",3.01,90,0.34,2.67
+ID-031,"Cassia County",2.15,90,0.42,1.73
+ID-033,"Clark County",1.44,70,-0.04,1.48
+ID-035,"Clearwater County",9.27,105,2.49,6.78
+ID-037,"Custer County",2.74,83,0.1,2.64
+ID-039,"Elmore County",3.74,91,0.67,3.07
+ID-041,"Franklin County",2.55,71,-0.17,2.72
+ID-043,"Fremont County",3.07,98,0.67,2.4
+ID-045,"Gem County",3.35,97,0.84,2.51
+ID-047,"Gooding County",1.49,71,-0.13,1.62
+ID-049,"Idaho County",6.24,103,1.55,4.69
+ID-051,"Jefferson County",0.93,88,0.17,0.76
+ID-053,"Jerome County",1.14,76,-0.06,1.2
+ID-055,"Kootenai County",7.75,119,3.39,4.36
+ID-057,"Latah County",6.34,114,2.18,4.16
+ID-059,"Lemhi County",2.21,75,0.06,2.15
+ID-061,"Lewis County",3.58,109,1.01,2.57
+ID-063,"Lincoln County",1.23,72,-0.16,1.39
+ID-065,"Madison County",2.84,121,1.32,1.52
+ID-067,"Minidoka County",1.19,87,0.12,1.07
+ID-069,"Nez Perce County",3.22,110,0.92,2.3
+ID-071,"Oneida County",2.12,73,-0.0,2.12
+ID-073,"Owyhee County",1.94,100,0.5,1.44
+ID-075,"Payette County",2.15,93,0.42,1.73
+ID-077,"Power County",2.0,87,0.24,1.76
+ID-079,"Shoshone County",10.16,109,3.32,6.84
+ID-081,"Teton County",4.28,112,1.63,2.65
+ID-083,"Twin Falls County",1.62,93,0.29,1.33
+ID-085,"Valley County",6.03,91,0.91,5.12
+ID-087,"Washington County",4.13,111,1.28,2.85

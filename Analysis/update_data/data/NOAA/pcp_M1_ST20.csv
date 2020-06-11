@@ -1,0 +1,87 @@
+January 2020 Michigan County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MI-001,"Alcona County",1.96,90,0.33,1.63
+MI-003,"Alger County",3.12,110,0.97,2.15
+MI-005,"Allegan County",3.69,116,1.59,2.1
+MI-007,"Alpena County",1.96,83,0.24,1.72
+MI-009,"Antrim County",2.04,71,0.07,1.97
+MI-011,"Arenac County",2.42,110,0.96,1.46
+MI-013,"Baraga County",2.41,101,0.62,1.79
+MI-015,"Barry County",3.83,118,1.96,1.87
+MI-017,"Bay County",2.65,114,1.15,1.5
+MI-019,"Benzie County",2.06,60,-0.11,2.17
+MI-021,"Berrien County",3.96,118,1.79,2.17
+MI-023,"Branch County",3.66,115,1.76,1.9
+MI-025,"Calhoun County",3.79,118,1.91,1.88
+MI-027,"Cass County",3.96,121,1.89,2.07
+MI-029,"Charlevoix County",1.72,48,-0.27,1.99
+MI-031,"Cheboygan County",1.42,41,-0.35,1.77
+MI-033,"Chippewa County",1.79,42,-0.65,2.44
+MI-035,"Clare County",2.3,99,0.71,1.59
+MI-037,"Clinton County",4.09,122,2.39,1.7
+MI-039,"Crawford County",2.21,94,0.54,1.67
+MI-041,"Delta County",2.39,105,0.74,1.65
+MI-043,"Dickinson County",2.13,111,0.88,1.25
+MI-045,"Eaton County",3.99,122,2.22,1.77
+MI-047,"Emmet County",1.4,32,-0.57,1.97
+MI-049,"Genesee County",3.62,123,1.99,1.63
+MI-051,"Gladwin County",2.33,104,0.82,1.51
+MI-053,"Gogebic County",2.05,96,0.39,1.66
+MI-055,"Grand Traverse County",1.98,70,0.06,1.92
+MI-057,"Gratiot County",3.4,118,1.76,1.64
+MI-059,"Hillsdale County",3.35,104,1.36,1.99
+MI-061,"Houghton County",2.51,102,0.65,1.86
+MI-063,"Huron County",3.06,112,1.31,1.75
+MI-065,"Ingham County",4.02,122,2.31,1.71
+MI-067,"Ionia County",3.74,120,1.96,1.78
+MI-069,"Iosco County",2.3,98,0.74,1.56
+MI-071,"Iron County",2.1,113,0.78,1.32
+MI-073,"Isabella County",2.82,110,1.19,1.63
+MI-075,"Jackson County",3.81,121,2.02,1.79
+MI-077,"Kalamazoo County",4.04,122,2.12,1.92
+MI-079,"Kalkaska County",2.29,90,0.45,1.84
+MI-081,"Kent County",3.46,111,1.49,1.97
+MI-083,"Keweenaw County",3.36,115,1.33,2.03
+MI-085,"Lake County",2.46,84,0.37,2.09
+MI-087,"Lapeer County",3.5,121,1.91,1.59
+MI-089,"Leelanau County",2.07,72,0.07,2
+MI-091,"Lenawee County",4.01,124,2.14,1.87
+MI-093,"Livingston County",4.41,125,2.7,1.71
+MI-095,"Luce County",2.11,56,-0.34,2.45
+MI-097,"Mackinac County",1.95,65,-0.14,2.09
+MI-099,"Macomb County",4.05,125,2.27,1.78
+MI-101,"Manistee County",2.32,76,0.19,2.13
+MI-103,"Marquette County",2.63,112,0.98,1.65
+MI-105,"Mason County",2.43,86,0.39,2.04
+MI-107,"Mecosta County",2.72,102,0.84,1.88
+MI-109,"Menominee County",1.7,99,0.37,1.33
+MI-111,"Midland County",2.74,112,1.16,1.58
+MI-113,"Missaukee County",2.18,97,0.55,1.63
+MI-115,"Monroe County",3.41,114,1.55,1.86
+MI-117,"Montcalm County",3.6,113,1.76,1.84
+MI-119,"Montmorency County",1.57,68,-0.01,1.58
+MI-121,"Muskegon County",2.76,98,0.7,2.06
+MI-123,"Newaygo County",2.71,94,0.63,2.08
+MI-125,"Oakland County",4.13,126,2.41,1.72
+MI-127,"Oceana County",2.64,93,0.56,2.08
+MI-129,"Ogemaw County",2.23,100,0.73,1.5
+MI-131,"Ontonagon County",2.23,93,0.39,1.84
+MI-133,"Osceola County",2.38,98,0.61,1.77
+MI-135,"Oscoda County",1.99,89,0.44,1.55
+MI-137,"Otsego County",1.73,70,0.01,1.72
+MI-139,"Ottawa County",3.06,104,0.97,2.09
+MI-141,"Presque Isle County",1.78,69,0.03,1.75
+MI-143,"Roscommon County",2.13,97,0.54,1.59
+MI-145,"Saginaw County",3.16,118,1.57,1.59
+MI-147,"St. Clair County",4.09,125,2.26,1.83
+MI-149,"St. Joseph County",3.91,121,2.11,1.8
+MI-151,"Sanilac County",3.47,122,1.72,1.75
+MI-153,"Schoolcraft County",3.41,117,1.39,2.02
+MI-155,"Shiawassee County",3.9,122,2.25,1.65
+MI-157,"Tuscola County",2.87,114,1.33,1.54
+MI-159,"Van Buren County",3.81,121,1.68,2.13
+MI-161,"Washtenaw County",3.84,125,2.17,1.67
+MI-163,"Wayne County",3.85,125,2.02,1.83
+MI-165,"Wexford County",2.38,86,0.39,1.99

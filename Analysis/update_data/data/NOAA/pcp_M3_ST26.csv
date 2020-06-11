@@ -1,0 +1,21 @@
+March 2020 Nevada County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NV-001,"Churchill County",0.34,40,-0.29,0.63
+NV-003,"Clark County",3.17,125,2.33,0.84
+NV-005,"Douglas County",2.29,86,0.34,1.95
+NV-007,"Elko County",1.11,49,-0.26,1.37
+NV-009,"Esmeralda County",0.4,64,-0.16,0.56
+NV-011,"Eureka County",0.91,48,-0.24,1.15
+NV-013,"Humboldt County",0.82,51,-0.31,1.13
+NV-015,"Lander County",1.08,72,0.06,1.02
+NV-017,"Lincoln County",2.34,111,1.12,1.22
+NV-019,"Lyon County",0.7,66,-0.16,0.86
+NV-021,"Mineral County",0.48,60,-0.17,0.65
+NV-023,"Nye County",0.89,78,-0.0,0.89
+NV-027,"Pershing County",0.56,50,-0.29,0.85
+NV-029,"Storey County",0.96,52,-0.54,1.5
+NV-031,"Washoe County",1.29,72,-0.06,1.35
+NV-033,"White Pine County",1.46,72,0.1,1.36
+NV-510,"Carson City",1.76,78,-0.12,1.88

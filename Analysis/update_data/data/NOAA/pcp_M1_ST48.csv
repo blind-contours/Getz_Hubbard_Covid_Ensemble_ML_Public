@@ -1,0 +1,27 @@
+January 2020 Wyoming County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+WY-001,"Albany County",0.65,50,-0.16,0.81
+WY-003,"Big Horn County",0.57,37,-0.31,0.88
+WY-005,"Campbell County",0.44,69,-0.04,0.48
+WY-007,"Carbon County",1.38,89,0.19,1.19
+WY-009,"Converse County",0.44,52,-0.08,0.52
+WY-011,"Crook County",0.56,58,-0.08,0.64
+WY-013,"Fremont County",0.64,34,-0.3,0.94
+WY-015,"Goshen County",0.12,17,-0.24,0.36
+WY-017,"Hot Springs County",0.44,58,-0.11,0.55
+WY-019,"Johnson County",0.48,44,-0.17,0.65
+WY-021,"Laramie County",0.15,16,-0.3,0.45
+WY-023,"Lincoln County",2.65,91,0.4,2.25
+WY-025,"Natrona County",0.47,69,-0.0,0.47
+WY-027,"Niobrara County",0.36,57,-0.08,0.44
+WY-029,"Park County",1.77,69,-0.12,1.89
+WY-031,"Platte County",0.21,31,-0.2,0.41
+WY-033,"Sheridan County",0.65,32,-0.4,1.05
+WY-035,"Sublette County",1.91,73,-0.06,1.97
+WY-037,"Sweetwater County",0.5,77,-0.01,0.51
+WY-039,"Teton County",5.22,86,0.72,4.5
+WY-041,"Uinta County",0.52,42,-0.31,0.83
+WY-043,"Washakie County",0.53,70,-0.05,0.58
+WY-045,"Weston County",0.41,61,-0.04,0.45

@@ -1,0 +1,18 @@
+April 2020 Vermont County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+VT-001,"Addison County",39.8,38,-1.5,41.3
+VT-003,"Bennington County",39.1,47,-0.9,40
+VT-005,"Caledonia County",37.1,35,-1.6,38.7
+VT-007,"Chittenden County",40.9,54,-0.2,41.1
+VT-009,"Essex County",36.2,41,-1.5,37.7
+VT-011,"Franklin County",40.3,56,-0.2,40.5
+VT-013,"Grand Isle County",42.0,49,-0.4,42.4
+VT-015,"Lamoille County",38.4,56,-0.0,38.4
+VT-017,"Orange County",38.6,43,-1.2,39.8
+VT-019,"Orleans County",37.1,45,-1.1,38.2
+VT-021,"Rutland County",39.3,40,-1.4,40.7
+VT-023,"Washington County",38.1,46,-1.0,39.1
+VT-025,"Windham County",40.1,44,-1.0,41.1
+VT-027,"Windsor County",39.7,47,-0.9,40.6

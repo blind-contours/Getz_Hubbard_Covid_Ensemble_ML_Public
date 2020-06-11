@@ -1,0 +1,14 @@
+April 2020 New Hampshire County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NH-001,"Belknap County",41.3,44,-1.0,42.3
+NH-003,"Carroll County",39.7,45,-0.8,40.5
+NH-005,"Cheshire County",41.7,49,-0.7,42.4
+NH-007,"Coos County",35.5,43,-1.2,36.7
+NH-009,"Grafton County",38.0,42,-1.2,39.2
+NH-011,"Hillsborough County",43.0,48,-0.6,43.6
+NH-013,"Merrimack County",41.8,45,-0.8,42.6
+NH-015,"Rockingham County",42.9,40,-1.2,44.1
+NH-017,"Strafford County",41.9,42,-1.1,43
+NH-019,"Sullivan County",40.4,50,-0.5,40.9

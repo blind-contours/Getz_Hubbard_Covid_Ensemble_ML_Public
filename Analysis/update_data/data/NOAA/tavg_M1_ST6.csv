@@ -1,0 +1,12 @@
+January 2020 Connecticut County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+CT-001,"Fairfield County",34.5,118,7.7,26.8
+CT-003,"Hartford County",32.8,119,7.8,25
+CT-005,"Litchfield County",30.5,118,7.8,22.7
+CT-007,"Middlesex County",34.3,119,7.5,26.8
+CT-009,"New Haven County",33.8,117,7.2,26.6
+CT-011,"New London County",35.2,120,8.2,27
+CT-013,"Tolland County",32.9,120,8.4,24.5
+CT-015,"Windham County",33.5,121,8.5,25

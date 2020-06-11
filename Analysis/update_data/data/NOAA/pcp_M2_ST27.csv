@@ -1,0 +1,14 @@
+February 2020 New Hampshire County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NH-001,"Belknap County",3.12,80,0.27,2.85
+NH-003,"Carroll County",3.78,92,0.55,3.23
+NH-005,"Cheshire County",3.03,79,0.22,2.81
+NH-007,"Coos County",3.55,103,0.83,2.72
+NH-009,"Grafton County",3.3,94,0.53,2.77
+NH-011,"Hillsborough County",3.41,84,0.36,3.05
+NH-013,"Merrimack County",3.2,85,0.33,2.87
+NH-015,"Rockingham County",3.42,86,0.42,3
+NH-017,"Strafford County",3.8,95,0.73,3.07
+NH-019,"Sullivan County",2.89,78,0.18,2.71

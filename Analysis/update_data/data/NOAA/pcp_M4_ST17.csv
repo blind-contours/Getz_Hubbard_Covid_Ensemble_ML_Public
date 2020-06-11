@@ -1,0 +1,20 @@
+April 2020 Maine County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+ME-001,"Androscoggin County",5.59,104,1.66,3.93
+ME-003,"Aroostook County",2.99,80,0.24,2.75
+ME-005,"Cumberland County",5.48,101,1.52,3.96
+ME-007,"Franklin County",4.48,99,0.98,3.5
+ME-009,"Hancock County",5.14,102,1.33,3.81
+ME-011,"Kennebec County",5.07,101,1.34,3.73
+ME-013,"Knox County",5.9,107,1.86,4.04
+ME-015,"Lincoln County",5.34,102,1.41,3.93
+ME-017,"Oxford County",5.12,106,1.55,3.57
+ME-019,"Penobscot County",4.15,95,0.84,3.31
+ME-021,"Piscataquis County",3.78,86,0.55,3.23
+ME-023,"Sagadahoc County",5.31,99,1.36,3.95
+ME-025,"Somerset County",3.56,83,0.37,3.19
+ME-027,"Waldo County",5.18,96,1.4,3.78
+ME-029,"Washington County",4.13,79,0.45,3.68
+ME-031,"York County",5.38,98,1.36,4.02

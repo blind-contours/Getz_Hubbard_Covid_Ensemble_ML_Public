@@ -1,0 +1,87 @@
+January 2020 Michigan County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MI-001,"Alcona County",26.7,123,9.0,17.7
+MI-003,"Alger County",22.6,121,7.8,14.8
+MI-005,"Allegan County",31.1,121,7.8,23.3
+MI-007,"Alpena County",26.9,123,9.2,17.7
+MI-009,"Antrim County",27.2,122,9.0,18.2
+MI-011,"Arenac County",29.2,124,9.7,19.5
+MI-013,"Baraga County",19.3,121,8.5,10.8
+MI-015,"Barry County",30.0,120,8.1,21.9
+MI-017,"Bay County",30.3,123,9.7,20.6
+MI-019,"Benzie County",27.6,122,8.4,19.2
+MI-021,"Berrien County",31.9,120,8.1,23.8
+MI-023,"Branch County",30.9,120,8.6,22.3
+MI-025,"Calhoun County",30.6,122,8.7,21.9
+MI-027,"Cass County",31.1,121,8.4,22.7
+MI-029,"Charlevoix County",27.2,122,8.9,18.3
+MI-031,"Cheboygan County",26.2,122,9.5,16.7
+MI-033,"Chippewa County",24.0,124,9.9,14.1
+MI-035,"Clare County",27.2,123,9.2,18
+MI-037,"Clinton County",30.1,121,8.6,21.5
+MI-039,"Crawford County",25.6,122,9.2,16.4
+MI-041,"Delta County",23.5,121,8.1,15.4
+MI-043,"Dickinson County",20.2,121,8.6,11.6
+MI-045,"Eaton County",30.0,120,8.4,21.6
+MI-047,"Emmet County",26.7,122,9.4,17.3
+MI-049,"Genesee County",31.0,124,9.9,21.1
+MI-051,"Gladwin County",28.4,123,9.4,19
+MI-053,"Gogebic County",18.0,121,8.6,9.4
+MI-055,"Grand Traverse County",27.9,123,9.3,18.6
+MI-057,"Gratiot County",30.1,122,9.3,20.8
+MI-059,"Hillsdale County",30.3,119,8.6,21.7
+MI-061,"Houghton County",20.7,122,8.8,11.9
+MI-063,"Huron County",30.0,124,9.9,20.1
+MI-065,"Ingham County",30.2,120,8.9,21.3
+MI-067,"Ionia County",29.7,121,8.4,21.3
+MI-069,"Iosco County",28.2,124,9.5,18.7
+MI-071,"Iron County",18.1,122,8.8,9.3
+MI-073,"Isabella County",29.0,123,9.5,19.5
+MI-075,"Jackson County",30.4,119,9.0,21.4
+MI-077,"Kalamazoo County",30.7,121,8.3,22.4
+MI-079,"Kalkaska County",26.3,122,9.1,17.2
+MI-081,"Kent County",29.9,121,8.2,21.7
+MI-083,"Keweenaw County",21.0,121,8.6,12.4
+MI-085,"Lake County",27.4,122,7.9,19.5
+MI-087,"Lapeer County",30.3,122,9.5,20.8
+MI-089,"Leelanau County",28.3,123,8.9,19.4
+MI-091,"Lenawee County",31.5,120,8.9,22.6
+MI-093,"Livingston County",30.4,123,9.4,21
+MI-095,"Luce County",23.0,122,8.5,14.5
+MI-097,"Mackinac County",24.5,122,9.0,15.5
+MI-099,"Macomb County",32.0,122,9.2,22.8
+MI-101,"Manistee County",27.5,121,7.7,19.8
+MI-103,"Marquette County",20.1,121,8.2,11.9
+MI-105,"Mason County",28.0,120,7.3,20.7
+MI-107,"Mecosta County",27.8,121,8.6,19.2
+MI-109,"Menominee County",23.1,122,8.8,14.3
+MI-111,"Midland County",30.0,123,9.6,20.4
+MI-113,"Missaukee County",26.2,121,9.0,17.2
+MI-115,"Monroe County",33.1,121,9.1,24
+MI-117,"Montcalm County",28.8,121,8.7,20.1
+MI-119,"Montmorency County",25.8,121,9.1,16.7
+MI-121,"Muskegon County",30.1,121,7.8,22.3
+MI-123,"Newaygo County",28.4,121,8.0,20.4
+MI-125,"Oakland County",30.6,122,9.3,21.3
+MI-127,"Oceana County",28.7,121,7.8,20.9
+MI-129,"Ogemaw County",27.1,124,9.7,17.4
+MI-131,"Ontonagon County",19.8,121,8.9,10.9
+MI-133,"Osceola County",26.5,121,8.5,18
+MI-135,"Oscoda County",26.0,124,9.4,16.6
+MI-137,"Otsego County",24.9,121,9.0,15.9
+MI-139,"Ottawa County",31.0,121,7.8,23.2
+MI-141,"Presque Isle County",26.6,123,9.3,17.3
+MI-143,"Roscommon County",26.5,123,9.5,17
+MI-145,"Saginaw County",30.6,123,9.6,21
+MI-147,"St. Clair County",31.6,123,9.2,22.4
+MI-149,"St. Joseph County",31.0,121,8.3,22.7
+MI-151,"Sanilac County",30.6,123,9.8,20.8
+MI-153,"Schoolcraft County",23.4,121,7.9,15.5
+MI-155,"Shiawassee County",30.5,121,9.3,21.2
+MI-157,"Tuscola County",30.4,123,9.8,20.6
+MI-159,"Van Buren County",31.3,121,8.0,23.3
+MI-161,"Washtenaw County",31.0,121,9.3,21.7
+MI-163,"Wayne County",32.4,122,8.9,23.5
+MI-165,"Wexford County",26.4,121,8.6,17.8

@@ -1,0 +1,76 @@
+February 2020 Wisconsin County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+WI-001,"Adams County",1.09,72,0.07,1.02
+WI-003,"Ashland County",0.43,11,-0.61,1.04
+WI-005,"Barron County",0.33,20,-0.55,0.88
+WI-007,"Bayfield County",0.36,14,-0.55,0.91
+WI-009,"Brown County",1.0,53,-0.22,1.22
+WI-011,"Buffalo County",0.76,60,-0.11,0.87
+WI-013,"Burnett County",0.25,14,-0.58,0.83
+WI-015,"Calumet County",0.91,48,-0.28,1.19
+WI-017,"Chippewa County",0.34,17,-0.56,0.9
+WI-019,"Clark County",0.71,51,-0.22,0.93
+WI-021,"Columbia County",0.93,56,-0.18,1.11
+WI-023,"Crawford County",0.85,54,-0.2,1.05
+WI-025,"Dane County",0.93,49,-0.23,1.16
+WI-027,"Dodge County",0.81,46,-0.32,1.13
+WI-029,"Door County",1.18,67,-0.05,1.23
+WI-031,"Douglas County",0.23,7,-0.64,0.87
+WI-033,"Dunn County",0.34,22,-0.52,0.86
+WI-035,"Eau Claire County",0.54,39,-0.38,0.92
+WI-037,"Florence County",0.43,22,-0.6,1.03
+WI-039,"Fond du Lac County",0.76,43,-0.38,1.14
+WI-041,"Forest County",0.54,28,-0.47,1.01
+WI-043,"Grant County",0.83,50,-0.26,1.09
+WI-045,"Green County",1.08,61,-0.1,1.18
+WI-047,"Green Lake County",0.98,60,-0.13,1.11
+WI-049,"Iowa County",0.72,42,-0.41,1.13
+WI-051,"Iron County",0.44,10,-0.73,1.17
+WI-053,"Jackson County",0.91,64,-0.02,0.93
+WI-055,"Jefferson County",0.99,56,-0.2,1.19
+WI-057,"Juneau County",1.09,69,0.06,1.03
+WI-059,"Kenosha County",0.46,15,-0.82,1.28
+WI-061,"Kewaunee County",1.0,53,-0.29,1.29
+WI-063,"La Crosse County",0.98,67,0.0,0.98
+WI-065,"Lafayette County",0.87,43,-0.33,1.2
+WI-067,"Langlade County",0.77,46,-0.27,1.04
+WI-069,"Lincoln County",0.45,28,-0.49,0.94
+WI-071,"Manitowoc County",0.78,38,-0.51,1.29
+WI-073,"Marathon County",0.71,45,-0.25,0.96
+WI-075,"Marinette County",0.84,53,-0.23,1.07
+WI-077,"Marquette County",0.98,64,-0.07,1.05
+WI-078,"Menominee County",0.92,54,-0.18,1.1
+WI-079,"Milwaukee County",0.82,34,-0.48,1.3
+WI-081,"Monroe County",0.87,54,-0.16,1.03
+WI-083,"Oconto County",1.1,69,-0.01,1.11
+WI-085,"Oneida County",0.38,17,-0.57,0.95
+WI-087,"Outagamie County",0.95,57,-0.18,1.13
+WI-089,"Ozaukee County",0.87,41,-0.43,1.3
+WI-091,"Pepin County",0.53,38,-0.3,0.83
+WI-093,"Pierce County",0.43,28,-0.41,0.84
+WI-095,"Polk County",0.38,24,-0.47,0.85
+WI-097,"Portage County",0.99,72,0.01,0.98
+WI-099,"Price County",0.27,8,-0.72,0.99
+WI-101,"Racine County",0.55,22,-0.72,1.27
+WI-103,"Richland County",0.88,56,-0.22,1.1
+WI-105,"Rock County",1.06,61,-0.13,1.19
+WI-107,"Rusk County",0.28,13,-0.6,0.88
+WI-109,"St. Croix County",0.29,19,-0.57,0.86
+WI-111,"Sauk County",1.01,63,-0.08,1.09
+WI-113,"Sawyer County",0.27,11,-0.64,0.91
+WI-115,"Shawano County",1.02,67,-0.08,1.1
+WI-117,"Sheboygan County",0.77,36,-0.49,1.26
+WI-119,"Taylor County",0.41,22,-0.55,0.96
+WI-121,"Trempealeau County",0.84,67,-0.07,0.91
+WI-123,"Vernon County",0.96,60,-0.11,1.07
+WI-125,"Vilas County",0.36,12,-0.69,1.05
+WI-127,"Walworth County",0.76,32,-0.52,1.28
+WI-129,"Washburn County",0.24,10,-0.64,0.88
+WI-131,"Washington County",0.97,49,-0.27,1.24
+WI-133,"Waukesha County",1.06,52,-0.2,1.26
+WI-135,"Waupaca County",0.94,62,-0.1,1.04
+WI-137,"Waushara County",0.91,56,-0.14,1.05
+WI-139,"Winnebago County",0.99,64,-0.1,1.09
+WI-141,"Wood County",0.97,70,0.03,0.94

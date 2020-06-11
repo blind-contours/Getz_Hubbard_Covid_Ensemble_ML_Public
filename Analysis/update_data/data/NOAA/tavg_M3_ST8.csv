@@ -1,0 +1,71 @@
+March 2020 Florida County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+FL-001,"Alachua County",69.1,125,6.8,62.3
+FL-003,"Baker County",68.6,126,7.8,60.8
+FL-005,"Bay County",69.4,126,9.1,60.3
+FL-007,"Bradford County",69.3,126,7.6,61.7
+FL-009,"Brevard County",72.0,124,6.4,65.6
+FL-011,"Broward County",74.7,124,5.5,69.2
+FL-013,"Calhoun County",68.9,126,9.0,59.9
+FL-015,"Charlotte County",72.9,123,5.6,67.3
+FL-017,"Citrus County",70.9,126,7.3,63.6
+FL-019,"Clay County",70.5,126,8.7,61.8
+FL-021,"Collier County",73.2,121,4.6,68.6
+FL-023,"Columbia County",67.7,123,6.7,61
+FL-027,"DeSoto County",72.0,123,5.4,66.6
+FL-029,"Dixie County",68.0,123,6.6,61.4
+FL-031,"Duval County",70.2,126,9.2,61
+FL-033,"Escambia County",69.0,126,9.2,59.8
+FL-035,"Flagler County",71.4,126,8.3,63.1
+FL-037,"Franklin County",69.6,126,9.1,60.5
+FL-039,"Gadsden County",68.6,126,8.8,59.8
+FL-041,"Gilchrist County",68.1,122,6.5,61.6
+FL-043,"Glades County",72.8,124,5.5,67.3
+FL-045,"Gulf County",69.7,126,9.3,60.4
+FL-047,"Hamilton County",67.4,123,7.0,60.4
+FL-049,"Hardee County",71.9,123,5.8,66.1
+FL-051,"Hendry County",73.2,124,5.2,68
+FL-053,"Hernando County",71.9,126,7.8,64.1
+FL-055,"Highlands County",72.6,123,6.0,66.6
+FL-057,"Hillsborough County",72.7,126,7.2,65.5
+FL-059,"Holmes County",68.9,126,9.5,59.4
+FL-061,"Indian River County",71.8,123,5.7,66.1
+FL-063,"Jackson County",68.6,126,8.7,59.9
+FL-065,"Jefferson County",68.4,126,8.4,60
+FL-067,"Lafayette County",67.4,121,6.5,60.9
+FL-069,"Lake County",72.0,126,7.4,64.6
+FL-071,"Lee County",73.5,123,5.5,68
+FL-073,"Leon County",68.9,126,8.9,60
+FL-075,"Levy County",69.2,124,6.9,62.3
+FL-077,"Liberty County",69.1,126,9.1,60
+FL-079,"Madison County",67.5,124,7.4,60.1
+FL-081,"Manatee County",71.9,124,5.9,66
+FL-083,"Marion County",70.6,126,7.2,63.4
+FL-085,"Martin County",73.5,124,5.8,67.7
+FL-086,"Miami-Dade County",74.6,123,5.0,69.6
+FL-087,"Monroe County",74.7,121,4.7,70
+FL-089,"Nassau County",69.2,126,8.8,60.4
+FL-091,"Okaloosa County",68.5,126,9.3,59.2
+FL-093,"Okeechobee County",72.3,124,5.7,66.6
+FL-095,"Orange County",72.4,126,7.0,65.4
+FL-097,"Osceola County",72.4,126,6.5,65.9
+FL-099,"Palm Beach County",74.4,125,6.0,68.4
+FL-101,"Pasco County",72.3,126,7.7,64.6
+FL-103,"Pinellas County",73.1,126,7.3,65.8
+FL-105,"Polk County",72.4,125,6.6,65.8
+FL-107,"Putnam County",71.0,126,8.2,62.8
+FL-109,"St. Johns County",71.0,126,9.0,62
+FL-111,"St. Lucie County",72.4,123,5.4,67
+FL-113,"Santa Rosa County",68.8,126,9.1,59.7
+FL-115,"Sarasota County",71.5,121,4.9,66.6
+FL-117,"Seminole County",72.4,126,7.2,65.2
+FL-119,"Sumter County",71.5,126,7.2,64.3
+FL-121,"Suwannee County",67.3,121,6.4,60.9
+FL-123,"Taylor County",68.0,125,7.3,60.7
+FL-125,"Union County",68.4,124,7.0,61.4
+FL-127,"Volusia County",71.7,126,7.5,64.2
+FL-129,"Wakulla County",69.0,126,8.7,60.3
+FL-131,"Walton County",68.7,126,9.5,59.2
+FL-133,"Washington County",68.9,126,9.0,59.9

@@ -1,0 +1,68 @@
+March 2020 Colorado County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+CO-001,"Adams County",1.46,106,0.53,0.93
+CO-003,"Alamosa County",0.37,35,-0.31,0.68
+CO-005,"Arapahoe County",1.54,104,0.56,0.98
+CO-007,"Archuleta County",1.82,58,-0.64,2.46
+CO-009,"Baca County",0.24,24,-0.72,0.96
+CO-011,"Bent County",0.22,22,-0.57,0.79
+CO-013,"Boulder County",2.17,88,0.39,1.78
+CO-014,"Broomfield County",1.7,105,0.59,1.11
+CO-015,"Chaffee County",1.56,65,-0.19,1.75
+CO-017,"Cheyenne County",0.65,73,-0.07,0.72
+CO-019,"Clear Creek County",2.52,60,-0.07,2.59
+CO-021,"Conejos County",1.19,52,-0.51,1.7
+CO-023,"Costilla County",1.06,47,-0.4,1.46
+CO-025,"Crowley County",0.19,19,-0.42,0.61
+CO-027,"Custer County",0.96,28,-0.96,1.92
+CO-029,"Delta County",1.77,76,0.12,1.65
+CO-031,"Denver County",1.49,103,0.46,1.03
+CO-033,"Dolores County",2.57,81,0.03,2.54
+CO-035,"Douglas County",1.67,90,0.24,1.43
+CO-037,"Eagle County",1.77,31,-0.72,2.49
+CO-039,"Elbert County",1.33,98,0.35,0.98
+CO-041,"El Paso County",0.86,74,-0.06,0.92
+CO-043,"Fremont County",0.68,42,-0.33,1.01
+CO-045,"Garfield County",2.54,74,0.19,2.35
+CO-047,"Gilpin County",2.34,74,0.14,2.2
+CO-049,"Grand County",1.51,26,-0.68,2.19
+CO-051,"Gunnison County",2.25,64,-0.25,2.5
+CO-053,"Hinsdale County",2.86,65,-0.61,3.47
+CO-055,"Huerfano County",0.64,16,-0.83,1.47
+CO-057,"Jackson County",1.78,43,-0.56,2.34
+CO-059,"Jefferson County",1.9,89,0.35,1.55
+CO-061,"Kiowa County",0.41,53,-0.28,0.69
+CO-063,"Kit Carson County",0.75,78,-0.11,0.86
+CO-065,"Lake County",2.19,48,-0.38,2.57
+CO-067,"La Plata County",2.18,74,-0.27,2.45
+CO-069,"Larimer County",1.83,76,0.09,1.74
+CO-071,"Las Animas County",0.28,10,-0.8,1.08
+CO-073,"Lincoln County",0.74,82,0.02,0.72
+CO-075,"Logan County",1.06,88,0.09,0.97
+CO-077,"Mesa County",2.01,91,0.36,1.65
+CO-079,"Mineral County",2.89,64,-0.54,3.43
+CO-081,"Moffat County",1.56,91,0.24,1.32
+CO-083,"Montezuma County",1.84,84,0.09,1.75
+CO-085,"Montrose County",1.57,85,0.19,1.38
+CO-087,"Morgan County",1.09,96,0.3,0.79
+CO-089,"Otero County",0.19,13,-0.67,0.86
+CO-091,"Ouray County",1.89,54,-0.48,2.37
+CO-093,"Park County",1.41,70,0.02,1.39
+CO-095,"Phillips County",1.19,88,0.17,1.02
+CO-097,"Pitkin County",2.56,44,-0.81,3.37
+CO-099,"Prowers County",0.35,42,-0.5,0.85
+CO-101,"Pueblo County",0.32,15,-0.56,0.88
+CO-103,"Rio Blanco County",1.88,71,-0.01,1.89
+CO-105,"Rio Grande County",0.83,43,-0.48,1.31
+CO-107,"Routt County",1.95,34,-0.68,2.63
+CO-109,"Saguache County",0.94,39,-0.55,1.49
+CO-111,"San Juan County",4.89,71,-0.32,5.21
+CO-113,"San Miguel County",1.93,72,-0.05,1.98
+CO-115,"Sedgwick County",1.5,96,0.44,1.06
+CO-117,"Summit County",1.93,26,-0.86,2.79
+CO-119,"Teller County",1.19,57,-0.21,1.4
+CO-121,"Washington County",0.96,78,0.03,0.93
+CO-123,"Weld County",1.27,103,0.47,0.8
+CO-125,"Yuma County",0.78,71,-0.19,0.97

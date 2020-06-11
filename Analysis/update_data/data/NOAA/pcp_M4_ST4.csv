@@ -1,0 +1,62 @@
+April 2020 California County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+CA-001,"Alameda County",1.52,81,0.18,1.34
+CA-003,"Alpine County",3.15,81,0.34,2.81
+CA-005,"Amador County",3.43,85,0.47,2.96
+CA-007,"Butte County",1.84,42,-1.4,3.24
+CA-009,"Calaveras County",3.14,80,0.34,2.8
+CA-011,"Colusa County",0.68,46,-0.64,1.32
+CA-013,"Contra Costa County",1.11,69,-0.11,1.22
+CA-015,"Del Norte County",2.89,23,-2.83,5.72
+CA-017,"El Dorado County",3.74,78,0.12,3.62
+CA-019,"Fresno County",2.63,100,0.91,1.72
+CA-021,"Glenn County",0.4,23,-1.28,1.68
+CA-023,"Humboldt County",2.54,35,-1.92,4.46
+CA-025,"Imperial County",0.34,116,0.24,0.1
+CA-027,"Inyo County",0.94,110,0.5,0.44
+CA-029,"Kern County",2.18,121,1.42,0.76
+CA-031,"Kings County",1.21,107,0.57,0.64
+CA-033,"Lake County",1.35,41,-1.53,2.88
+CA-035,"Lassen County",0.98,41,-0.53,1.51
+CA-037,"Los Angeles County",3.63,121,2.51,1.12
+CA-039,"Madera County",2.9,97,0.87,2.03
+CA-041,"Marin County",1.46,54,-0.77,2.23
+CA-043,"Mariposa County",3.83,94,1.1,2.73
+CA-045,"Mendocino County",1.52,36,-1.91,3.43
+CA-047,"Merced County",0.99,81,0.07,0.92
+CA-049,"Modoc County",0.65,18,-0.83,1.48
+CA-051,"Mono County",1.63,96,0.52,1.11
+CA-053,"Monterey County",2.48,106,1.07,1.41
+CA-055,"Napa County",1.08,51,-0.83,1.91
+CA-057,"Nevada County",3.45,69,-0.34,3.79
+CA-059,"Orange County",3.18,120,2.18,1
+CA-061,"Placer County",3.25,67,-0.27,3.52
+CA-063,"Plumas County",2.49,61,-0.44,2.93
+CA-065,"Riverside County",2.01,124,1.48,0.53
+CA-067,"Sacramento County",1.96,96,0.54,1.42
+CA-069,"San Benito County",1.8,98,0.54,1.26
+CA-071,"San Bernardino County",1.39,123,1.01,0.38
+CA-073,"San Diego County",3.48,122,2.41,1.07
+CA-075,"San Francisco County",1.09,59,-0.45,1.54
+CA-077,"San Joaquin County",1.18,79,0.11,1.07
+CA-079,"San Luis Obispo County",2.17,101,0.9,1.27
+CA-081,"San Mateo County",1.93,74,0.01,1.92
+CA-083,"Santa Barbara County",2.97,113,1.59,1.38
+CA-085,"Santa Clara County",2.24,95,0.58,1.66
+CA-087,"Santa Cruz County",2.98,96,0.78,2.2
+CA-089,"Shasta County",1.36,28,-1.85,3.21
+CA-091,"Sierra County",3.06,68,-0.26,3.32
+CA-093,"Siskiyou County",0.82,12,-1.89,2.71
+CA-095,"Solano County",0.87,57,-0.37,1.24
+CA-097,"Sonoma County",1.35,45,-1.37,2.72
+CA-099,"Stanislaus County",1.13,81,0.09,1.04
+CA-101,"Sutter County",0.86,55,-0.41,1.27
+CA-103,"Tehama County",0.97,28,-1.71,2.68
+CA-105,"Trinity County",1.87,32,-2.14,4.01
+CA-107,"Tulare County",3.43,101,1.39,2.04
+CA-109,"Tuolumne County",4.35,92,0.96,3.39
+CA-111,"Ventura County",4.13,119,2.7,1.43
+CA-113,"Yolo County",0.89,62,-0.35,1.24
+CA-115,"Yuba County",2.15,57,-0.63,2.78

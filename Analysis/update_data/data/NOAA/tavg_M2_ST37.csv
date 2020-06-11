@@ -1,0 +1,9 @@
+February 2020 Rhode Island County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+RI-001,"Bristol County",36.6,124,7.4,29.2
+RI-003,"Kent County",35.4,123,7.8,27.6
+RI-005,"Newport County",36.9,124,7.5,29.4
+RI-007,"Providence County",34.5,122,7.5,27
+RI-009,"Washington County",36.3,124,8.0,28.3

@@ -1,0 +1,29 @@
+January 2020 Maryland County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MD-001,"Allegany County",3.07,80,0.28,2.79
+MD-003,"Anne Arundel County",2.77,54,-0.54,3.31
+MD-005,"Baltimore County",3.11,65,-0.33,3.44
+MD-009,"Calvert County",2.73,50,-0.69,3.42
+MD-011,"Caroline County",2.88,54,-0.59,3.47
+MD-013,"Carroll County",3.28,78,0.05,3.23
+MD-015,"Cecil County",2.97,55,-0.5,3.47
+MD-017,"Charles County",3.07,71,-0.25,3.32
+MD-019,"Dorchester County",2.95,47,-0.57,3.52
+MD-021,"Frederick County",3.38,80,0.21,3.17
+MD-023,"Garrett County",3.62,63,-0.13,3.75
+MD-025,"Harford County",2.77,48,-0.64,3.41
+MD-027,"Howard County",3.02,69,-0.25,3.27
+MD-029,"Kent County",2.05,18,-1.35,3.4
+MD-031,"Montgomery County",3.02,73,-0.13,3.15
+MD-033,"Prince George's County",2.9,67,-0.37,3.27
+MD-035,"Queen Anne's County",2.4,31,-1.06,3.46
+MD-037,"St. Mary's County",2.78,45,-0.62,3.4
+MD-039,"Somerset County",3.41,75,-0.02,3.43
+MD-041,"Talbot County",2.66,43,-0.81,3.47
+MD-043,"Washington County",3.34,89,0.47,2.87
+MD-045,"Wicomico County",3.25,60,-0.31,3.56
+MD-047,"Worcester County",3.34,68,-0.26,3.6
+MD-510,"Baltimore City",3.18,70,-0.23,3.41
+MD-511,"",3.02,75,-0.12,3.14

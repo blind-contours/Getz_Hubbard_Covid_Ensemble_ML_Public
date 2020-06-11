@@ -1,0 +1,37 @@
+April 2020 New Mexico County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NM-001,"Bernalillo County",0.4,47,-0.36,0.76
+NM-003,"Catron County",0.32,43,-0.37,0.69
+NM-005,"Chaves County",0.09,21,-0.59,0.68
+NM-006,"Cibola County",0.48,54,-0.31,0.79
+NM-007,"Colfax County",0.41,23,-0.84,1.25
+NM-009,"Curry County",0.33,36,-0.67,1
+NM-011,"De Baca County",0.34,52,-0.5,0.84
+NM-013,"Dona Ana County",0.0,1,-0.24,0.24
+NM-015,"Eddy County",0.06,22,-0.54,0.6
+NM-017,"Grant County",0.06,26,-0.35,0.41
+NM-019,"Guadalupe County",0.44,57,-0.43,0.87
+NM-021,"Harding County",0.2,18,-0.83,1.03
+NM-023,"Hidalgo County",0.0,1,-0.25,0.25
+NM-025,"Lea County",0.08,19,-0.65,0.73
+NM-027,"Lincoln County",0.2,34,-0.5,0.7
+NM-028,"Los Alamos County",0.35,24,-0.82,1.17
+NM-029,"Luna County",0.01,23,-0.23,0.24
+NM-031,"McKinley County",0.29,33,-0.44,0.73
+NM-033,"Mora County",0.24,17,-1.04,1.28
+NM-035,"Otero County",0.02,11,-0.4,0.42
+NM-037,"Quay County",0.21,21,-0.87,1.08
+NM-039,"Rio Arriba County",0.1,1,-1.08,1.18
+NM-041,"Roosevelt County",0.19,28,-0.7,0.89
+NM-043,"Sandoval County",0.22,22,-0.65,0.87
+NM-045,"San Juan County",0.03,2,-0.61,0.64
+NM-047,"San Miguel County",0.27,25,-0.82,1.09
+NM-049,"Santa Fe County",0.48,42,-0.48,0.96
+NM-051,"Sierra County",0.03,21,-0.33,0.36
+NM-053,"Socorro County",0.09,25,-0.41,0.5
+NM-055,"Taos County",0.22,6,-1.29,1.51
+NM-057,"Torrance County",0.55,60,-0.26,0.81
+NM-059,"Union County",0.44,28,-0.82,1.26
+NM-061,"Valencia County",0.29,53,-0.3,0.59

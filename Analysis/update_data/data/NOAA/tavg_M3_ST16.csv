@@ -1,0 +1,68 @@
+March 2020 Louisiana County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+LA-001,"Acadia Parish",69.0,124,8.0,61
+LA-003,"Allen Parish",68.2,124,8.2,60
+LA-005,"Ascension Parish",69.8,126,9.1,60.7
+LA-007,"Assumption Parish",70.4,126,9.2,61.2
+LA-009,"Avoyelles Parish",67.6,123,8.1,59.5
+LA-011,"Beauregard Parish",68.0,125,8.5,59.5
+LA-013,"Bienville Parish",63.9,121,7.8,56.1
+LA-015,"Bossier Parish",63.7,121,7.7,56
+LA-017,"Caddo Parish",63.5,121,7.0,56.5
+LA-019,"Calcasieu Parish",68.8,125,8.2,60.6
+LA-021,"Caldwell Parish",64.9,123,7.8,57.1
+LA-023,"Cameron Parish",69.0,123,7.8,61.2
+LA-025,"Catahoula Parish",66.5,123,8.2,58.3
+LA-027,"Claiborne Parish",62.3,121,7.0,55.3
+LA-029,"Concordia Parish",67.0,123,8.3,58.7
+LA-031,"De Soto Parish",64.3,121,7.3,57
+LA-033,"East Baton Rouge Parish",69.2,125,9.1,60.1
+LA-035,"East Carroll Parish",62.9,119,6.9,56
+LA-037,"East Feliciana Parish",68.2,125,9.0,59.2
+LA-039,"Evangeline Parish",68.2,124,8.2,60
+LA-041,"Franklin Parish",65.1,122,7.7,57.4
+LA-043,"Grant Parish",66.2,123,8.0,58.2
+LA-045,"Iberia Parish",69.8,125,8.7,61.1
+LA-047,"Iberville Parish",69.6,125,8.9,60.7
+LA-049,"Jackson Parish",63.7,122,7.6,56.1
+LA-051,"Jefferson Parish",70.7,126,8.9,61.8
+LA-053,"Jefferson Davis Parish",69.0,124,7.9,61.1
+LA-055,"Lafayette Parish",69.2,124,8.2,61
+LA-057,"Lafourche Parish",70.9,126,9.0,61.9
+LA-059,"La Salle Parish",66.2,123,8.1,58.1
+LA-061,"Lincoln Parish",62.9,122,7.4,55.5
+LA-063,"Livingston Parish",69.3,126,9.2,60.1
+LA-065,"Madison Parish",65.4,123,8.5,56.9
+LA-067,"Morehouse Parish",63.2,123,7.5,55.7
+LA-069,"Natchitoches Parish",65.7,122,7.9,57.8
+LA-071,"Orleans Parish",70.2,126,9.2,61
+LA-073,"Ouachita Parish",63.6,122,7.3,56.3
+LA-075,"Plaquemines Parish",70.5,126,9.0,61.5
+LA-077,"Pointe Coupee Parish",68.4,124,8.2,60.2
+LA-079,"Rapides Parish",67.2,122,8.2,59
+LA-081,"Red River Parish",64.7,122,7.9,56.8
+LA-083,"Richland Parish",64.0,121,7.3,56.7
+LA-085,"Sabine Parish",65.7,124,8.1,57.6
+LA-087,"St. Bernard Parish",70.0,126,9.1,60.9
+LA-089,"St. Charles Parish",70.6,126,8.9,61.7
+LA-091,"St. Helena Parish",68.2,125,9.4,58.8
+LA-093,"St. James Parish",70.2,126,9.1,61.1
+LA-095,"St. John the Baptist Parish",70.1,126,9.1,61
+LA-097,"St. Landry Parish",68.4,124,8.0,60.4
+LA-099,"St. Martin Parish",69.7,125,8.7,61
+LA-101,"St. Mary Parish",70.6,126,9.3,61.3
+LA-103,"St. Tammany Parish",69.4,126,9.5,59.9
+LA-105,"Tangipahoa Parish",68.8,125,9.4,59.4
+LA-107,"Tensas Parish",66.2,123,8.5,57.7
+LA-109,"Terrebonne Parish",71.3,126,9.3,62
+LA-111,"Union Parish",62.9,122,7.4,55.5
+LA-113,"Vermilion Parish",69.5,124,8.1,61.4
+LA-115,"Vernon Parish",67.0,125,8.6,58.4
+LA-117,"Washington Parish",68.4,126,9.6,58.8
+LA-119,"Webster Parish",63.5,121,7.7,55.8
+LA-121,"West Baton Rouge Parish",69.4,125,9.0,60.4
+LA-123,"West Carroll Parish",62.6,119,6.7,55.9
+LA-125,"West Feliciana Parish",68.0,124,8.4,59.6
+LA-127,"Winn Parish",65.1,123,7.9,57.2

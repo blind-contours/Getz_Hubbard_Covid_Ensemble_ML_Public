@@ -1,0 +1,14 @@
+January 2020 New Hampshire County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NH-001,"Belknap County",26.0,117,7.3,18.7
+NH-003,"Carroll County",24.7,120,7.8,16.9
+NH-005,"Cheshire County",27.5,119,8.1,19.4
+NH-007,"Coos County",20.6,118,8.6,12
+NH-009,"Grafton County",23.4,118,8.3,15.1
+NH-011,"Hillsborough County",29.2,121,8.2,21
+NH-013,"Merrimack County",26.9,118,7.8,19.1
+NH-015,"Rockingham County",30.1,119,7.6,22.5
+NH-017,"Strafford County",27.9,117,7.0,20.9
+NH-019,"Sullivan County",25.7,118,8.3,17.4

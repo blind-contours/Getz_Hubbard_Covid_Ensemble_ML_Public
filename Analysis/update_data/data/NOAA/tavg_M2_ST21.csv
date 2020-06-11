@@ -1,0 +1,91 @@
+February 2020 Minnesota County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MN-001,"Aitkin County",14.2,91,3.3,10.9
+MN-003,"Anoka County",18.5,90,3.0,15.5
+MN-005,"Becker County",11.0,82,1.6,9.4
+MN-007,"Beltrami County",10.3,87,2.5,7.8
+MN-009,"Benton County",15.7,86,2.2,13.5
+MN-011,"Big Stone County",17.0,88,2.3,14.7
+MN-013,"Blue Earth County",17.8,68,-0.0,17.8
+MN-015,"Brown County",18.6,76,1.4,17.2
+MN-017,"Carlton County",14.1,89,2.9,11.2
+MN-019,"Carver County",18.2,81,2.1,16.1
+MN-021,"Cass County",13.7,93,3.3,10.4
+MN-023,"Chippewa County",16.9,83,1.5,15.4
+MN-025,"Chisago County",18.3,92,3.5,14.8
+MN-027,"Clay County",11.9,81,1.4,10.5
+MN-029,"Clearwater County",10.2,83,1.8,8.4
+MN-031,"Cook County",10.4,82,1.8,8.6
+MN-033,"Cottonwood County",19.1,84,2.0,17.1
+MN-035,"Crow Wing County",15.7,100,4.1,11.6
+MN-037,"Dakota County",19.2,83,2.4,16.8
+MN-039,"Dodge County",17.0,74,0.7,16.3
+MN-041,"Douglas County",14.4,91,2.7,11.7
+MN-043,"Faribault County",18.6,74,0.4,18.2
+MN-045,"Fillmore County",17.8,67,0.3,17.5
+MN-047,"Freeborn County",17.6,71,0.2,17.4
+MN-049,"Goodhue County",18.2,81,1.6,16.6
+MN-051,"Grant County",15.7,93,3.2,12.5
+MN-053,"Hennepin County",18.7,86,2.8,15.9
+MN-055,"Houston County",20.3,77,1.3,19
+MN-057,"Hubbard County",11.9,85,2.2,9.7
+MN-059,"Isanti County",17.8,91,3.3,14.5
+MN-061,"Itasca County",11.1,85,2.0,9.1
+MN-063,"Jackson County",19.0,79,1.3,17.7
+MN-065,"Kanabec County",16.5,91,3.6,12.9
+MN-067,"Kandiyohi County",15.9,80,1.5,14.4
+MN-069,"Kittson County",10.3,97,4.5,5.8
+MN-071,"Koochiching County",8.8,76,1.4,7.4
+MN-073,"Lac qui Parle County",17.3,81,1.4,15.9
+MN-075,"Lake County",10.5,80,1.4,9.1
+MN-077,"Lake of the Woods County",8.9,86,2.5,6.4
+MN-079,"Le Sueur County",17.2,66,0.0,17.2
+MN-081,"Lincoln County",17.8,81,1.8,16
+MN-083,"Lyon County",18.2,78,1.4,16.8
+MN-085,"McLeod County",17.5,80,1.7,15.8
+MN-087,"Mahnomen County",9.5,76,0.8,8.7
+MN-089,"Marshall County",9.2,83,2.3,6.9
+MN-091,"Martin County",19.0,73,1.1,17.9
+MN-093,"Meeker County",15.7,79,1.0,14.7
+MN-095,"Mille Lacs County",16.0,89,3.1,12.9
+MN-097,"Morrison County",15.5,89,2.9,12.6
+MN-099,"Mower County",17.1,68,0.3,16.8
+MN-101,"Murray County",18.1,77,1.3,16.8
+MN-103,"Nicollet County",17.8,72,0.5,17.3
+MN-105,"Nobles County",18.8,75,1.0,17.8
+MN-107,"Norman County",9.4,67,-0.2,9.6
+MN-109,"Olmsted County",16.9,69,0.1,16.8
+MN-111,"Otter Tail County",13.5,89,2.5,11
+MN-113,"Pennington County",8.0,74,0.4,7.6
+MN-115,"Pine County",16.4,97,4.0,12.4
+MN-117,"Pipestone County",18.5,82,1.8,16.7
+MN-119,"Polk County",9.0,73,0.5,8.5
+MN-121,"Pope County",15.4,89,2.5,12.9
+MN-123,"Ramsey County",19.3,86,3.0,16.3
+MN-125,"Red Lake County",8.0,70,-0.1,8.1
+MN-127,"Redwood County",18.4,75,1.4,17
+MN-129,"Renville County",17.4,80,1.1,16.3
+MN-131,"Rice County",17.7,76,1.0,16.7
+MN-133,"Rock County",20.5,83,2.4,18.1
+MN-135,"Roseau County",9.5,93,3.6,5.9
+MN-137,"St. Louis County",10.3,80,1.4,8.9
+MN-139,"Scott County",18.6,80,1.7,16.9
+MN-141,"Sherburne County",16.5,85,2.1,14.4
+MN-143,"Sibley County",18.2,79,1.5,16.7
+MN-145,"Stearns County",15.5,85,2.2,13.3
+MN-147,"Steele County",17.4,75,0.7,16.7
+MN-149,"Stevens County",15.8,89,2.2,13.6
+MN-151,"Swift County",16.3,84,1.8,14.5
+MN-153,"Todd County",14.5,89,2.8,11.7
+MN-155,"Traverse County",17.5,94,3.8,13.7
+MN-157,"Wabasha County",17.7,69,0.5,17.2
+MN-159,"Wadena County",13.3,90,2.6,10.7
+MN-161,"Waseca County",17.0,66,-0.2,17.2
+MN-163,"Washington County",19.1,86,3.0,16.1
+MN-165,"Watonwan County",18.9,79,1.3,17.6
+MN-167,"Wilkin County",15.0,90,2.9,12.1
+MN-169,"Winona County",19.2,78,1.4,17.8
+MN-171,"Wright County",16.9,83,2.0,14.9
+MN-173,"Yellow Medicine County",18.2,83,1.7,16.5

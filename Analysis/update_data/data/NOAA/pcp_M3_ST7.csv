@@ -1,0 +1,7 @@
+March 2020 Delaware County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+DE-001,"Kent County",3.54,61,-0.43,3.97
+DE-003,"New Castle County",3.48,51,-0.36,3.84
+DE-005,"Sussex County",3.7,60,-0.35,4.05

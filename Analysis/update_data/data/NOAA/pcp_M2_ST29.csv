@@ -1,0 +1,37 @@
+February 2020 New Mexico County Precipitation
+Units: Inches
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+NM-001,"Bernalillo County",0.81,96,0.19,0.62
+NM-003,"Catron County",1.49,99,0.48,1.01
+NM-005,"Chaves County",0.53,92,0.1,0.43
+NM-006,"Cibola County",0.89,90,0.12,0.77
+NM-007,"Colfax County",0.65,81,0.07,0.58
+NM-009,"Curry County",0.42,79,-0.02,0.44
+NM-011,"De Baca County",0.36,75,-0.05,0.41
+NM-013,"Dona Ana County",0.99,114,0.55,0.44
+NM-015,"Eddy County",0.58,97,0.17,0.41
+NM-017,"Grant County",1.74,106,0.7,1.04
+NM-019,"Guadalupe County",0.63,88,0.11,0.52
+NM-021,"Harding County",0.37,77,-0.01,0.38
+NM-023,"Hidalgo County",0.92,88,0.19,0.73
+NM-025,"Lea County",0.45,82,0.0,0.45
+NM-027,"Lincoln County",0.9,101,0.31,0.59
+NM-028,"Los Alamos County",0.97,73,-0.08,1.05
+NM-029,"Luna County",1.35,116,0.79,0.56
+NM-031,"McKinley County",0.98,94,0.24,0.74
+NM-033,"Mora County",0.65,68,-0.06,0.71
+NM-035,"Otero County",0.83,97,0.24,0.59
+NM-037,"Quay County",0.29,60,-0.17,0.46
+NM-039,"Rio Arriba County",0.65,29,-0.55,1.2
+NM-041,"Roosevelt County",0.49,84,0.07,0.42
+NM-043,"Sandoval County",0.68,71,-0.04,0.72
+NM-045,"San Juan County",0.36,46,-0.24,0.6
+NM-047,"San Miguel County",0.53,72,-0.07,0.6
+NM-049,"Santa Fe County",0.87,88,0.12,0.75
+NM-051,"Sierra County",1.27,117,0.74,0.53
+NM-053,"Socorro County",1.0,115,0.5,0.5
+NM-055,"Taos County",1.09,71,-0.08,1.17
+NM-057,"Torrance County",1.16,109,0.47,0.69
+NM-059,"Union County",0.33,65,-0.08,0.41
+NM-061,"Valencia County",0.77,103,0.25,0.52

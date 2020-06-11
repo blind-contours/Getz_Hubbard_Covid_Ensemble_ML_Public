@@ -1,0 +1,119 @@
+January 2020 Missouri County Average Temperature
+Units: Degrees Fahrenheit
+Missing: -99
+"Location ID","Location","Value","Rank","Anomaly (1901-2000 base period)","1901-2000 Mean"
+MO-001,"Adair County",28.4,106,5.1,23.3
+MO-003,"Andrew County",29.0,98,4.4,24.6
+MO-005,"Atchison County",28.0,99,4.8,23.2
+MO-007,"Audrain County",31.8,106,4.9,26.9
+MO-009,"Barry County",38.6,109,4.9,33.7
+MO-011,"Barton County",36.9,109,4.7,32.2
+MO-013,"Bates County",35.6,112,5.8,29.8
+MO-015,"Benton County",35.5,113,5.7,29.8
+MO-017,"Bollinger County",37.6,108,5.0,32.6
+MO-019,"Boone County",32.9,107,4.8,28.1
+MO-021,"Buchanan County",30.2,102,4.4,25.8
+MO-023,"Butler County",40.0,107,5.1,34.9
+MO-025,"Caldwell County",29.6,100,4.5,25.1
+MO-027,"Callaway County",33.5,106,4.9,28.6
+MO-029,"Camden County",36.4,111,5.4,31
+MO-031,"Cape Girardeau County",38.2,110,5.7,32.5
+MO-033,"Carroll County",31.1,104,4.9,26.2
+MO-035,"Carter County",38.9,110,5.7,33.2
+MO-037,"Cass County",33.7,109,5.7,28
+MO-039,"Cedar County",37.0,113,5.3,31.7
+MO-041,"Chariton County",31.3,108,5.1,26.2
+MO-043,"Christian County",37.4,109,5.2,32.2
+MO-045,"Clark County",28.4,100,4.3,24.1
+MO-047,"Clay County",30.9,100,4.3,26.6
+MO-049,"Clinton County",29.6,102,4.3,25.3
+MO-051,"Cole County",35.3,109,5.1,30.2
+MO-053,"Cooper County",33.8,109,5.5,28.3
+MO-055,"Crawford County",35.5,109,5.2,30.3
+MO-057,"Dade County",37.4,112,5.1,32.3
+MO-059,"Dallas County",36.2,110,5.0,31.2
+MO-061,"Daviess County",28.5,97,3.9,24.6
+MO-063,"DeKalb County",28.7,100,4.2,24.5
+MO-065,"Dent County",36.1,108,5.1,31
+MO-067,"Douglas County",38.0,110,5.6,32.4
+MO-069,"Dunklin County",42.0,111,5.7,36.3
+MO-071,"Franklin County",35.1,110,5.5,29.6
+MO-073,"Gasconade County",34.8,109,5.3,29.5
+MO-075,"Gentry County",28.0,99,4.6,23.4
+MO-077,"Greene County",36.9,112,5.1,31.8
+MO-079,"Grundy County",28.7,102,4.3,24.4
+MO-081,"Harrison County",27.8,101,4.7,23.1
+MO-083,"Henry County",35.2,114,5.6,29.6
+MO-085,"Hickory County",36.0,110,5.2,30.8
+MO-087,"Holt County",29.0,98,4.5,24.5
+MO-089,"Howard County",32.7,109,5.3,27.4
+MO-091,"Howell County",38.8,113,6.0,32.8
+MO-093,"Iron County",35.9,107,4.9,31
+MO-095,"Jackson County",32.4,106,5.1,27.3
+MO-097,"Jasper County",38.4,112,5.3,33.1
+MO-099,"Jefferson County",36.1,110,5.4,30.7
+MO-101,"Johnson County",33.8,113,6.0,27.8
+MO-103,"Knox County",28.6,103,4.7,23.9
+MO-105,"Laclede County",36.6,108,5.2,31.4
+MO-107,"Lafayette County",32.4,108,5.5,26.9
+MO-109,"Lawrence County",37.5,109,4.9,32.6
+MO-111,"Lewis County",29.1,99,4.3,24.8
+MO-113,"Lincoln County",33.3,109,5.6,27.7
+MO-115,"Linn County",29.5,104,4.6,24.9
+MO-117,"Livingston County",29.3,93,3.9,25.4
+MO-119,"McDonald County",40.0,113,5.6,34.4
+MO-121,"Macon County",30.6,108,5.8,24.8
+MO-123,"Madison County",36.3,107,4.5,31.8
+MO-125,"Maries County",36.0,110,5.1,30.9
+MO-127,"Marion County",30.7,108,5.1,25.6
+MO-129,"Mercer County",27.2,98,4.2,23
+MO-131,"Miller County",36.2,112,5.4,30.8
+MO-133,"Mississippi County",40.2,108,5.6,34.6
+MO-135,"Moniteau County",34.6,110,5.4,29.2
+MO-137,"Monroe County",31.2,107,5.1,26.1
+MO-139,"Montgomery County",33.0,106,5.2,27.8
+MO-141,"Morgan County",34.8,110,5.4,29.4
+MO-143,"New Madrid County",40.9,110,5.6,35.3
+MO-145,"Newton County",39.5,114,5.8,33.7
+MO-147,"Nodaway County",27.9,100,5.1,22.8
+MO-149,"Oregon County",40.0,116,6.6,33.4
+MO-151,"Osage County",35.3,108,5.2,30.1
+MO-153,"Ozark County",38.8,108,5.3,33.5
+MO-155,"Pemiscot County",42.4,114,5.9,36.5
+MO-157,"Perry County",36.9,110,5.3,31.6
+MO-159,"Pettis County",34.2,112,5.9,28.3
+MO-161,"Phelps County",36.2,108,4.9,31.3
+MO-163,"Pike County",32.1,108,5.4,26.7
+MO-165,"Platte County",31.3,103,4.7,26.6
+MO-167,"Polk County",36.7,113,5.3,31.4
+MO-169,"Pulaski County",36.5,108,4.9,31.6
+MO-171,"Putnam County",26.4,92,3.6,22.8
+MO-173,"Ralls County",31.6,109,5.4,26.2
+MO-175,"Randolph County",31.6,108,5.4,26.2
+MO-177,"Ray County",31.1,105,5.0,26.1
+MO-179,"Reynolds County",37.0,109,5.4,31.6
+MO-181,"Ripley County",40.4,116,6.2,34.2
+MO-183,"St. Charles County",34.8,111,5.6,29.2
+MO-185,"St. Clair County",36.0,110,5.1,30.9
+MO-186,"Ste. Genevieve County",36.4,108,5.2,31.2
+MO-187,"St. Francois County",35.8,108,4.9,30.9
+MO-189,"St. Louis County",35.4,108,5.3,30.1
+MO-195,"Saline County",32.6,109,5.4,27.2
+MO-197,"Schuyler County",27.4,102,4.7,22.7
+MO-199,"Scotland County",28.0,104,4.8,23.2
+MO-201,"Scott County",39.4,108,5.6,33.8
+MO-203,"Shannon County",38.0,110,5.8,32.2
+MO-205,"Shelby County",29.8,104,4.8,25
+MO-207,"Stoddard County",39.7,108,5.2,34.5
+MO-209,"Stone County",38.3,109,4.7,33.6
+MO-211,"Sullivan County",27.7,98,4.0,23.7
+MO-213,"Taney County",38.9,109,5.1,33.8
+MO-215,"Texas County",36.7,107,5.0,31.7
+MO-217,"Vernon County",36.1,107,4.9,31.2
+MO-219,"Warren County",33.9,111,5.6,28.3
+MO-221,"Washington County",35.6,109,5.3,30.3
+MO-223,"Wayne County",37.9,106,4.8,33.1
+MO-225,"Webster County",36.6,110,5.5,31.1
+MO-227,"Worth County",27.2,101,5.0,22.2
+MO-229,"Wright County",36.7,107,5.2,31.5
+MO-510,"St. Louis City",35.4,105,4.9,30.5
