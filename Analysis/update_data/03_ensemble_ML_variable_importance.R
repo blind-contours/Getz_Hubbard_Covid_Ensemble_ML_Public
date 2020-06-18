@@ -37,26 +37,32 @@ outcomes <- c("CountyRelativeDay25Cases",
               "TotalDeathsUpToDate_PopScale")
 
 
-covars <- colnames(covid_data_processed)[-which(names(covid_data_processed) %in% c(outcomes, 
-                                                             "X1", 
-                                                             "X1_1", 
-                                                             "FIPS", 
-                                                             "county_names",
-                                                             "Row Label",
-                                                             'total.population.2018'))]
-
-
-
-
+covars <- colnames(covid_data_processed)[-which(names(covid_data_processed) %in% c(
+  outcomes,
+  "X1", 
+  "FIPS",
+  "FIPS.1",
+  "county_names"
+))]
 
 
 ## use a function to apply task over multiple outcomes 
-run_sl3_poisson_lrns <- function(outcome, data, covars, scale = TRUE, cv = TRUE, outcome_type = "Gaussian", all_outcomes = outcomes) {
+run_sl3_poisson_lrns <- function(outcome, 
+                                 data, 
+                                 covars, 
+                                 scale = TRUE, 
+                                 cv = TRUE, 
+                                 outcome_type = "Gaussian", 
+                                 all_outcomes = outcomes) {
   
   if (scale) {
     
     features_data_scaled <- data %>% 
-      select(-c(all_outcomes, 'X1', 'FIPS', 'county_names', 'total.population.2018')) %>% 
+      select(-c(all_outcomes,
+                "X1", 
+                "FIPS",
+                "FIPS.1",
+                "county_names")) %>% 
       scale()  %>% 
       as.data.frame()
     
@@ -192,7 +198,6 @@ ML_pipeline_output <- map(.x = outcomes[5:length(outcomes)],
 proc.time() - ptm
 
 saveRDS(ML_pipeline_output, here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes.RDS"))
-
 
 plot_variable_importance <- function(input_df, plot_label, save_label){
  
