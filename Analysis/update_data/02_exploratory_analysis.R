@@ -32,9 +32,7 @@ for (i in seq_along(1:length(outcome_quantiles))) {
   levels(outcome_quantiles[[i]]) <-  c("Q1", "Q2", "Q3", "Q4")
 }
 
-                    
 ## Heatmap
-
 
 ## make dataframe of each outcome, row names FIPS to do multiple annotations in the heatmap
 
@@ -91,6 +89,9 @@ clusters <- cutree(covid_factors_heatmap$tree_col, k = 5)
 clusters <- as.data.frame(clusters)
 
 colnames_dendro_reordered <- colnames(features_data)[covid_factors_heatmap$tree_col$order]
+
+## from the reordered columns from the dendrogram we now are indexing the variable names for where we see features related to outcome
+colnames_dendro_reordered[20:28]
 
 ## this part gets variables assigned to each cluster, i.e. finding what variables are in hotspots that are associated with high numbers of cases/mortality.
 ## because the data is changing I will need to figure out how to automate this later.

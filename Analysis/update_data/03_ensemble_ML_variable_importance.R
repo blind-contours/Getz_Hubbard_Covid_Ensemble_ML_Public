@@ -183,7 +183,7 @@ run_sl3_poisson_lrns <- function(outcome,
   ## get variable importance from the sl3 object
   var_importance <- varimp(sl_fit, loss_squared_error, type = "ratio")
   
-  return(list('fit' = sl_fit, 'cv_fit' = CVsl, 'var_imp' = var_importance))
+  return(list('fit' = sl_fit, 'sl_obj' = sl, 'cv_fit' = CVsl, 'var_imp' = var_importance))
 }
 
 ptm <- proc.time()
