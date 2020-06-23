@@ -7,12 +7,13 @@ library(here)
 library(R6)
 library(tidyverse)
 library(readxl)
+library(here)
 
 ## scale data before running ML pipeline? 
-scale = TRUE
+scale = FALSE
 
 ## load data
-covid_data_processed <- read_csv("Analysis/update_data/data/processed/cleaned_covid_data_final.csv")
+covid_data_processed <- read_csv(here("Analysis/update_data/data/processed/cleaned_covid_data_final.csv"))
 
 ## source the custom learners built for poisson outcomes
 sapply(list.files(path = here("Analysis/poisson_learners"),
@@ -50,13 +51,14 @@ covars <- colnames(covid_data_processed)[-which(names(covid_data_processed) %in%
 run_sl3_poisson_lrns <- function(outcome, 
                                  data, 
                                  covars, 
-                                 scale = TRUE, 
+                                 scale = scale, 
                                  cv = TRUE, 
                                  outcome_type = "Gaussian", 
                                  all_outcomes = outcomes) {
   
   if (scale) {
     
+    browser()
     features_data_scaled <- data %>% 
       select(-c(all_outcomes,
                 "X1", 
@@ -68,7 +70,7 @@ run_sl3_poisson_lrns <- function(outcome,
     
     data <- cbind(data[, outcome], features_data_scaled)
 
-  }
+  } 
   
   if (cv) {
     
@@ -191,13 +193,13 @@ ML_pipeline_output <- map(.x = outcomes[5:length(outcomes)],
                           .f = run_sl3_poisson_lrns, 
                           data = covid_data_processed, 
                           covars = covars,
-                          scale = TRUE,
+                          scale = FALSE,
                           cv = TRUE,
                           outcome_type = "Gaussian",
                           all_outcomes = outcomes)
 proc.time() - ptm
 
-saveRDS(ML_pipeline_output, here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes.RDS"))
+saveRDS(ML_pipeline_output, here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale.RDS"))
 
 plot_variable_importance <- function(input_df, plot_label, save_label){
  
