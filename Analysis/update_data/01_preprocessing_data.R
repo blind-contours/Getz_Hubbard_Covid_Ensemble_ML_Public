@@ -17,45 +17,26 @@ census_data_rename <- FALSE
 ## load data CountiesMergedData_Jun_10.csv
 # covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData20200517.csv")
 
-# Changed to CountiesMergedData_Jun_10.csv
-covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData_Jun_10.csv")
+# Changed to CountiesMergedData_July_10.csv
+covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData_July_10.csv")
+
+county_names <- covid_data_unprocessed$Name
+
+covid_data_unprocessed <- covid_data_unprocessed %>% 
+  select(-c(X1, Name, NearestAirportName, NearestAirportOver5000000Name))
+
+covid_data_unprocessed <- data.frame(lapply(covid_data_unprocessed, 
+                                            function(x) as.numeric(as.character(x))))
+
+# get data dictionary 
+Data_Dictionary <- read_excel("Analysis/update_data/data/processed/Data_Dictionary.xlsx")
+
+vars_2_keep <- Data_Dictionary %>% filter(Keep == "Yes") %>% select(`Variable Name`)
+
+covid_data_unprocessed <-covid_data_unprocessed %>% select(vars_2_keep$`Variable Name`)
 
 ## remove columns with NA greater than threshold
 covid_data_processed <- covid_data_unprocessed[, which(colMeans(!is.na(covid_data_unprocessed)) > na_thresh)]
-
-## scale count features to per capita by dividing by population
-
-# I did the scaling in the script where I pull the census data. I hope that's okay. 
-# I was having trouble keeping track of what needed to be scaled and by what.
-# Your code is still awesome and better than what I did!
-# There's a potentail we need to double check what I did still
-# vars_for_per_capita_scaling <- c("PublicTransportation", 
-#                                  "total.female", 
-#                                  "white..alone.", 
-#                                  "black..alone.", 
-#                                  "american.indian.alaskan.native",
-#                                  "asian",	
-#                                  "hawaiian.or.pacific.islander",	
-#                                  "other",	
-#                                  "X2.or.more.races", 
-#                                  "Male.Public.transportation",
-#                                  "Female.Public.transportation",
-#                                  "public.transportation..white.only.", 
-#                                  "Public.transportation..BLACK.only.",
-#                                  "Total..Public.transportation..excluding.taxicab.",
-#                                  "Public.transportation..excluding.taxicab....Below.100.percent.of.the.poverty.level",
-#                                  "pub.trans.MBSA.occupations",	
-#                                  "pub.trans.Sales.and.office.occupations",	
-#                                  "pub.trans.PTM.occupations",	
-#                                  "Total..In.labor.force..Employed..No.health.insurance.coverage",	
-#                                  "total.insurance.coverage",	
-#                                  "count_below_pov", 
-#                                  "house.hold.size")
-
-
-# for (i in  vars_for_per_capita_scaling) {
-#   covid_data_processed[,i] <- covid_data_processed[,i] / covid_data_processed$Population
-# }
 
 
 
@@ -110,8 +91,13 @@ char_vars <- names(covid_data_processed[, sapply(covid_data_processed, class) ==
 
 ## pull outcome data
 
-outcomes <- c("CountyRelativeDay25Cases", "TotalCasesUpToDate", "USRelativeDay100Deaths", "TotalDeathsUpToDate", "FirstCaseDay")
-outcome_data <- covid_data_processed[,outcomes]
+outcomes <- c("CountyRelativeDay25Cases", 
+              "TotalCasesUpToDate", 
+              "USRelativeDay100Deaths", 
+              "TotalDeathsUpToDate", 
+              "FirstCaseDay")
+
+outcome_data <- covid_data_processed[,c(outcomes, "FIPS")]
 
 ## check for na in outcome data
 list_na <- colnames(outcome_data)[ apply(outcome_data, 2, anyNA) ]
@@ -125,12 +111,9 @@ number_na
 covid_data_processed_features <- covid_data_processed %>% 
   select(-outcomes)
 
-## remove character variables
-covid_data_processed_features_numeric <- covid_data_processed_features %>% 
-  select(-char_vars)
 
 ## impute the mean for NA values in the numeric dataset (we already filtered for NA columns greater than 75%)
-covid_data_processed_features_numeric_imputed<- na_mean(covid_data_processed_features_numeric, option = "mean")
+covid_data_processed_features_numeric_imputed<- na_mean(covid_data_processed_features, option = "mean")
 
 
 ## identifying and removing highly correlated features
@@ -139,11 +122,9 @@ highlyCorDescr  <- findCorrelation(descrCor, cutoff = 0.99)
 covid_data_processed_features_numeric_imputed_high_corr_rm <- covid_data_processed_features_numeric_imputed[,-highlyCorDescr]
 
 ## just add back in the name factor variable because I don't think that nearest airport type etc. is useful (could be wrong)
-county_names <- covid_data_processed$Name
-final_covid_processed <- cbind(county_names, covid_data_processed_features_numeric_imputed_high_corr_rm)
 
-final_covid_processed <- final_covid_processed %>%
-  select(-c("X1"))
+final_covid_processed <- covid_data_processed_features_numeric_imputed
+
 
 ## add the outcome back in and let's just remove the rows with NAs for outcome
 
@@ -153,7 +134,7 @@ completeFun <- function(data, desiredCols) {
   return(data[completeVec, ])
 }
 
-final_covid_processed <- cbind(outcome_data, final_covid_processed)
+final_covid_processed <- merge(outcome_data, final_covid_processed, by = "FIPS")
 final_covid_processed <- completeFun(final_covid_processed, outcomes)
 
 ## Column bind the outcome data and write the final dataset

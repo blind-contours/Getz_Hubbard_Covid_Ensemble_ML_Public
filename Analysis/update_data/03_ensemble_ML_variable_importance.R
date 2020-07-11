@@ -53,7 +53,6 @@ run_sl3_poisson_lrns <- function(outcome,
                                  covars, 
                                  scale = scale, 
                                  cv = TRUE, 
-                                 outcome_type = "Gaussian", 
                                  all_outcomes = outcomes) {
   
   if (scale) {
@@ -86,6 +85,13 @@ run_sl3_poisson_lrns <- function(outcome,
     covariates = covars,
     outcome = outcome)
   }
+  
+  if (outcome == "FirstCaseDay") { 
+    outcome_type <- "Poisson"}
+  else{
+    outcome_type <- "Gaussian"
+  }
+  
   
   if (outcome_type == "Poisson") {
     
@@ -195,11 +201,10 @@ ML_pipeline_output <- map(.x = outcomes[5:length(outcomes)],
                           covars = covars,
                           scale = FALSE,
                           cv = TRUE,
-                          outcome_type = "Gaussian",
                           all_outcomes = outcomes)
 proc.time() - ptm
 
-saveRDS(ML_pipeline_output, here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale.RDS"))
+saveRDS(ML_pipeline_output, here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july10.RDS"))
 
 plot_variable_importance <- function(input_df, plot_label, save_label){
  
@@ -232,7 +237,7 @@ plot_variable_importance(input_df = ML_pipeline_output[[3]], plot_label = "Cases
 plot_variable_importance(input_df = ML_pipeline_output[[4]], plot_label = "Mortality at Day 100 Rate Outcome", save_label = "day_100_mortality.pdf")
 plot_variable_importance(input_df = ML_pipeline_output[[5]], plot_label = "Mortality Total Rate Outcome", save_label = "total_deaths_2date.pdf")
 
-
+  
 
 ## if things need to be done manually, i.e. running the script within the function rather than running the whole function plotting variable importance dataframe generated 
 ## can be plotted here: 
