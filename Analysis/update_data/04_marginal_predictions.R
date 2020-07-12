@@ -11,7 +11,7 @@ library(readxl)
 scale <- FALSE
 ## read in processsed dataframe and load the ML pipeline results
 data_original <- read_csv("Analysis/update_data/data/processed/cleaned_covid_data_final.csv")
-ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale.RDS"))
+ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july10.RDS"))
 
 
 ## create the per-capita outcomes
@@ -96,6 +96,7 @@ bootstrapCI <- function(target_variable,
                         covars,
                         outcome,
                         perc) {
+  
   sl <- ML_pipeline_results$sl_obj
 
   nr <- nrow(data_original)
@@ -205,7 +206,7 @@ data_original = data_original,
 covars = covars,
 percents = percents,
 pop = data_original$Population,
-boot_num = 10
+boot_num = 2
 )
 
 boot_diff_results_cmpr_prev <- list(
@@ -312,6 +313,8 @@ plots <- pmap(list(
 
 
 plot_bootstrap_results <- function(boot_results, target_outcomes) {
+  browser()
+  boot_results <- boot_results[[1]]
   target_variable <- names(boot_results)[1]
   xlabel <- as.character(target_variable)
 

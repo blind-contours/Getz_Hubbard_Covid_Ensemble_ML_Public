@@ -7,6 +7,7 @@ library(rvest)
 library(dplyr)
 library(tidyverse)
 library(here)
+library(tidyr)
 
 # Download USFacts data
 usf <- data.frame(
@@ -15,7 +16,6 @@ usf <- data.frame(
 )
 
 usf$fips <- as.integer(usf[, 1])
-# usf[ , grepl( "countyFIPS" , names( usf ) ) ]
 
 
 # Parse FIPS as integers
@@ -295,6 +295,7 @@ lbs_employment_x_county_wide_rename <-
 counties_occ <- merge(counties, 
                       lbs_employment_x_county_wide_rename, by.x = "FIPS", by.y = "fips")
 
+## need to rewrite this later to make sure there isn't errors due to redundancy
 counties_occ$occ_total_all_industries  <- counties_occ$occ_total_all_industries / counties_occ$Population
 counties_occ$occ_all_federal <- counties_occ$occ_all_federal / counties_occ$Population
 counties_occ$occ_all_state <-  counties_occ$occ_all_state / counties_occ$Population
@@ -359,32 +360,84 @@ countypres2016_rep <- countypres2016_rep %>% select(FIPS, rep_ratio)
 
 counties_add_data_political <- merge(counties_add_data, countypres2016_rep, by = "FIPS")
 
+## integrate the google mobility data 
+
+# Data 1
+grocery_pharmacy <- read_csv(here("Analysis/Data/Mobility/google-mobility-us-groceryAndPharmacy.csv"))
+
+df.1 <- 
+  grocery_pharmacy %>%
+  gather(key = date, value = value, -State)
+df.1$type <- "grocery_pharmacy"
+
+
+# Data 2
+parks <- read_csv(here("Analysis/Data/Mobility/google-mobility-us-parks.csv"))
+
+df.2 <- 
+  parks %>%
+  gather(key = date, value = value, -State)
+df.2$type <- "parks"
+
+
+# Data 3
+residential <- read_csv(here("Analysis/Data/Mobility/google-mobility-us-residential.csv"))
+
+df.3 <- 
+  residential %>%
+  gather(key = date, value = value, -State)
+df.3$type <- "residential"
+
+
+# Data 4
+retailAndRecreation <- read_csv(here("Analysis/Data/Mobility/google-mobility-us-retailAndRecreation.csv"))
+
+df.4 <- 
+  retailAndRecreation %>%
+  gather(key = date, value = value, -State)
+df.4$type <- "retailAndRecreation"
+
+
+# Data 5
+transitStations <- read_csv(here("Analysis/Data/Mobility/google-mobility-us-transitStations.csv"))
+
+df.5 <- 
+  transitStations %>%
+  gather(key = date, value = value, -State)
+df.5$type <- "transitStations"
+
+
+# Data 6
+workplaces <- read_csv(here("Analysis/Data/Mobility/google-mobility-us-workplaces.csv"))
+
+df.6 <- 
+  workplaces %>%
+  gather(key = date, value = value, -State)
+df.6$type <- "workplaces"
+
+mobility_data_long <- rbind(df.1, df.2,df.3,df.4,df.5,df.6)
+
+mobility_data_long$date <- as.Date(mobility_data_long$date, "%Y-%m-%d")
+
+mobility_data_long <- as.data.frame(mobility_data_long)
+
+google_mobility_coefs <- mobility_data_long %>% 
+  group_by(State, type) %>% 
+  group_modify(~broom::tidy(lm(value ~ date, .))) %>%
+  filter(term == "date") %>% 
+  select(State, type, estimate)
+
+google_mobility_coefs <- spread(google_mobility_coefs, type, estimate)
+
+state.abb[match(google_mobility_coefs$State,state.name)]
+
+fips_state_crosswalk <- read_excel("Analysis/update_data/data/processed/fips_state_crosswalk.xlsx")
+
+dim(merge(counties_add_data_political, fips_state_crosswalk, on = "FIPS"))
 
 
 
-# Results #
-# We may need to take some columns out first
-# View(CountiesMergedData20200517)
 
-## removing variables based on NA percent
-# counties2 <- counties[, which(colMeans(!is.na(counties)) > 0.75)]
-#
-# ## removing near zero variance variables
-# nz_idx_vector <- nearZeroVar(
-#   counties2,
-#   freqCut = 95/5,
-#   uniqueCut = 10,
-#   saveMetrics = FALSE,
-#   names = FALSE,
-#   foreach = FALSE,
-#   allowParallel = TRUE
-# )
-#
-# ## what variables are near nonvarying
-# counties3 <- counties2[,-nz_idx_vector]
-
-# Write results to a file
-# write.csv(counties3,here("Analysis/update_data/data/processed/CountiesMergedData20200517.csv"))
 write.csv(
   counties_add_data_political,
   here("Analysis/update_data/data/processed/CountiesMergedData_July_10.csv")

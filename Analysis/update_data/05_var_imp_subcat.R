@@ -1,14 +1,18 @@
-`%notin%` <- Negate(`%in%`)
-
+library(here)
+library(readxl)
+library(dplyr)
+library(purrr)
+library(sl3)
 
 ## changed the varimp function to do subcategories
-varimp_subcat <- function (fit, 
+varimp_subcat <- function (.x, 
                            loss, 
                            variable_list, 
                            subcategory_list,
                            fold_number = "validation", 
                            type = c("ratio", "difference")) 
 {
+  fit <- .x$fit
   type <- match.arg(type)
   task <- fit$training_task
   dat <- task$data
@@ -27,7 +31,6 @@ varimp_subcat <- function (fit,
     scrambled_sl_preds <- fit$predict_fold(scrambled_col_task, 
                                            fold_number)
 
-    
     risk_scrambled <- mean(loss(scrambled_sl_preds, Y))
     if (type == "ratio") {
       varimp_metric <- risk_scrambled/risk
@@ -51,9 +54,8 @@ varimp_subcat <- function (fit,
 }
 
 ## plotting results
-plot_variable_importance <- function(input_df, plot_label, save_label){
-  
-  var_importance <- as.data.frame(input_df$var_imp)
+plot_variable_importance_for_cat <- function(input_df, plot_label, save_label){
+  var_importance <- input_df
   colnames(var_importance) <- c("County_Features", "Risk_Ratio")
   
   var_importance$County_Features <- as.factor(var_importance$County_Features)
@@ -75,9 +77,7 @@ plot_variable_importance <- function(input_df, plot_label, save_label){
   dev.off()
   
 }
-
-
-
+ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july10.RDS"))
 Data_Dictionary <- read_excel("Analysis/update_data/data/processed/Data_Dictionary.xlsx")
 Data_Dictionary_Used <- Data_Dictionary %>% filter(Keep == "Yes") %>% select(`Variable Name`, `Sub-Category`)
 ##remove from the list covariates that had too many NAs and were then dropped before analysis, FIPS, and the outcome data:
@@ -96,17 +96,22 @@ Data_Dictionary_Used <- Data_Dictionary_Used[-match(removing , Data_Dictionary_U
 variable_list <-  Data_Dictionary_Used$`Variable Name`
 subcategory_list <- Data_Dictionary_Used$`Sub-Category`
 
-varimp_subcat(fit = ML_pipeline_output[[1]]$fit,
-              loss = loss_squared_error, 
-              variable_list = variable_list,
-              subcategory_list =subcategory_list,
-              fold_number = "validation", 
-              type = "ratio")
+var_imp_by_categories <- map(.x = ML_pipeline_results, 
+    .f = varimp_subcat, 
+    loss = loss_squared_error, 
+    variable_list = variable_list,
+    subcategory_list =subcategory_list,
+    fold_number = "validation", 
+    type = "ratio")
 
-varimp_subcat(fit = ML_pipeline_output[[2]]$fit,
-              loss = loss_squared_error, 
-              variable_list = variable_list,
-              subcategory_list =subcategory_list,
-              fold_number = "validation", 
-              type = "ratio")
+
+plot_variable_importance_for_cat(input_df = var_imp_by_categories[[1]], plot_label = "Day First Case Outcome by Cat", save_label = "day_first_case_x_cat.pdf")
+plot_variable_importance_for_cat(input_df = var_imp_by_categories[[2]], plot_label = "Cases Rate at Day 25 Outcome by Cat", save_label = "day_25_cases_x_cat.pdf")
+plot_variable_importance_for_cat(input_df = var_imp_by_categories[[3]], plot_label = "Cases Rate Total To Date Outcome by Cat", save_label = "tota_cases_2date_x_cat.pdf")
+plot_variable_importance_for_cat(input_df = var_imp_by_categories[[4]], plot_label = "Mortality at Day 100 Rate Outcome by Cat", save_label = "day_100_mortality_x_cat.pdf")
+plot_variable_importance_for_cat(input_df = var_imp_by_categories[[5]], plot_label = "Mortality Total Rate Outcome by Cat", save_label = "total_deaths_2date_x_cat.pdf")
+
+
+
+
 

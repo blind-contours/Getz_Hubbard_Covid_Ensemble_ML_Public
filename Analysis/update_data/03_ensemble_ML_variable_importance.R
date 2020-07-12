@@ -238,24 +238,3 @@ plot_variable_importance(input_df = ML_pipeline_output[[4]], plot_label = "Morta
 plot_variable_importance(input_df = ML_pipeline_output[[5]], plot_label = "Mortality Total Rate Outcome", save_label = "total_deaths_2date.pdf")
 
   
-
-## if things need to be done manually, i.e. running the script within the function rather than running the whole function plotting variable importance dataframe generated 
-## can be plotted here: 
-
-
-#var_importance <- as.data.frame(input_df$var_imp)
-colnames(var_importance) <- c("County_Features", "Risk_Ratio")
-
-var_importance$County_Features <- as.factor(var_importance$County_Features)
-var_importance$County_Features <- factor(var_importance$County_Features, levels = var_importance$County_Features[order(var_importance$Risk_Ratio)])
-
-var_imp_plot <- var_importance %>%
-  filter(Risk_Ratio > 1.01)  %>%
-  ggplot(aes(x = County_Features, y = Risk_Ratio)) +
-  geom_dotplot(binaxis = "y", dotsize = 0.25) +
-  labs(x = "County Level Feature", y = "Risk Ratio", 
-       title = "Day First Case") +  ## you will need to change the title
-  coord_flip() +
-  theme_bw()
-
-print(var_imp_plot)
