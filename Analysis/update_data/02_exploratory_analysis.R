@@ -95,7 +95,7 @@ clusters <- as.data.frame(clusters)
 colnames_dendro_reordered <- colnames(features_data)[covid_factors_heatmap$tree_col$order]
 
 ## from the reordered columns from the dendrogram we now are indexing the variable names for where we see features related to outcome
-colnames_dendro_reordered[12:17]
+colnames_dendro_reordered[20:24]
 
 ## this part gets variables assigned to each cluster, i.e. finding what variables are in hotspots that are associated with high numbers of cases/mortality.
 ## because the data is changing I will need to figure out how to automate this later.

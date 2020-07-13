@@ -16,7 +16,7 @@ census_data_rename <- FALSE
 # covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData20200517.csv")
 
 # Changed to CountiesMergedData_July_10.csv
-covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData_July_12.csv")
+covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData_July_13.csv")
 
 county_names <- covid_data_unprocessed$Name
 
@@ -25,6 +25,14 @@ covid_data_unprocessed <- covid_data_unprocessed %>%
 
 covid_data_unprocessed <- data.frame(lapply(covid_data_unprocessed, 
                                             function(x) as.numeric(as.character(x))))
+
+## these variables still need standardization by population: 
+covid_data_unprocessed$Premature.death.raw.value <- covid_data_unprocessed$Premature.death.raw.value / covid_data_unprocessed$Population 
+covid_data_unprocessed$HIV.prevalence.raw.value <- covid_data_unprocessed$HIV.prevalence.raw.value / covid_data_unprocessed$Population 
+covid_data_unprocessed$Sexually.transmitted.infections.raw.value <- covid_data_unprocessed$Sexually.transmitted.infections.raw.value / covid_data_unprocessed$Population 
+covid_data_unprocessed$Preventable.hospital.stays.raw.value <- covid_data_unprocessed$Preventable.hospital.stays.raw.value / covid_data_unprocessed$Population 
+
+
 
 # get data dictionary 
 Data_Dictionary <- read_excel("Analysis/update_data/data/processed/Data_Dictionary.xlsx")
@@ -123,8 +131,6 @@ highlyCorDescr  <- findCorrelation(descrCor, cutoff = 0.99)
 
 ## check high correlation
 highlyCorDescr
-
-## just add back in the name factor variable because I don't think that nearest airport type etc. is useful (could be wrong)
 
 final_covid_processed <- covid_data_processed_features_numeric_imputed
 
