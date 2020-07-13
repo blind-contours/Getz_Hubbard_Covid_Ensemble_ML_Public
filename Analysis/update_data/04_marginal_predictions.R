@@ -135,7 +135,11 @@ bootstrapCI <- function(target_variable,
                         outcome,
                         perc,
                         sub_cat_vars) {
-  #browser()
+  
+  # if (target_variable=="EPL_LIMENG") { 
+  #   browser()
+  #   }
+  
   sl <- ML_pipeline_results$sl_obj
 
   nr <- nrow(data_original)
@@ -151,9 +155,10 @@ bootstrapCI <- function(target_variable,
     )
   )
   ## create another SL task but remove all other variables in the target variable subcategory and only include the target variable
+  #browser()
   resampled_data_task_no_subcat_covars <- make_sl3_Task(
     data = resampled_data,
-    covariates = c(covars[covars %notin% sub_cat_vars[[1]]], target_variable),
+    covariates = c(covars[covars %notin% sub_cat_vars], target_variable),
     outcome = outcome,
     folds = origami::make_folds(resampled_data,
       fold_fun = folds_vfold, V = 2
@@ -180,7 +185,7 @@ bootstrapCI <- function(target_variable,
 
   resampled_data_reduced_task_no_subcat_covars <- make_sl3_Task(
     data = data_resampled_reduced,
-    covariates = c(covars[covars %notin% sub_cat_vars[[1]]], target_variable),
+    covariates = c(covars[covars %notin% sub_cat_vars], target_variable),
     outcome = outcome,
     folds = origami::make_folds(resampled_data,
       fold_fun = folds_vfold, V = 2
@@ -273,7 +278,7 @@ bootsrap_marginal_predictions <- function(target_variable,
       boot_updates_SL_univar_gam <- do.call(cbind,sapply(boot_updates,"[",3))
       
     } else {
-      browser()
+      #browser()
       total_totals <- as.data.frame(t(colSums(bind_rows(boot_updates) * pop)))
       total_counts_SL_full <- total_totals$SL_full_model
       total_counts_SL_no_subcat <- total_totals$SL_no_tgt_subcat_vars
