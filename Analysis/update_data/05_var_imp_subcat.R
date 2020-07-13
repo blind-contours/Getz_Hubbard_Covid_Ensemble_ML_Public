@@ -3,7 +3,8 @@ library(readxl)
 library(dplyr)
 library(purrr)
 library(sl3)
-
+library(tidyr)
+library(data.table)
 ## changed the varimp function to do subcategories
 varimp_subcat <- function (.x, 
                            loss, 
@@ -12,6 +13,7 @@ varimp_subcat <- function (.x,
                            fold_number = "validation", 
                            type = c("ratio", "difference")) 
 {
+  #browser()
   fit <- .x$fit
   type <- match.arg(type)
   task <- fit$training_task
@@ -24,7 +26,7 @@ varimp_subcat <- function (.x,
   importance <- lapply(subcategories, function(i) {
     #browser()
     subcat_vars <- variable_list[which(subcategory_list %in% i)]
-    scrambled_cols <- as.data.frame(map(.x =subcat_vars, ~data.table(sample(unlist(dat[, subcat_vars, with = FALSE]), nrow(dat)))))
+    scrambled_cols <- as.data.frame(purrr::map(.x =subcat_vars, ~data.table(sample(unlist(dat[, subcat_vars, with = FALSE]), nrow(dat)))))
     names(scrambled_cols) <- subcat_vars
     scrambled_col_names <- task$add_columns(scrambled_cols)
     scrambled_col_task <- task$next_in_chain(column_names = scrambled_col_names)
@@ -81,10 +83,7 @@ ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipe
 Data_Dictionary <- read_excel("Analysis/update_data/data/processed/Data_Dictionary.xlsx")
 Data_Dictionary_Used <- Data_Dictionary %>% filter(Keep == "Yes") %>% select(`Variable Name`, `Sub-Category`)
 ##remove from the list covariates that had too many NAs and were then dropped before analysis, FIPS, and the outcome data:
-removing <- c("HIV.prevalence.raw.value", 
-                "prev_2017_over_65_Alzheimer.s.Disease.Dementia", 
-                "seg_index",
-                "occ_other_services",
+removing <- c(vars_rmv_na,
                 "FIPS",
                 "CountyRelativeDay25Cases",
                 "TotalCasesUpToDate",
@@ -96,7 +95,7 @@ Data_Dictionary_Used <- Data_Dictionary_Used[-match(removing , Data_Dictionary_U
 variable_list <-  Data_Dictionary_Used$`Variable Name`
 subcategory_list <- Data_Dictionary_Used$`Sub-Category`
 
-var_imp_by_categories <- map(.x = ML_pipeline_results, 
+var_imp_by_categories <- purrr::map(.x = ML_pipeline_results, 
     .f = varimp_subcat, 
     loss = loss_squared_error, 
     variable_list = variable_list,

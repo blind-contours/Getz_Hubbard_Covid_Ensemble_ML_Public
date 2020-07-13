@@ -57,7 +57,7 @@ run_sl3_poisson_lrns <- function(outcome,
   
   if (scale) {
     
-    browser()
+    #browser()
     features_data_scaled <- data %>% 
       select(-c(all_outcomes,
                 "X1", 
@@ -195,7 +195,7 @@ run_sl3_poisson_lrns <- function(outcome,
 }
 
 ptm <- proc.time()
-ML_pipeline_output <- map(.x = outcomes[5:length(outcomes)], 
+ML_pipeline_output <- purrr::map(.x = outcomes[5:length(outcomes)], 
                           .f = run_sl3_poisson_lrns, 
                           data = covid_data_processed, 
                           covars = covars,

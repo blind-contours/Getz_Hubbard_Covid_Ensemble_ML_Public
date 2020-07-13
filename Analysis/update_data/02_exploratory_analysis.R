@@ -29,7 +29,7 @@ outcomes_data <- covid_data_processed %>%
   select(outcomes)
 
 ## map quantcut from gtools across each column of outcomes_data
-outcome_quantiles <- map(outcomes_data, quantcut, q=4)
+outcome_quantiles <- purrr::map(outcomes_data, quantcut, q=4)
 
 ## relabel the quantiles
 for (i in seq_along(1:length(outcome_quantiles))) {
@@ -95,7 +95,7 @@ clusters <- as.data.frame(clusters)
 colnames_dendro_reordered <- colnames(features_data)[covid_factors_heatmap$tree_col$order]
 
 ## from the reordered columns from the dendrogram we now are indexing the variable names for where we see features related to outcome
-colnames_dendro_reordered[c(41:45,47:50)]
+colnames_dendro_reordered[12:17]
 
 ## this part gets variables assigned to each cluster, i.e. finding what variables are in hotspots that are associated with high numbers of cases/mortality.
 ## because the data is changing I will need to figure out how to automate this later.

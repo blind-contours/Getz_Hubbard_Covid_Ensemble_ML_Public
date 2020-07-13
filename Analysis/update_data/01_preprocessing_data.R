@@ -3,13 +3,11 @@ library(rvest)
 library(dplyr)
 library(tidyverse)
 library(here)
-
-# install.packages('imputeTS')
 library(imputeTS)
-
+`%notin%` <- Negate(`%in%`)
 
 ## NA threshold
-na_thresh <- 0.75
+na_thresh <- 0.70
 
 ## run census variable rename? 
 census_data_rename <- FALSE
@@ -18,7 +16,7 @@ census_data_rename <- FALSE
 # covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData20200517.csv")
 
 # Changed to CountiesMergedData_July_10.csv
-covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData_July_10.csv")
+covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData_July_12.csv")
 
 county_names <- covid_data_unprocessed$Name
 
@@ -31,13 +29,16 @@ covid_data_unprocessed <- data.frame(lapply(covid_data_unprocessed,
 # get data dictionary 
 Data_Dictionary <- read_excel("Analysis/update_data/data/processed/Data_Dictionary.xlsx")
 
-vars_2_keep <- Data_Dictionary %>% filter(Keep == "Yes") %>% select(`Variable Name`)
+vars_2_keep <- Data_Dictionary %>% 
+  filter(Keep == "Yes") %>% select(`Variable Name`)
 
-covid_data_unprocessed <-covid_data_unprocessed %>% select(vars_2_keep$`Variable Name`)
+covid_data_unprocessed <-covid_data_unprocessed %>% 
+  select(vars_2_keep$`Variable Name`)
 
 ## remove columns with NA greater than threshold
 covid_data_processed <- covid_data_unprocessed[, which(colMeans(!is.na(covid_data_unprocessed)) > na_thresh)]
 
+vars_rmv_na <- colnames(covid_data_unprocessed)[names(covid_data_unprocessed) %notin% names(covid_data_processed)]
 
 
 ## removing near zero variance variables
@@ -119,7 +120,9 @@ covid_data_processed_features_numeric_imputed<- na_mean(covid_data_processed_fea
 ## identifying and removing highly correlated features
 descrCor <-  cor(covid_data_processed_features_numeric_imputed[,2:length(covid_data_processed_features_numeric_imputed)], use = "pairwise.complete.obs")
 highlyCorDescr  <- findCorrelation(descrCor, cutoff = 0.99)
-covid_data_processed_features_numeric_imputed_high_corr_rm <- covid_data_processed_features_numeric_imputed[,-highlyCorDescr]
+
+## check high correlation
+highlyCorDescr
 
 ## just add back in the name factor variable because I don't think that nearest airport type etc. is useful (could be wrong)
 

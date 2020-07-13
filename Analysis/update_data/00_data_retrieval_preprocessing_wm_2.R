@@ -429,17 +429,20 @@ google_mobility_coefs <- mobility_data_long %>%
 
 google_mobility_coefs <- spread(google_mobility_coefs, type, estimate)
 
-state.abb[match(google_mobility_coefs$State,state.name)]
+google_mobility_coefs$State <- state.abb[match(google_mobility_coefs$State,state.name)]
 
 fips_state_crosswalk <- read_excel("Analysis/update_data/data/processed/fips_state_crosswalk.xlsx")
 
-dim(merge(counties_add_data_political, fips_state_crosswalk, on = "FIPS"))
+counties_add_data_political_xwalk <- merge(counties_add_data_political, fips_state_crosswalk, on = "FIPS")
+
+counties_add_data_political_xwalk_google_mob <- merge(counties_add_data_political_xwalk, google_mobility_coefs, on = "State")
 
 
+counties_add_data_political_xwalk_google_mob <- counties_add_data_political_xwalk_google_mob %>% select(-c(State, X1))
 
 
 write.csv(
-  counties_add_data_political,
-  here("Analysis/update_data/data/processed/CountiesMergedData_July_10.csv")
+  counties_add_data_political_xwalk_google_mob,
+  here("Analysis/update_data/data/processed/CountiesMergedData_July_12.csv")
 )
 
