@@ -19,7 +19,7 @@ usf$fips <- as.integer(usf[, 1])
 
 
 # Parse FIPS as integers
-usf$fips <- as.integer(usf$countyFIPS)
+#usf$fips <- as.integer(usf$countyFIPS)
 # Remove counties in Alaska and Hawaii
 usf <- usf[!((usf$State %in% c("AK", "HI")) | (usf$fips == 0)), ]
 
@@ -239,6 +239,9 @@ by_residence <- aggregate(commuting$`Workers in Commuting Flow`, list(fips = fip
 by_work <- aggregate(commuting$`Workers in Commuting Flow`, list(fips = fips_work), sum)
 counties$agg_commuting_by_residence_place <- by_residence$x[match(counties$FIPS, by_residence$fips)]
 counties$agg_commuting_by_work_place <- by_work$x[match(counties$FIPS, by_work$fips)]
+
+counties$agg_commuting_by_residence_place <- counties$agg_commuting_by_residence_place / counties$Population
+counties$agg_commuting_by_work_place <- counties$agg_commuting_by_work_place / counties$Population
 
 
 ## read in employment data
