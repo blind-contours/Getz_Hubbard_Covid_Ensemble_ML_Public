@@ -46,6 +46,45 @@ covars <- colnames(covid_data_processed)[-which(names(covid_data_processed) %in%
   "county_names"
 ))]
 
+varimp_server <- function (fit, loss, fold_number = "validation", type = c("ratio", 
+                                                          "difference")) 
+{
+  type <- match.arg(type)
+  task <- fit$training_task
+  dat <- task$data
+  X <- task$nodes$covariates
+  Y <- task$Y
+  preds <- fit$predict_fold(task, fold_number = fold_number)
+  risk <- mean(loss(preds, Y))
+  importance <- lapply(X, function(i) {
+    scrambled_col <- data.table(sample(unlist(dat[, i, with = FALSE]), 
+                                       nrow(dat)))
+    names(scrambled_col) <- i
+    scrambled_col_names <- task$add_columns(scrambled_col)
+    scrambled_col_task <- task$next_in_chain(column_names = scrambled_col_names)
+    scrambled_sl_preds <- fit$predict_fold(scrambled_col_task, 
+                                           fold_number)
+    risk_scrambled <- mean(loss(scrambled_sl_preds, Y))
+    if (type == "ratio") {
+      varimp_metric <- risk_scrambled/risk
+    }
+    else if (type == "difference") {
+      varimp_metric <- risk_scrambled - risk
+    }
+    return(varimp_metric)
+  })
+  names(importance) <- X
+  if (type == "ratio") {
+    results <- data.table(X = names(importance), risk_ratio = unlist(importance))
+    results_ordered <- results[order(-results$risk_ratio)]
+  }
+  else if (type == "difference") {
+    results <- data.table(X = names(importance), risk_difference = unlist(importance))
+    results_ordered <- results[order(-results$risk_difference)]
+  }
+  return(results_ordered)
+}
+
 
 ## use a function to apply task over multiple outcomes 
 run_sl3_poisson_lrns <- function(outcome, 
@@ -189,7 +228,7 @@ run_sl3_poisson_lrns <- function(outcome,
   CVsl <- CV_lrnr_sl(sl_fit, task, loss_squared_error)
   
   ## get variable importance from the sl3 object
-  var_importance <- varimp(sl_fit, loss_squared_error, type = "ratio")
+  var_importance <- varimp_server(sl_fit, loss_squared_error, type = "ratio")
   
   return(list('fit' = sl_fit, 'sl_obj' = sl, 'cv_fit' = CVsl, 'var_imp' = var_importance))
 }
