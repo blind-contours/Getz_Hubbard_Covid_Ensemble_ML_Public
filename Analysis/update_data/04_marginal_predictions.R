@@ -19,11 +19,11 @@ plan(multiprocess)
 
 scale <- FALSE
 ## read in processsed dataframe and load the ML pipeline results
-data_original <- read_csv("Analysis/update_data/data/processed/cleaned_covid_data_final.csv")
+data_original <- read_csv(here("Analysis/update_data/data/processed/cleaned_covid_data_final.csv"))
 ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july13.RDS"))
 
 ## read in data dictionary for identifying subgroups of top variables to isolate the different control conditions
-Data_Dictionary <- read_excel("Analysis/update_data/data/processed/Data_Dictionary.xlsx")
+Data_Dictionary <- read_excel(here("Analysis/update_data/data/processed/Data_Dictionary.xlsx"))
 Data_Dictionary_Used <- Data_Dictionary %>%
   filter(Keep == "Yes") %>%
   select(`Variable Name`, `Sub-Category`)
@@ -33,7 +33,7 @@ Data_Dictionary_Used <- Data_Dictionary %>%
 
 vars_rmv_na <- read.csv(here("Analysis/update_data/data/processed/vars_removed_na_thresh.csv"))
 
-vars_rmv_na <- vars_rmv_na$x
+vars_rmv_na <- as.vector(vars_rmv_na$x)
 
 removing <- c(
   vars_rmv_na,
@@ -358,42 +358,47 @@ saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_July
 
 
 ## make sure reproducible: 
-boot_results <- readRDS(here("Analysis/update_data/data/processed/BootResults_July14.RDS"))
+boot_results_reload <- readRDS(here("Analysis/update_data/data/processed/BootResults_July14.RDS"))
 
 ## create boot dfs for each outcome for each model method
 
 ## day first case
 boot_results_list <- list()
-for (i in 1:length(boot_results)) { 
-  boot_df <- rbind(boot_results[[i]]$full_sl_results$boot_CI_df_sl_full, boot_results[[i]]$no_subcat_sl_results$boot_CI_df_sl_nosubcat, boot_results[[i]]$univar_gam_results$boot_CI_univar_gam)
+for (i in 1:length(boot_results_reload)) { 
+  boot_df <- rbind(boot_results_reload[[i]]$full_sl_results$boot_CI_df_sl_full, 
+                   boot_results_reload[[i]]$no_subcat_sl_results$boot_CI_df_sl_nosubcat, 
+                   boot_results_reload[[i]]$univar_gam_results$boot_CI_univar_gam)
+  
   boot_df$model_type <- c(rep('SL_full', length(percents)), rep('SL_no_subcat_vars', length(percents)), rep('univar gam', length(percents)))
   boot_results_list[[i]] <- boot_df
 }
 
 names(boot_results_list) <- target_outcomes
 
-plot_bootstrap_results <- function(boot_results, target_outcomes) {
+plot_bootstrap_results <- function(boot_res, 
+                                   desc_outcome,
+                                   desc_var) {
   browser()
-  target_variable <- names(boot_results)[1]
-  xlabel <- as.character(target_variable)
+  target_variable <- names(boot_res)[1]
+  title <- as.character(desc_var)
+  ylabel <- as.character(desc_outcome)
   
-  file_name <- paste(target_outcomes, "_marginal_predictions_", xlabel, ".png", sep = "")
+  boot_res$model_type <- as.factor(boot_res$model_type)
+  levels(boot_res$model_type) <- c("SuperLearner Full", "SuperLearner No Subcat", "Univar GAM")
+  file_name <- paste(desc_outcome, "_marginal_predictions_", title, ".png", sep = "")
   
-  ggplot(boot_results, aes(x = boot_results[, target_variable], y = `Boot Pred`), fill = as.factor(model_type)) +
-    geom_errorbar(aes(ymin = `Boot Low`, ymax = `Boot High`), width = .1) +
-    geom_line(position=position_dodge(width=0.9), aes(y=`Boot Pred`, colour=model_type)) +
-    geom_point(position=position_dodge(width=0.9), aes(y=`Boot Pred`, colour=model_type)) + 
-    xlab(xlabel) +
-    ggtitle(target_outcomes)
+  names(boot_res)[5] <- "Model Type"
   
-  ggplot(boot_results, aes(x = boot_results[, target_variable], y = `Boot Pred`)) +
-    geom_line(aes(linetype = as.factor(model_type), group = as.factor(model_type)))+
-    geom_point()+
+  plot <- ggplot(boot_res, aes(x = boot_res[, target_variable], y = `Boot Pred`, colour=`Model Type`)) +
+    geom_line(aes(linetype = `Model Type`, colour = `Model Type`)) +
+    geom_point( aes(y=`Boot Pred`, colour=`Model Type`)) +
     geom_errorbar(
-      aes(ymin = `Boot Low`, ymax = `Boot High`, group = as.factor(model_type)),
-      width = 0.2
-    )
-  
+      aes(ymin = `Boot Low`, ymax = `Boot High`, group = `Model Type`),
+      width = 0.05
+    ) + 
+    xlab("Percent Reduced") + 
+    ylab(ylabel) + 
+    labs(title = title)
   
   ggsave(
     filename = file_name,
@@ -409,11 +414,25 @@ plot_bootstrap_results <- function(boot_results, target_outcomes) {
   )
 }
 
-walk2(
-  .x = boot_results_list,
-  .y = target_outcomes,
-  .f = plot_bootstrap_results
-)
+
+desc_outcomes <- c("Day of First Case", 
+                   "COVID-19 Cases at Day 25",
+                   "COVID-19 Cases to-date", 
+                   "All-cause Mortalities at Day 100", 
+                   "All-cause Mortalities to-date")
+
+desc_vars <- c("Total Population", 
+               "CDC Limited English Score", 
+               "CDC Limited English Score",
+               "Total All Industry Occupations", 
+               "Total All Private Occupations")
+
+
+pmap(list(
+     boot_res = boot_results_list,
+     desc_outcome = desc_outcomes,
+     desc_var = desc_vars),
+    .f = plot_bootstrap_results)
 
 
 

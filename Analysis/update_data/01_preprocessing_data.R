@@ -6,23 +6,21 @@ library(here)
 library(imputeTS)
 `%notin%` <- Negate(`%in%`)
 
-## NA threshold
+## thresholds
 na_thresh <- 0.70
-
+corr_thres <- 0.90
 ## run census variable rename? 
 census_data_rename <- FALSE
 
-## load data CountiesMergedData_Jun_10.csv
-# covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData20200517.csv")
 
 # Changed to CountiesMergedData_July_10.csv
 covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData_July_13.csv")
 
-county_names <- covid_data_unprocessed$Name
-
+## remove character values that aren't needed
 covid_data_unprocessed <- covid_data_unprocessed %>% 
   select(-c(X1, Name, NearestAirportName, NearestAirportOver5000000Name))
 
+## convert to numeric
 covid_data_unprocessed <- data.frame(lapply(covid_data_unprocessed, 
                                             function(x) as.numeric(as.character(x))))
 
@@ -96,9 +94,6 @@ if (census_data_rename == TRUE) {
 str(covid_data_processed)
 char_vars <- names(covid_data_processed[, sapply(covid_data_processed, class) == 'character'])
 
-## looks like just three variables are characters, nearest airport name, nearest airport over X and county name - will likely leave out later two variables as probably not useful
-
-## pull outcome data
 
 outcomes <- c("CountyRelativeDay25Cases", 
               "TotalCasesUpToDate", 
@@ -124,15 +119,17 @@ covid_data_processed_features <- covid_data_processed %>%
 ## impute the mean for NA values in the numeric dataset (we already filtered for NA columns greater than 75%)
 covid_data_processed_features_numeric_imputed<- na_mean(covid_data_processed_features, option = "mean")
 
-
 ## identifying and removing highly correlated features
-descrCor <-  cor(covid_data_processed_features_numeric_imputed[,2:length(covid_data_processed_features_numeric_imputed)], use = "pairwise.complete.obs")
-highlyCorDescr  <- findCorrelation(descrCor, cutoff = 0.99)
+descrCor <-  cor(covid_data_processed_features_numeric_imputed)
+descrCor[upper.tri(descrCor)] <- 0
+diag(descrCor) <- 0
 
-## check high correlation
-highlyCorDescr
+names(covid_data_processed_features_numeric_imputed[,apply(descrCor,2,function(x) any(x > corr_thres))])
+covid_data_processed_features_numeric_imputed_corr_rem <- covid_data_processed_features_numeric_imputed[,!apply(descrCor,2,function(x) any(x > corr_thres))]
 
-final_covid_processed <- covid_data_processed_features_numeric_imputed
+covid_data_processed_features_numeric_imputed_corr_rem$occ_total_all_industries <- covid_data_processed_features_numeric_imputed$occ_total_all_industries
+
+final_covid_processed <- covid_data_processed_features_numeric_imputed_corr_rem
 
 
 ## add the outcome back in and let's just remove the rows with NAs for outcome

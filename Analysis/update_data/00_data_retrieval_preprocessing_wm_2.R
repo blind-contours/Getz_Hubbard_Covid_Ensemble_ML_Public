@@ -245,7 +245,7 @@ counties$agg_commuting_by_work_place <- counties$agg_commuting_by_work_place / c
 
 
 ## read in employment data
-lbs_employment_types <- read_excel("Analysis/update_data/data/raw/lbs_employment_types.xlsx",
+lbs_employment_types <- read_excel(here("Analysis/update_data/data/raw/lbs_employment_types.xlsx"),
   sheet = "US_St_Cn_MSA"
 )
 
