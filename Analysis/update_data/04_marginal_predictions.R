@@ -8,6 +8,11 @@ library(R6)
 library(tidyverse)
 library(readxl)
 library(gam)
+library(data.table)
+library(gbm)
+
+library(future)
+plan(multiprocess)
 
 `%notin%` <- Negate(`%in%`)
 
@@ -15,7 +20,7 @@ library(gam)
 scale <- FALSE
 ## read in processsed dataframe and load the ML pipeline results
 data_original <- read_csv("Analysis/update_data/data/processed/cleaned_covid_data_final.csv")
-ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july10.RDS"))
+ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july13.RDS"))
 
 ## read in data dictionary for identifying subgroups of top variables to isolate the different control conditions
 Data_Dictionary <- read_excel("Analysis/update_data/data/processed/Data_Dictionary.xlsx")
@@ -25,6 +30,10 @@ Data_Dictionary_Used <- Data_Dictionary %>%
 ## remove from the list covariates that had too many NAs and were then dropped before analysis, FIPS, and the outcome data:
 
 #vars_rmv_na <- colnames(data_original)[names(data_original) %notin% Data_Dictionary_Used$`Variable Name`]
+
+vars_rmv_na <- read.csv(here("Analysis/update_data/data/processed/vars_removed_na_thresh.csv"))
+
+vars_rmv_na <- vars_rmv_na$x
 
 removing <- c(
   vars_rmv_na,
@@ -47,7 +56,7 @@ data_original$USRelativeDay100Deaths_PopScale <- data_original$USRelativeDay100D
 data_original$TotalDeathsUpToDate_PopScale <- data_original$TotalDeathsUpToDate / data_original$Population
 
 # test perc reduced
-percents <- c(0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90)
+percents <- c(0.0, 0.1, 0.2, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90)
 
 all_outcomes <- c(
   "CountyRelativeDay25Cases",
@@ -284,9 +293,9 @@ bootsrap_marginal_predictions <- function(target_variable,
       total_counts_SL_no_subcat <- total_totals$SL_no_tgt_subcat_vars
       total_counts_univariate_gam <- total_totals$univariate_gam
       
-      boot_updates_SL_full <- do.call(cbind,sapply(boot_updates,"[",1)) * pop  
-      boot_updates_SL_nosubcat <- do.call(cbind,sapply(boot_updates,"[",2)) * pop  
-      boot_updates_SL_univar_gam <- do.call(cbind,sapply(boot_updates,"[",3))* pop  
+      boot_updates_SL_full <- colSums(do.call(cbind,sapply(boot_updates,"[",1)) * pop)  
+      boot_updates_SL_nosubcat <- colSums(do.call(cbind,sapply(boot_updates,"[",2)) * pop)  
+      boot_updates_SL_univar_gam <- colSums(do.call(cbind,sapply(boot_updates,"[",3))* pop)  
       
     }
 
@@ -342,8 +351,72 @@ data_original = data_original,
 covars = covars,
 percents = percents,
 pop = data_original$Population,
-boot_num = 1
+boot_num = 5
 )
+
+saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_July14.RDS"))
+
+
+## make sure reproducible: 
+boot_results <- readRDS(here("Analysis/update_data/data/processed/BootResults_July14.RDS"))
+
+## create boot dfs for each outcome for each model method
+
+## day first case
+boot_results_list <- list()
+for (i in 1:length(boot_results)) { 
+  boot_df <- rbind(boot_results[[i]]$full_sl_results$boot_CI_df_sl_full, boot_results[[i]]$no_subcat_sl_results$boot_CI_df_sl_nosubcat, boot_results[[i]]$univar_gam_results$boot_CI_univar_gam)
+  boot_df$model_type <- c(rep('SL_full', length(percents)), rep('SL_no_subcat_vars', length(percents)), rep('univar gam', length(percents)))
+  boot_results_list[[i]] <- boot_df
+}
+
+names(boot_results_list) <- target_outcomes
+
+plot_bootstrap_results <- function(boot_results, target_outcomes) {
+  browser()
+  target_variable <- names(boot_results)[1]
+  xlabel <- as.character(target_variable)
+  
+  file_name <- paste(target_outcomes, "_marginal_predictions_", xlabel, ".png", sep = "")
+  
+  ggplot(boot_results, aes(x = boot_results[, target_variable], y = `Boot Pred`), fill = as.factor(model_type)) +
+    geom_errorbar(aes(ymin = `Boot Low`, ymax = `Boot High`), width = .1) +
+    geom_line(position=position_dodge(width=0.9), aes(y=`Boot Pred`, colour=model_type)) +
+    geom_point(position=position_dodge(width=0.9), aes(y=`Boot Pred`, colour=model_type)) + 
+    xlab(xlabel) +
+    ggtitle(target_outcomes)
+  
+  ggplot(boot_results, aes(x = boot_results[, target_variable], y = `Boot Pred`)) +
+    geom_line(aes(linetype = as.factor(model_type), group = as.factor(model_type)))+
+    geom_point()+
+    geom_errorbar(
+      aes(ymin = `Boot Low`, ymax = `Boot High`, group = as.factor(model_type)),
+      width = 0.2
+    )
+  
+  
+  ggsave(
+    filename = file_name,
+    plot = plot,
+    device = NULL,
+    path = here("/Visulizations/marginal_predictions"),
+    scale = 1,
+    width = NA,
+    height = NA,
+    units = c("in", "cm", "mm"),
+    dpi = 300,
+    limitsize = TRUE
+  )
+}
+
+walk2(
+  .x = boot_results_list,
+  .y = target_outcomes,
+  .f = plot_bootstrap_results
+)
+
+
+
 
 boot_diff_results_cmpr_prev <- list(
   "FirstCaseDay_boot_change" = as.data.frame(matrix(ncol = 3, nrow = 9)),
@@ -450,38 +523,4 @@ plots <- pmap(list(
 ## plot results
 
 
-plot_bootstrap_results <- function(boot_results, target_outcomes) {
-  browser()
-  boot_results <- boot_results[[1]]
-  target_variable <- names(boot_results)[1]
-  xlabel <- as.character(target_variable)
 
-  file_name <- paste(target_outcomes, "_marginal_predictions_", xlabel, ".png", sep = "")
-
-  plot <- ggplot(boot_results, aes(x = boot_results[, target_variable], y = `Boot Pred`)) +
-    geom_errorbar(aes(ymin = `Boot Low`, ymax = `Boot High`), width = .1) +
-    geom_line() +
-    geom_point() +
-    xlab(xlabel) +
-    ggtitle(target_outcomes)
-
-
-  ggsave(
-    filename = file_name,
-    plot = plot,
-    device = NULL,
-    path = here("/Visulizations/marginal_predictions"),
-    scale = 1,
-    width = NA,
-    height = NA,
-    units = c("in", "cm", "mm"),
-    dpi = 300,
-    limitsize = TRUE
-  )
-}
-
-walk2(
-  .x = boot_results,
-  .y = target_outcomes,
-  .f = plot_bootstrap_results
-)

@@ -8,6 +8,7 @@ library(R6)
 library(tidyverse)
 library(readxl)
 library(here)
+library(data.table)
 
 ## scale data before running ML pipeline? 
 scale = FALSE
@@ -46,7 +47,7 @@ covars <- colnames(covid_data_processed)[-which(names(covid_data_processed) %in%
   "county_names"
 ))]
 
-varimp_server <- function (fit, loss, fold_number = "validation", type = c("ratio", 
+varimp_server <- function(fit, loss, fold_number = "validation", type = c("ratio", 
                                                           "difference")) 
 {
   type <- match.arg(type)

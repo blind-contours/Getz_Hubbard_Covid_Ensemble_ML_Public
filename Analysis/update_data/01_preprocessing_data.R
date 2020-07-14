@@ -47,7 +47,7 @@ covid_data_unprocessed <-covid_data_unprocessed %>%
 covid_data_processed <- covid_data_unprocessed[, which(colMeans(!is.na(covid_data_unprocessed)) > na_thresh)]
 
 vars_rmv_na <- colnames(covid_data_unprocessed)[names(covid_data_unprocessed) %notin% names(covid_data_processed)]
-
+write.csv(vars_rmv_na, here("Analysis/update_data/data/processed/vars_removed_na_thresh.csv"))
 
 ## removing near zero variance variables
 nz_idx_vector <- nearZeroVar(
