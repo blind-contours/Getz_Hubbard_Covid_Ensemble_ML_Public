@@ -20,7 +20,7 @@ plan(multiprocess)
 scale <- FALSE
 ## read in processsed dataframe and load the ML pipeline results
 data_original <- read_csv(here("Analysis/update_data/data/processed/cleaned_covid_data_final.csv"))
-ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july13.RDS"))
+ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july14.RDS")) ### MAKE SURE TO CHANGE THIS AS UPDATED!
 
 ## read in data dictionary for identifying subgroups of top variables to isolate the different control conditions
 Data_Dictionary <- read_excel(here("Analysis/update_data/data/processed/Data_Dictionary.xlsx"))
@@ -282,9 +282,10 @@ bootsrap_marginal_predictions <- function(target_variable,
       total_counts_SL_no_subcat <- boot_totals$SL_no_tgt_subcat_vars
       total_counts_univariate_gam <- boot_totals$univariate_gam
       
-      boot_updates_SL_full <- do.call(cbind,sapply(boot_updates,"[",1)) ## wish I didn't have to manually index here but in a hurry
-      boot_updates_SL_nosubcat <- do.call(cbind,sapply(boot_updates,"[",2))
-      boot_updates_SL_univar_gam <- do.call(cbind,sapply(boot_updates,"[",3))
+      #browser()
+      boot_updates_SL_full <- colMeans(do.call(cbind,sapply(boot_updates,"[",1))) ## wish I didn't have to manually index here but in a hurry
+      boot_updates_SL_nosubcat <- colMeans(do.call(cbind,sapply(boot_updates,"[",2)))
+      boot_updates_SL_univar_gam <- colMeans(do.call(cbind,sapply(boot_updates,"[",3)))
       
     } else {
       #browser()
@@ -377,8 +378,9 @@ names(boot_results_list) <- target_outcomes
 
 plot_bootstrap_results <- function(boot_res, 
                                    desc_outcome,
-                                   desc_var) {
-  browser()
+                                   desc_var,
+                                   actual_outcome) {
+  #browser()
   target_variable <- names(boot_res)[1]
   title <- as.character(desc_var)
   ylabel <- as.character(desc_outcome)
@@ -398,7 +400,8 @@ plot_bootstrap_results <- function(boot_res,
     ) + 
     xlab("Percent Reduced") + 
     ylab(ylabel) + 
-    labs(title = title)
+    labs(title = title) + 
+    geom_hline(yintercept = actual_outcome)
   
   ggsave(
     filename = file_name,
@@ -422,19 +425,24 @@ desc_outcomes <- c("Day of First Case",
                    "All-cause Mortalities to-date")
 
 desc_vars <- c("Total Population", 
-               "CDC Limited English Score", 
+               "Proportion Asian Individuals", 
                "CDC Limited English Score",
                "Total All Industry Occupations", 
-               "Total All Private Occupations")
+               "Total All Industry Occupations")
+
+actual_outcomes <- c(mean(data_original$FirstCaseDay), 
+                     sum(data_original$CountyRelativeDay25Cases), 
+                     sum(data_original$TotalCasesUpToDate),
+                     sum(data_original$USRelativeDay100Deaths),
+                     sum(data_original$TotalDeathsUpToDate))
 
 
 pmap(list(
      boot_res = boot_results_list,
      desc_outcome = desc_outcomes,
-     desc_var = desc_vars),
+     desc_var = desc_vars,
+     actual_outcome = actual_outcomes),
     .f = plot_bootstrap_results)
-
-
 
 
 boot_diff_results_cmpr_prev <- list(
