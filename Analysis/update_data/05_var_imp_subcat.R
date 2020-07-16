@@ -79,12 +79,13 @@ plot_variable_importance_for_cat <- function(input_df, plot_label, save_label){
   dev.off()
   
 }
-ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july10.RDS"))
-Data_Dictionary <- read_excel("Analysis/update_data/data/processed/Data_Dictionary.xlsx")
+ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july14.RDS"))
+Data_Dictionary <- read_excel(here("Analysis/update_data/data/processed/Data_Dictionary.xlsx"))
 Data_Dictionary_Used <- Data_Dictionary %>% filter(Keep == "Yes") %>% select(`Variable Name`, `Sub-Category`)
 ##remove from the list covariates that had too many NAs and were then dropped before analysis, FIPS, and the outcome data:
 removing <- c(vars_rmv_na,
                 "FIPS",
+                "occ_all_private",
                 "CountyRelativeDay25Cases",
                 "TotalCasesUpToDate",
                 "USRelativeDay100Deaths", 

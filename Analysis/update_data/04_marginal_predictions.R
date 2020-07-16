@@ -246,21 +246,7 @@ bootsrap_marginal_predictions <- function(target_variable,
 
   for (i in 1:length(percents)) {
     perc <- percents[i]
-    #data_temp <- data_original
-    #data_temp[, target_variable] <- data_original[, target_variable] - (data_original[, target_variable] * perc)
-
-    # task_reduced_initial_est <- make_sl3_Task(
-    #   data = data_temp,
-    #   covariates = covars,
-    #   outcome = outcome,
-    #   folds = origami::make_folds(data_temp,
-    #     fold_fun = folds_vfold, V = 2
-    #   )
-    # )
-    # 
-    # sl_preds_reduced <- sl_fit$predict(task_reduced_initial_est)
     
-
     boot_updates <- replicate(boot_num, bootstrapCI(
       target_variable = target_variable,
       data_original = data_original,
@@ -273,9 +259,6 @@ bootsrap_marginal_predictions <- function(target_variable,
     )
 
     if (outcome == "FirstCaseDay") {
-      ## initial model predictions ,take mean days
-      #SL_full_initial_total_counts <- mean(sl_preds_reduced)
-      
       ## reformat and extract the bootstrap results
       boot_totals <- as.data.frame(t(colMeans(bind_rows(boot_updates))))
       total_counts_SL_full <- boot_totals$SL_full_model
@@ -288,7 +271,6 @@ bootsrap_marginal_predictions <- function(target_variable,
       boot_updates_SL_univar_gam <- colMeans(do.call(cbind,sapply(boot_updates,"[",3)))
       
     } else {
-      #browser()
       total_totals <- as.data.frame(t(colSums(bind_rows(boot_updates) * pop)))
       total_counts_SL_full <- total_totals$SL_full_model
       total_counts_SL_no_subcat <- total_totals$SL_no_tgt_subcat_vars
@@ -352,7 +334,7 @@ data_original = data_original,
 covars = covars,
 percents = percents,
 pop = data_original$Population,
-boot_num = 5
+boot_num = 10
 )
 
 saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_July14.RDS"))
