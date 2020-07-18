@@ -32,8 +32,9 @@ airports <- read.csv(here("Analysis/update_data/data/processed/counties_airports
 # there was an error because tl_2019_us_county.shp
 # was too large
 # polygons=sf::st_read("data/shape/tl_2019_us_county.shp")
-polygons <- counties(cb = F, year = 2019, class = "sf")
+#polygons <- counties(cb = F, year = 2019, class = "sf")
 # Parse FIPS as integers
+polygons <- readRDS(here("Analysis/update_data/data/raw/polygons.RDS"))
 polygons$fips <- as.integer(as.character(polygons$GEOID))
 # Keep only counties with data from US Facts
 polygons <- polygons[polygons$fips %in% usf$fips, ]
@@ -276,7 +277,7 @@ lbs_employment_x_county_wide$fips <- as.integer(lbs_employment_x_county_wide$fip
 lbs_employment_x_county_wide_rename <-
   lbs_employment_x_county_wide %>% 
   select(fips,
-         occ_total_all_industries = `Total Covered  Total, all industries`,
+         #occ_total_all_industries = `Total Covered  Total, all industries`,
          occ_all_federal = `Federal Government  Total, all industries`,
          occ_all_state = `State Government  Total, all industries`,
          occ_all_local = `Local Government  Total, all industries`,
@@ -299,7 +300,7 @@ counties_occ <- merge(counties,
                       lbs_employment_x_county_wide_rename, by.x = "FIPS", by.y = "fips")
 
 ## need to rewrite this later to make sure there isn't errors due to redundancy
-counties_occ$occ_total_all_industries  <- counties_occ$occ_total_all_industries / counties_occ$Population
+#counties_occ$occ_total_all_industries  <- counties_occ$occ_total_all_industries / counties_occ$Population
 counties_occ$occ_all_federal <- counties_occ$occ_all_federal / counties_occ$Population
 counties_occ$occ_all_state <-  counties_occ$occ_all_state / counties_occ$Population
 counties_occ$occ_all_local <- counties_occ$occ_all_local / counties_occ$Population 
@@ -317,6 +318,7 @@ counties_occ$occ_educ_health <- counties_occ$occ_educ_health / counties_occ$Popu
 counties_occ$occ_leisure <- counties_occ$occ_leisure / counties_occ$Population
 counties_occ$occ_other_services <- counties_occ$occ_other_services / counties_occ$Population
 
+## check total industries agains't the sum
 
 ## getting additional data from county rankings that were not aggregated (i.e. obesity and segregration)
 
@@ -440,12 +442,8 @@ counties_add_data_political_xwalk <- merge(counties_add_data_political, fips_sta
 
 counties_add_data_political_xwalk_google_mob <- merge(counties_add_data_political_xwalk, google_mobility_coefs, on = "State")
 
-
-counties_add_data_political_xwalk_google_mob <- counties_add_data_political_xwalk_google_mob %>% select(-c(State, X1))
-
-
 write.csv(
   counties_add_data_political_xwalk_google_mob,
-  here("Analysis/update_data/data/processed/CountiesMergedData_July_13.csv")
+  here("Analysis/update_data/data/processed/CountiesMergedData_July_15.csv")
 )
 
