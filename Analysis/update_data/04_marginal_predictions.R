@@ -462,7 +462,13 @@ for (i in seq(length(boot_results_reload))) {
 }
 
 
+lm_boot_results <- map(.x = coef_list_of_lists, ~quantile(unlist(.x),  probs = c(0.025, 0.50, 0.975)))
 
+lm_day_first_case <- lm_boot_results[1]
+lm_day_25_cases <- lm_boot_results[2]
+lm_total_to_date_cases <- lm_boot_results[3]
+lm_day_100_deaths <- lm_boot_results[4]
+lm_total_to_date_deaths <- lm_boot_results[5]
 
 
 ##############################################################################################
