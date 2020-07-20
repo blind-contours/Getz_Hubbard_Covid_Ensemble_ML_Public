@@ -5,6 +5,8 @@ library(purrr)
 library(sl3)
 library(tidyr)
 library(data.table)
+library(gbm)
+library(ggplot2)
 ## changed the varimp function to do subcategories
 
 varimp_subcat <- function (.x, 
@@ -81,8 +83,10 @@ plot_variable_importance_for_cat <- function(input_df, plot_label, save_label){
 ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july16.RDS"))
 Data_Dictionary <- read_excel(here("Analysis/update_data/data/processed/Data_Dictionary.xlsx"))
 Data_Dictionary_Used <- Data_Dictionary %>% filter(Keep == "Yes") %>% select(`Variable Name`, `Sub-Category`)
+
+vars_rmv_na <- read.csv(here("Analysis/update_data/data/processed/vars_removed_na_thresh.csv"))
 ##remove from the list covariates that had too many NAs and were then dropped before analysis, FIPS, and the outcome data:
-removing <- c(vars_rmv_na,
+removing <- c(vars_rmv_na$x,
                 "FIPS",
                 "occ_all_private",
                 "CountyRelativeDay25Cases",
