@@ -179,7 +179,8 @@ bootstrapCI <- function(target_variable,
   )
 
   ## train a univariate gam on the resampled data
-  univar_gam_model <- gam(as.formula(paste(outcome, target_variable, sep = "~")), data = resampled_data)
+  univar_gam_model <- gam(as.formula(paste(outcome, paste("s(" , target_variable,")", sep = ""), sep = "~")), 
+                          data = resampled_data)
   # browser()
   ## train the superlearner on the resampled data
   sl_fit_full_resampled <- sl$train(resampled_data_task)
@@ -187,7 +188,16 @@ bootstrapCI <- function(target_variable,
 
   ## get the original data and reduce the target variable by perc
   data_resampled_reduced <- data_original
-  data_resampled_reduced[, target_variable] <- data_resampled_reduced[, target_variable] - (data_resampled_reduced[, target_variable] * perc)
+  #browser()
+  target_min <- min(data_resampled_reduced[, target_variable])
+  
+  for(i in 1:nrow(data_resampled_reduced)) {
+    if(target_min < data_resampled_reduced[[i, target_variable]])
+      data_resampled_reduced[[i, target_variable]] <- data_resampled_reduced[[i, target_variable]] - (data_resampled_reduced[[i, target_variable]] * perc)
+    else { 
+      data_resampled_reduced[[i, target_variable]] <- target_min
+      }
+  }
 
   resampled_data_reduced_task <- make_sl3_Task(
     data = data_resampled_reduced,
@@ -321,6 +331,7 @@ bootsrap_marginal_predictions <- function(target_variable,
 }
 
 
+start_time <- Sys.time()
 
 boot_results <- pmap(list(
   target_variable = top_vars,
@@ -338,12 +349,15 @@ percents = percents,
 pop = data_original$Population,
 boot_num = 10
 )
+end_time <- Sys.time()
 
-saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_July18.RDS"))
+end_time - start_time
+
+saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_July30.RDS"))
 
 
 ## make sure reproducible:
-boot_results_reload <- readRDS(here("Analysis/update_data/data/processed/BootResults_July18.RDS"))
+boot_results_reload <- readRDS(here("Analysis/update_data/data/processed/BootResults_July30.RDS"))
 
 ## create boot dfs for each outcome for each model method
 
@@ -443,9 +457,12 @@ pmap(list(
 ## run linear models through one axis of the 3d arrays of the bootstrap in order to derive coefficients for predictions that look linear:
 
 coef_list_of_lists <- list()
+pval_list_of_lists <- list()
+
 for (i in seq(length(boot_results_reload))) {
   boot_data <- boot_results_reload[[i]]$no_subcat_sl_results$boot_sl_nosubcat_array
   coef_list <- list()
+  pval_list <- list()
   names(boot_data) <- percents
 
   for (j in 1:dim(boot_data)[2]) {
@@ -455,14 +472,18 @@ for (i in seq(length(boot_results_reload))) {
     data$perc <- as.numeric(rownames(data))
     colnames(data) <- c("Outcome", "Percent Changed")
     coef <- coef(lm(Outcome ~ `Percent Changed`, data = data))[[2]]
+    pval <- summary(lm(Outcome ~ `Percent Changed`, data = data))[4][[1]][8]
     coef <- coef / 10
     coef_list[[j]] <- coef
+    pval_list[[j]] <- pval
   }
   coef_list_of_lists[[i]] <- coef_list
+  pval_list_of_lists[[i]] <- pval_list
 }
 
 
 lm_boot_results <- map(.x = coef_list_of_lists, ~quantile(unlist(.x),  probs = c(0.025, 0.50, 0.975)))
+lm_pval_boot_results <- map(.x = pval_list_of_lists, ~quantile(unlist(.x),  probs = c(0.025, 0.50, 0.975)))
 
 lm_day_first_case <- lm_boot_results[1]
 lm_day_25_cases <- lm_boot_results[2]
