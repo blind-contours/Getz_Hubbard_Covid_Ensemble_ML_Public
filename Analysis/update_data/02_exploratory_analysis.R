@@ -9,7 +9,7 @@ library(here)
 ## load data after preprocessing
 #covid_data_processed <- read_excel(here("Analysis/update_data/data/processed/cleaned_covid_data_final.xlsx"),sheet = 1)
 
-covid_data_processed <- read_csv("Analysis/update_data/data/processed/cleaned_covid_data_final.csv")
+covid_data_processed <- read_csv(here("Analysis/update_data/data/processed/cleaned_covid_data_final.csv"))
 
 ## this was previously to create variable types for plotting on the top x axis but I've since removed it for the time being until we are clear on variable types
 
@@ -89,16 +89,33 @@ covid_factors_heatmap <- pheatmap(covid_num_scale,main = "COVID-19 Heatmap",
          cutree_cols = 5)
 
 ## get the clusters of variables 
-clusters <- cutree(covid_factors_heatmap$tree_col, k = 5)
-clusters <- as.data.frame(clusters)
+clusters_col <- cutree(covid_factors_heatmap$tree_col, k = 5)
+clusters_row <- cutree(covid_factors_heatmap$tree_row, k = 4)
 
+clusters_col <- as.data.frame(clusters_col)
+clusters_row <- as.data.frame(clusters_row)
+  
 colnames_dendro_reordered <- colnames(features_data)[covid_factors_heatmap$tree_col$order]
+rownames_dendro_reordered <- rownames(covid_num_scale)[covid_factors_heatmap$tree_row$order]
+
+high_values_cluster_group1 <- colnames_dendro_reordered[3:16]
+high_values_cluster_group2 <- colnames_dendro_reordered[46:53]                                                     
+low_values_cluster_group1 <- colnames_dendro_reordered[54:64]                                                     
+
+
+raw_data_w_states <- read.csv(here("Analysis/update_data/data/processed/CountiesMergedData_July_15.csv"))
+
+states_cluster_1 <- table(raw_data_w_states$State[match(rownames(subset(clusters_row, clusters_row == 1)), raw_data_w_states$FIPS)])
 
 ## from the reordered columns from the dendrogram we now are indexing the variable names for where we see features related to outcome
-colnames_dendro_reordered[20:24]
 
-## this part gets variables assigned to each cluster, i.e. finding what variables are in hotspots that are associated with high numbers of cases/mortality.
-## because the data is changing I will need to figure out how to automate this later.
+
+
+
+
+
+## JUNK 
+
 
 table(clusters)
 

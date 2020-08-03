@@ -5,7 +5,10 @@ library(purrr)
 library(sl3)
 library(tidyr)
 library(data.table)
+library(gbm)
+library(ggplot2)
 ## changed the varimp function to do subcategories
+
 varimp_subcat <- function (.x, 
                            loss, 
                            variable_list, 
@@ -24,11 +27,10 @@ varimp_subcat <- function (.x,
   preds <- fit$predict_fold(task, fold_number = fold_number)
   risk <- mean(loss(preds, Y))
   importance <- lapply(subcategories, function(i) {
-    #browser()
     subcat_vars <- variable_list[which(subcategory_list %in% i)]
-    scrambled_cols <- as.data.frame(purrr::map(.x =subcat_vars, ~data.table(sample(unlist(dat[, subcat_vars, with = FALSE]), nrow(dat)))))
-    names(scrambled_cols) <- subcat_vars
-    scrambled_col_names <- task$add_columns(scrambled_cols)
+    scrambled_rows <- dat[sample(nrow(dat)), ]
+    scrambled_rows_selection <- scrambled_rows %>% dplyr::select(!!subcat_vars)
+    scrambled_col_names <- task$add_columns(scrambled_rows_selection)
     scrambled_col_task <- task$next_in_chain(column_names = scrambled_col_names)
     scrambled_sl_preds <- fit$predict_fold(scrambled_col_task, 
                                            fold_number)
@@ -66,7 +68,6 @@ plot_variable_importance_for_cat <- function(input_df, plot_label, save_label){
   pdf(paste(here("Visulizations/var_imp/"),save_label , sep = ""))
   
   var_imp_plot <- var_importance %>%
-    filter(Risk_Ratio > 1.01)  %>%
     ggplot(aes(x = County_Features, y = Risk_Ratio)) +
     geom_dotplot(binaxis = "y", dotsize = 0.25) +
     labs(x = "County Level Feature", y = "Risk Ratio", 
@@ -79,12 +80,15 @@ plot_variable_importance_for_cat <- function(input_df, plot_label, save_label){
   dev.off()
   
 }
-ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july10.RDS"))
-Data_Dictionary <- read_excel("Analysis/update_data/data/processed/Data_Dictionary.xlsx")
+ML_pipeline_results <- readRDS(here("Analysis/update_data/data/processed/ML_pipeline_5_outcomes_noscale_july16.RDS"))
+Data_Dictionary <- read_excel(here("Analysis/update_data/data/processed/Data_Dictionary.xlsx"))
 Data_Dictionary_Used <- Data_Dictionary %>% filter(Keep == "Yes") %>% select(`Variable Name`, `Sub-Category`)
+
+vars_rmv_na <- read.csv(here("Analysis/update_data/data/processed/vars_removed_na_thresh.csv"))
 ##remove from the list covariates that had too many NAs and were then dropped before analysis, FIPS, and the outcome data:
-removing <- c(vars_rmv_na,
+removing <- c(vars_rmv_na$x,
                 "FIPS",
+                "occ_all_private",
                 "CountyRelativeDay25Cases",
                 "TotalCasesUpToDate",
                 "USRelativeDay100Deaths", 

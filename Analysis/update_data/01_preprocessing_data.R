@@ -14,11 +14,11 @@ census_data_rename <- FALSE
 
 
 # Changed to CountiesMergedData_July_10.csv
-covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData_July_13.csv")
+covid_data_unprocessed <- read_csv("Analysis/update_data/data/processed/CountiesMergedData_July_15.csv")
 
 ## remove character values that aren't needed
 covid_data_unprocessed <- covid_data_unprocessed %>% 
-  select(-c(X1, Name, NearestAirportName, NearestAirportOver5000000Name))
+  select(-c(X1, State, Name, NearestAirportName, NearestAirportOver5000000Name))
 
 ## convert to numeric
 covid_data_unprocessed <- data.frame(lapply(covid_data_unprocessed, 

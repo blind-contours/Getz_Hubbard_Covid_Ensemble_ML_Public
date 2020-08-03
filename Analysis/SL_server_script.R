@@ -110,7 +110,8 @@ bootstrapCI <- function(perc, boot_pred_data) {
     data = new_data,
     covariates = covars,
     outcome = outcome,
-    folds = origami::make_folds(data_used, fold_fun = folds_vfold, V = 2)
+    folds = origami::make_folds(data_used, 
+                                fold_fun = folds_vfold, V = 2)
   )
   
   sl_fit <- sl$train(day25_cases_task_cv)
@@ -147,13 +148,13 @@ for (i in 1:length(percents)) {
   data_temp <- data_used
   data_temp$log_Pub_Trans <- data_used$log_Pub_Trans - (data_used$log_Pub_Trans*perc)
 
-  day25_cases_task_cv_test <- make_sl3_Task(
+  task_cv_test <- make_sl3_Task(
   data = data_temp,
   covariates = covars,
   outcome = outcome,
-  folds = origami::make_folds(data_used, fold_fun = folds_vfold, V = 2))
+  folds = origami::make_folds(data_temp, fold_fun = folds_vfold, V = 2))
   
-  sl_preds_reduced <- sl_fit$predict(day25_cases_task_cv_test)
+  sl_preds_reduced <- sl_fit$predict(task_cv_test)
   sum_cases <- sum(sl_preds_reduced)
   
   boot_day25 <- replicate(10, bootstrapCI(perc = perc, 
