@@ -14,8 +14,9 @@ library(tidyr)
 library(gbm)
 
 
-#library(future)
-#plan(multiprocess)
+library(doParallel)
+workers <- getDoParWorkers()
+registerDoParallel(cores=workers)
 
 `%notin%` <- Negate(`%in%`)
 
@@ -240,7 +241,8 @@ bootsrap_marginal_predictions <- function(target_variable,
                                           covars,
                                           percents,
                                           pop,
-                                          boot_num) {
+                                          boot_num){
+  
   initialize_data <- rep(NaN, dim(data_original)[1] * boot_num * length(percents))
 
   boot_data_array_full_sl <- as.data.frame(matrix(0, ncol = length(percents), nrow = boot_num))
@@ -253,17 +255,21 @@ bootsrap_marginal_predictions <- function(target_variable,
 
 
   for (i in 1:length(percents)) {
+    
     perc <- percents[i]
-
-    boot_updates <- replicate(boot_num, bootstrapCI(
+    
+    boot_updates <- foreach(icount(boot_num)) %dopar% { 
+      bootstrapCI(
       target_variable = target_variable,
       data_original = data_original,
       ML_pipeline_result = ML_pipeline_result,
       covars = covars,
       outcome = outcome,
       perc = perc,
-      sub_cat_vars = sub_cat_vars
-    ), simplify = FALSE)
+      sub_cat_vars = sub_cat_vars)
+    }
+    
+    browser()
 
     if (outcome == "FirstCaseDay") {
       ## reformat and extract the bootstrap results
@@ -347,7 +353,7 @@ data_original = data_original,
 covars = covars,
 percents = percents,
 pop = data_original$Population,
-boot_num = 10
+boot_num = 3
 )
 end_time <- Sys.time()
 
