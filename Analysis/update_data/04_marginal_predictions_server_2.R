@@ -231,122 +231,97 @@ bootstrapCI <- function(target_variable,
   return(results)
 }
 
-## run marginal predictions for each decrease in target variable from variable importance calculations
-bootsrap_marginal_predictions <- function(target_variable,
-                                          ML_pipeline_result,
-                                          outcome,
-                                          boot_df_sf_full,
-                                          boot_df_sf_no_subcat,
-                                          boot_df_univar_gam,
-                                          sub_cat_vars,
-                                          data_original,
-                                          covars,
-                                          percents,
-                                          pop,
-                                          boot_num){
-  
-  initialize_data <- rep(NaN, dim(data_original)[1] * boot_num * length(percents))
-  
-  boot_data_array_full_sl <- as.data.frame(matrix(0, ncol = length(percents), nrow = boot_num))
-  boot_data_array_full_nosubcat <- as.data.frame(matrix(0, ncol = length(percents), nrow = boot_num))
-  boot_data_array_full_univar_gam <- as.data.frame(matrix(0, ncol = length(percents), nrow = boot_num))
-  
-  
-  for (i in 1:length(percents)) {
-    
-    perc <- percents[i]
-    
-    browser()
-    boot_updates <- foreach(icount(boot_num)) %dopar% { 
-      bootstrapCI(
-        target_variable = target_variable,
-        data_original = data_original,
-        ML_pipeline_result = ML_pipeline_result,
-        covars = covars,
-        outcome = outcome,
-        perc = perc,
-        sub_cat_vars = sub_cat_vars)
-    }
-    
-    if (outcome == "FirstCaseDay") {
-      ## reformat and extract the bootstrap results
-      boot_totals <- as.data.frame(t(colMeans(bind_rows(boot_updates))))
-      total_counts_SL_full <- boot_totals$SL_full_model
-      total_counts_SL_no_subcat <- boot_totals$SL_no_tgt_subcat_vars
-      total_counts_univariate_gam <- boot_totals$univariate_gam
-      
-      boot_updates_SL_full <- colMeans(do.call(cbind, sapply(boot_updates, "[", 1))) ## wish I didn't have to manually index here but in a hurry
-      boot_updates_SL_nosubcat <- colMeans(do.call(cbind, sapply(boot_updates, "[", 2)))
-      boot_updates_SL_univar_gam <- colMeans(do.call(cbind, sapply(boot_updates, "[", 3)))
-    } else {
-      total_totals <- as.data.frame(t(colSums(bind_rows(boot_updates) * pop)))
-      total_counts_SL_full <- total_totals$SL_full_model
-      total_counts_SL_no_subcat <- total_totals$SL_no_tgt_subcat_vars
-      total_counts_univariate_gam <- total_totals$univariate_gam
-      
-      boot_updates_SL_full <- colSums(do.call(cbind, sapply(boot_updates, "[", 1)) * pop)
-      boot_updates_SL_nosubcat <- colSums(do.call(cbind, sapply(boot_updates, "[", 2)) * pop)
-      boot_updates_SL_univar_gam <- colSums(do.call(cbind, sapply(boot_updates, "[", 3)) * pop)
-    }
-    boot_data_array_full_sl[, i] <- as.vector(boot_updates_SL_full)
-    boot_data_array_full_nosubcat[, i] <- as.vector(boot_updates_SL_nosubcat)
-    boot_data_array_full_univar_gam[, i] <- as.vector(boot_updates_SL_univar_gam)
-    
-    CI_boot_full_sl <- quantile(boot_updates_SL_full, probs = c(0.025, 0.50, 0.975), na.rm = TRUE)
-    CI_boot_full_nosubcat <- quantile(boot_updates_SL_nosubcat, probs = c(0.025, 0.50, 0.975), na.rm = TRUE)
-    CI_boot_full_univar_gam <- quantile(boot_updates_SL_univar_gam, probs = c(0.025, 0.50, 0.975), na.rm = TRUE)
-    
-    ## update full sl df
-    boot_df_sf_full[i, 1] <- perc
-    boot_df_sf_full[i, 2] <- CI_boot_full_sl[[2]]
-    boot_df_sf_full[i, 3] <- CI_boot_full_sl[[1]]
-    boot_df_sf_full[i, 4] <- CI_boot_full_sl[[3]]
-    
-    ## update subcat sl df
-    boot_df_sf_no_subcat[i, 1] <- perc
-    boot_df_sf_no_subcat[i, 2] <- CI_boot_full_nosubcat[[2]]
-    boot_df_sf_no_subcat[i, 3] <- CI_boot_full_nosubcat[[1]]
-    boot_df_sf_no_subcat[i, 4] <- CI_boot_full_nosubcat[[3]]
-    
-    ## update univar gam df
-    boot_df_univar_gam[i, 1] <- perc
-    boot_df_univar_gam[i, 2] <- CI_boot_full_univar_gam[[2]]
-    boot_df_univar_gam[i, 3] <- CI_boot_full_univar_gam[[1]]
-    boot_df_univar_gam[i, 4] <- CI_boot_full_univar_gam[[3]]
-  }
-  
-  return(list(
-    "full_sl_results" = list(
-      "boot_CI_df_sl_full" = boot_df_sf_full,
-      "boot_sl_full_array" = boot_data_array_full_sl
-    ),
-    "no_subcat_sl_results" = list(
-      "boot_CI_df_sl_nosubcat" = boot_df_sf_no_subcat,
-      "boot_sl_nosubcat_array" = boot_data_array_full_nosubcat
-    ),
-    "univar_gam_results" = list(
-      "boot_CI_univar_gam" = boot_df_univar_gam,
-      "boot_sl_univar_gam_array" = boot_data_array_full_univar_gam
-    )
-  ))
-}
+target_variable <- top_vars[1]
+ML_pipeline_result <- ML_pipeline_results[[1]]
+outcome <- target_outcomes[1]
+boot_df_sf_full <- boot_dfs_sl_full[1] 
+boot_df_sf_no_subcat <- boot_dfs_sl_no_subcat[1]
+boot_df_univar_gam <- boot_dfs_univar_gam[1]
+sub_cat_vars <- top_var_subcat_vars[1]
+data_original <- data_original
+covars <- covars 
+percents <- percents
+pop <- data_original$Population
+boot_num <- 100
 
+
+
+## run marginal predictions for each decrease in target variable from variable importance calculations
 
 start_time <- Sys.time()
-bootsrap_marginal_predictions(target_variable = top_vars[1],
-                                          ML_pipeline_result = ML_pipeline_results[[1]],
-                                          outcome = target_outcomes[1],
-                                          boot_df_sf_full = boot_dfs_sl_full[1] ,
-                                          boot_df_sf_no_subcat = boot_dfs_sl_no_subcat[1],
-                                          boot_df_univar_gam = boot_dfs_univar_gam[1],
-                                          sub_cat_vars = top_var_subcat_vars[1],
-                                          data_original = data_original,
-                                          covars = covars ,
-                                          percents = percents,
-                                          pop = data_original$Population,
-                                          boot_num = 100)
+
+
+initialize_data <- rep(NaN, dim(data_original)[1] * boot_num * length(percents))
+
+boot_data_array_full_sl <- as.data.frame(matrix(0, ncol = length(percents), nrow = boot_num))
+boot_data_array_full_nosubcat <- as.data.frame(matrix(0, ncol = length(percents), nrow = boot_num))
+boot_data_array_full_univar_gam <- as.data.frame(matrix(0, ncol = length(percents), nrow = boot_num))
+
+
+
+perc <- percents[4]
+
+boot_updates <- foreach(icount(boot_num)) %dopar% { 
+  bootstrapCI(
+    target_variable = target_variable,
+    data_original = data_original,
+    ML_pipeline_result = ML_pipeline_result,
+    covars = covars,
+    outcome = outcome,
+    perc = perc,
+    sub_cat_vars = sub_cat_vars)
+}
+
+if (outcome == "FirstCaseDay") {
+  ## reformat and extract the bootstrap results
+  boot_totals <- as.data.frame(t(colMeans(bind_rows(boot_updates))))
+  total_counts_SL_full <- boot_totals$SL_full_model
+  total_counts_SL_no_subcat <- boot_totals$SL_no_tgt_subcat_vars
+  total_counts_univariate_gam <- boot_totals$univariate_gam
+  
+  boot_updates_SL_full <- colMeans(do.call(cbind, sapply(boot_updates, "[", 1))) ## wish I didn't have to manually index here but in a hurry
+  boot_updates_SL_nosubcat <- colMeans(do.call(cbind, sapply(boot_updates, "[", 2)))
+  boot_updates_SL_univar_gam <- colMeans(do.call(cbind, sapply(boot_updates, "[", 3)))
+} else {
+  total_totals <- as.data.frame(t(colSums(bind_rows(boot_updates) * pop)))
+  total_counts_SL_full <- total_totals$SL_full_model
+  total_counts_SL_no_subcat <- total_totals$SL_no_tgt_subcat_vars
+  total_counts_univariate_gam <- total_totals$univariate_gam
+  
+  boot_updates_SL_full <- colSums(do.call(cbind, sapply(boot_updates, "[", 1)) * pop)
+  boot_updates_SL_nosubcat <- colSums(do.call(cbind, sapply(boot_updates, "[", 2)) * pop)
+  boot_updates_SL_univar_gam <- colSums(do.call(cbind, sapply(boot_updates, "[", 3)) * pop)
+}
+boot_data_array_full_sl[, i] <- as.vector(boot_updates_SL_full)
+boot_data_array_full_nosubcat[, i] <- as.vector(boot_updates_SL_nosubcat)
+boot_data_array_full_univar_gam[, i] <- as.vector(boot_updates_SL_univar_gam)
+
+CI_boot_full_sl <- quantile(boot_updates_SL_full, probs = c(0.025, 0.50, 0.975), na.rm = TRUE)
+CI_boot_full_nosubcat <- quantile(boot_updates_SL_nosubcat, probs = c(0.025, 0.50, 0.975), na.rm = TRUE)
+CI_boot_full_univar_gam <- quantile(boot_updates_SL_univar_gam, probs = c(0.025, 0.50, 0.975), na.rm = TRUE)
+
+## update full sl df
+boot_df_sf_full[i, 1] <- perc
+boot_df_sf_full[i, 2] <- CI_boot_full_sl[[2]]
+boot_df_sf_full[i, 3] <- CI_boot_full_sl[[1]]
+boot_df_sf_full[i, 4] <- CI_boot_full_sl[[3]]
+
+## update subcat sl df
+boot_df_sf_no_subcat[i, 1] <- perc
+boot_df_sf_no_subcat[i, 2] <- CI_boot_full_nosubcat[[2]]
+boot_df_sf_no_subcat[i, 3] <- CI_boot_full_nosubcat[[1]]
+boot_df_sf_no_subcat[i, 4] <- CI_boot_full_nosubcat[[3]]
+
+## update univar gam df
+boot_df_univar_gam[i, 1] <- perc
+boot_df_univar_gam[i, 2] <- CI_boot_full_univar_gam[[2]]
+boot_df_univar_gam[i, 3] <- CI_boot_full_univar_gam[[1]]
+boot_df_univar_gam[i, 4] <- CI_boot_full_univar_gam[[3]]
+
+
 end_time <- Sys.time()
 
 end_time - start_time
+
 
 saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_Aug1_test_tar1.RDS"))
