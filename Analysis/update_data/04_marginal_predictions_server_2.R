@@ -13,7 +13,7 @@ library(gbm)
 library(tidyr)
 library(gbm)
 
-
+## load parallel
 library(doParallel)
 #cl <- makeCluster(2)
 cl <- as.numeric(Sys.getenv('SLURM_CPUS_ON_NODE'))
