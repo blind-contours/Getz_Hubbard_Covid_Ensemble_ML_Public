@@ -24,14 +24,10 @@ library(tidyr)
 library(gbm)
 library(doRNG)
 
-
-registerDoFuture()
-plan(multiprocess)
-
-#library(doParallel)
-#ncores <- as.numeric(Sys.getenv('SLURM_CPUS_ON_NODE'))
-#ncores
-#registerDoParallel(2)
+library(doParallel)
+ncores <- as.numeric(Sys.getenv('SLURM_CPUS_ON_NODE'))
+ncores
+registerDoParallel(ncores)
 
 `%notin%` <- Negate(`%in%`)
 
@@ -170,84 +166,92 @@ bootstrapCI <- function(target_variable,
                         perc,
                         sub_cat_vars) {
   
-  #sl <- ML_pipeline_result$sl_obj
+  sl <- ML_pipeline_result$sl_obj
+
+  nr <- nrow(data_original)
+  data_tmp <- data_original
+  resampled_data <- data_tmp[sample(1:nr, size = nr, replace = TRUE), ]
+
+  resampled_data_task <- make_sl3_Task(
+   data = resampled_data,
+   covariates = covars,
+   outcome = outcome,
+   folds = origami::make_folds(resampled_data,
+                               fold_fun = folds_vfold, V = 2
+    )
+  )
+  # create another SL task but remove all other variables in the target variable subcategory and only include the target variable
+  resampled_data_task_no_subcat_covars <- make_sl3_Task(
+    data = resampled_data,
+    covariates = c(covars[covars %notin% sub_cat_vars], target_variable),
+    outcome = outcome,
+    folds = origami::make_folds(resampled_data,
+                                fold_fun = folds_vfold, V = 2
+    )
+  )
   
-  #nr <- nrow(data_original)
-  #data_tmp <- data_original
-  #resampled_data <- data_tmp[sample(1:nr, size = nr, replace = TRUE), ]
+  print("Got past making the initial tasks")
+
+  print("Fitting Learners")
+
+  ## train a univariate gam on the resampled data
+  univar_gam_model <- gam(as.formula(paste(outcome, paste("s(" , target_variable,")", sep = ""), sep = "~")),
+                          data = resampled_data)
   
-  #resampled_data_task <- make_sl3_Task(
-  #  data = resampled_data,
-  #  covariates = covars,
-  #  outcome = outcome,
-  #  folds = origami::make_folds(resampled_data,
-  #                              fold_fun = folds_vfold, V = 2
-  #   )
-  # )
-  ## create another SL task but remove all other variables in the target variable subcategory and only include the target variable
-  # resampled_data_task_no_subcat_covars <- make_sl3_Task(
-  #   data = resampled_data,
-  #   covariates = c(covars[covars %notin% sub_cat_vars], target_variable),
-  #   outcome = outcome,
-  #   folds = origami::make_folds(resampled_data,
-  #                               fold_fun = folds_vfold, V = 2
-  #   )
-  # )
+  print("Finished Fitting GAM")
+  ## train the superlearner on the resampled data
   
-  # print("Got past making the initial tasks")
+  # lrnr_mean <- make_learner(Lrnr_mean)
+  # sl_2 <- make_learner(Lrnr_sl, sl$params$learners[c(1,2)])
+  # sl_fit_full_resampled <- sl_2$train(resampled_data_task)
+  # sl_fit_nosubcat_resampled  <- sl_2$train(resampled_data_task_no_subcat_covars)
   # 
-  # print("Fitting Learners")
-  # 
-  # ## train a univariate gam on the resampled data
-  # univar_gam_model <- gam(as.formula(paste(outcome, paste("s(" , target_variable,")", sep = ""), sep = "~")), 
-  #                         data = resampled_data)
-  # ## train the superlearner on the resampled data
-  # sl_fit_full_resampled <- sl$train(resampled_data_task)
-  # sl_fit_nosubcat_resampled <- sl$train(resampled_data_task_no_subcat_covars)
-  # 
-  # print("Got past fitting")
-  # 
-  # 
-  # ## get the original data and reduce the target variable by perc
-  # data_resampled_reduced <- data_original
-  # target_min <- min(data_resampled_reduced[, target_variable])
-  # 
-  # for(i in 1:nrow(data_resampled_reduced)) {
-  #   if(target_min < data_resampled_reduced[[i, target_variable]])
-  #     data_resampled_reduced[[i, target_variable]] <- data_resampled_reduced[[i, target_variable]] - (data_resampled_reduced[[i, target_variable]] * perc)
-  #   else { 
-  #     data_resampled_reduced[[i, target_variable]] <- target_min
-  #   }
-  # }
-  # 
-  # resampled_data_reduced_task <- make_sl3_Task(
-  #   data = data_resampled_reduced,
-  #   covariates = covars,
-  #   outcome = outcome,
-  #   folds = origami::make_folds(data_resampled_reduced, fold_fun = folds_vfold, V = 2)
-  # )
-  # 
-  # resampled_data_reduced_task_no_subcat_covars <- make_sl3_Task(
-  #   data = data_resampled_reduced,
-  #   covariates = c(covars[covars %notin% sub_cat_vars], target_variable),
-  #   outcome = outcome,
-  #   folds = origami::make_folds(resampled_data,
-  #                               fold_fun = folds_vfold, V = 2
-  #   )
-  # )
-  # 
-  # print("Got past making the resampled reduced tasks")
-  # 
-  # ## predict through superlearner for reduced data on resampled models
-  # sl_preds_reduced_full <- sl_fit_full_resampled$predict(resampled_data_reduced_task)
-  # # predict from no subcategories
-  # sl_preds_reduced_no_subcat <- sl_fit_nosubcat_resampled$predict(resampled_data_reduced_task_no_subcat_covars)
-  # # predict from univariate gam
-  # univariate_gam_predictions <- stats::predict(object = univar_gam_model, newdata = data_resampled_reduced)
-  # 
-  # results <- data.frame(sl_preds_reduced_full, sl_preds_reduced_no_subcat, as.vector(univariate_gam_predictions))
-  # colnames(results) <- c("SL_full_model", "SL_no_tgt_subcat_vars", "univariate_gam")
-  results <- mean(rnorm(1e8))
+  sl_fit_full_resampled <- sl$train(resampled_data_task)
+  sl_fit_nosubcat_resampled <- sl$train(resampled_data_task_no_subcat_covars)
+
+  print("Got past fitting")
+
+
+  ## get the original data and reduce the target variable by perc
+  data_resampled_reduced <- data_original
+  target_min <- min(data_resampled_reduced[, target_variable])
+
+  for(i in 1:nrow(data_resampled_reduced)) {
+    if(target_min < data_resampled_reduced[[i, target_variable]])
+      data_resampled_reduced[[i, target_variable]] <- data_resampled_reduced[[i, target_variable]] - (data_resampled_reduced[[i, target_variable]] * perc)
+    else {
+      data_resampled_reduced[[i, target_variable]] <- target_min
+    }
+  }
+
+  resampled_data_reduced_task <- make_sl3_Task(
+    data = data_resampled_reduced,
+    covariates = covars,
+    outcome = outcome,
+    folds = origami::make_folds(data_resampled_reduced, fold_fun = folds_vfold, V = 2)
+  )
+
+  resampled_data_reduced_task_no_subcat_covars <- make_sl3_Task(
+    data = data_resampled_reduced,
+    covariates = c(covars[covars %notin% sub_cat_vars], target_variable),
+    outcome = outcome,
+    folds = origami::make_folds(resampled_data,
+                                fold_fun = folds_vfold, V = 2
+    )
+  )
+
+  print("Got past making the resampled reduced tasks")
+
+  ## predict through superlearner for reduced data on resampled models
+  sl_preds_reduced_full <- sl_fit_full_resampled$predict(resampled_data_reduced_task)
+  # predict from no subcategories
+  sl_preds_reduced_no_subcat <- sl_fit_nosubcat_resampled$predict(resampled_data_reduced_task_no_subcat_covars)
+  # predict from univariate gam
+  univariate_gam_predictions <- stats::predict(object = univar_gam_model, newdata = data_resampled_reduced)
+
+  results <- data.frame(sl_preds_reduced_full, sl_preds_reduced_no_subcat, as.vector(univariate_gam_predictions))
+  colnames(results) <- c("SL_full_model", "SL_no_tgt_subcat_vars", "univariate_gam")
+  #results <- mean(rnorm(1e8))
   
   return(results)
 }
@@ -375,4 +379,4 @@ end_time <- Sys.time()
 
 end_time - start_time
 
-#saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_July31.RDS"))
+saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_Aug_6_run100.RDS"))
