@@ -186,34 +186,12 @@ bootstrapCI <- function(target_variable,
     )
   )
   
-  print("Got past making the initial tasks")
-
-  print("Fitting GAM")
 
   ## train a univariate gam on the resampled data
   univar_gam_model <- gam(as.formula(paste(outcome, paste("s(" , target_variable,")", sep = ""), sep = "~")),
                           data = resampled_data)
   
-  print("Finished Fitting GAM")
-  # ## train the superlearner on the resampled data
-  # 
-  
-  # print("Fitting sample xgboost")
-  # data(agaricus.train, package='xgboost')
-  # data(agaricus.test, package='xgboost')
-  # 
-  # dtrain <- xgb.DMatrix(agaricus.train$data, label = agaricus.train$label)
-  # dtest <- xgb.DMatrix(agaricus.test$data, label = agaricus.test$label)
-  # watchlist <- list(train = dtrain, eval = dtest)
-  # 
-  # ## A simple xgb.train example:
-  # param <- list(max_depth = 2, eta = 1, verbose = 3, nthread = 1,
-  #               objective = "binary:logistic", eval_metric = "auc")
-  # bst <- xgb.train(param, dtrain, nrounds = 2, watchlist)
-  # 
-  # print("past manual xgboost")
-  
-  print("fitting sl learners")
+
   
   # lrnr_mean <- make_learner(Lrnr_mean)
   #sl_2 <- make_learner(Lrnr_sl, sl$params$learners[c(1,4)])
@@ -222,8 +200,6 @@ bootstrapCI <- function(target_variable,
   # 
   sl_fit_full_resampled <- sl$train(resampled_data_task)
   sl_fit_nosubcat_resampled <- sl$train(resampled_data_task_no_subcat_covars)
-
-  print("Got past fitting")
 
 
   ## get the original data and reduce the target variable by perc
@@ -254,7 +230,6 @@ bootstrapCI <- function(target_variable,
     )
   )
 
-  print("Got past making the resampled reduced tasks")
 
   ## predict through superlearner for reduced data on resampled models
   sl_preds_reduced_full <- sl_fit_full_resampled$predict(resampled_data_reduced_task)
@@ -265,8 +240,7 @@ bootstrapCI <- function(target_variable,
 
   results <- data.frame(sl_preds_reduced_full, sl_preds_reduced_no_subcat, as.vector(univariate_gam_predictions))
   colnames(results) <- c("SL_full_model", "SL_no_tgt_subcat_vars", "univariate_gam")
-  #results <- mean(rnorm(1e8))
-  
+
   return(results)
 }
 
@@ -378,51 +352,51 @@ ncores
 cl <- makeCluster(ncores)
 registerDoParallel(ncores)
 
-all_results <-as.list(rep(NA,5))
+#all_results <-as.list(rep(NA,5))
 
-#for(it in 2:5){
-#start_time <- Sys.time()
-results <- bootstrap_marginal_predictions(target_variable= top_vars[1],
-                                          ML_pipeline_result =ML_pipeline_results[[1]],
-                                          outcome = target_outcomes[1],
-                                          boot_df_sf_full = boot_dfs_sl_full[[1]],
-                                          boot_df_sf_no_subcat = boot_dfs_sl_no_subcat[[1]],
-                                          boot_df_univar_gam = boot_dfs_univar_gam[[1]],
-                                          sub_cat_vars= top_var_subcat_vars[[1]],
-                                          data_original = data_original,
-                                          covars = covars,
-                                          percents = percents,
-                                          pop = data_original$Population,
-                                          boot_num=100)
+start_time <- Sys.time()
 
-#end_time <- Sys.time()
-#end_time - start_time
+boot_results <- pmap(list(
+  target_variable = top_vars,
+  ML_pipeline_result = ML_pipeline_results,
+  outcome = target_outcomes,
+  boot_df_sf_full = boot_dfs_sl_full,
+  boot_df_sf_no_subcat = boot_dfs_sl_no_subcat,
+  boot_df_univar_gam = boot_dfs_univar_gam,
+  sub_cat_vars = top_var_subcat_vars
+),
+.f = bootsrap_marginal_predictions,
+data_original = data_original,
+covars = covars,
+percents = percents,
+pop = data_original$Population,
+boot_num = 1000
+)
 
+end_time <- Sys.time()
+end_time - start_time
 
-#all_results[[it]] <- results
-#}
+saveRDS(results, here("Analysis/update_data/data/processed/BootResults_Aug_7_run100.RDS"))
 
 stopCluster(cl)
 
 
-saveRDS(results, here("Analysis/update_data/data/processed/BootResults_Aug_7_run100.RDS"))
+# for(it in 1:5){
+#   results <- bootstrap_marginal_predictions(target_variable= top_vars[it],
+#                                             ML_pipeline_result =ML_pipeline_results[[it]],
+#                                             outcome = target_outcomes[it],
+#                                             boot_df_sf_full = boot_dfs_sl_full[[it]],
+#                                             boot_df_sf_no_subcat = boot_dfs_sl_no_subcat[[it]],
+#                                             boot_df_univar_gam = boot_dfs_univar_gam[[it]],
+#                                             sub_cat_vars= top_var_subcat_vars[[it]],
+#                                             data_original = data_original,
+#                                             covars = covars,
+#                                             percents = percents,
+#                                             pop = data_original$Population,
+#                                             boot_num=1000)
+#   
+#   all_results[[it]] <- results
+#   }
 
-
-# boot_results <- pmap(list(
-#   target_variable = top_vars,
-#   ML_pipeline_result = ML_pipeline_results,
-#   outcome = target_outcomes,
-#   boot_df_sf_full = boot_dfs_sl_full,
-#   boot_df_sf_no_subcat = boot_dfs_sl_no_subcat,
-#   boot_df_univar_gam = boot_dfs_univar_gam,
-#   sub_cat_vars = top_var_subcat_vars
-# ),
-# .f = bootsrap_marginal_predictions,
-# data_original = data_original,
-# covars = covars,
-# percents = percents,
-# pop = data_original$Population,
-# boot_num = 100
-# )
 
 
