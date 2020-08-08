@@ -405,7 +405,7 @@ results <- bootstrap_marginal_predictions(target_variable= top_vars[1],
 stopCluster(cl)
 
 
-saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_Aug_7_run100.RDS"))
+saveRDS(results, here("Analysis/update_data/data/processed/BootResults_Aug_7_run100.RDS"))
 
 
 # boot_results <- pmap(list(
