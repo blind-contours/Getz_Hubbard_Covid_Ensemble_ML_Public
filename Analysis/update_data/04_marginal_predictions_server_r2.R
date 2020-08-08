@@ -163,17 +163,17 @@ bootstrapCI <- function(target_variable,
                         sub_cat_vars) {
   
   sl <- ML_pipeline_result$sl_obj
-
+  
   nr <- nrow(data_original)
   data_tmp <- data_original
   resampled_data <- data_tmp[sample(1:nr, size = nr, replace = TRUE), ]
-
+  
   resampled_data_task <- make_sl3_Task(
-   data = resampled_data,
-   covariates = covars,
-   outcome = outcome,
-   folds = origami::make_folds(resampled_data,
-                               fold_fun = folds_vfold, V = 2
+    data = resampled_data,
+    covariates = covars,
+    outcome = outcome,
+    folds = origami::make_folds(resampled_data,
+                                fold_fun = folds_vfold, V = 2
     )
   )
   # create another SL task but remove all other variables in the target variable subcategory and only include the target variable
@@ -186,12 +186,12 @@ bootstrapCI <- function(target_variable,
     )
   )
   
-
+  
   ## train a univariate gam on the resampled data
   univar_gam_model <- gam(as.formula(paste(outcome, paste("s(" , target_variable,")", sep = ""), sep = "~")),
                           data = resampled_data)
   
-
+  
   
   # lrnr_mean <- make_learner(Lrnr_mean)
   #sl_2 <- make_learner(Lrnr_sl, sl$params$learners[c(1,4)])
@@ -200,12 +200,12 @@ bootstrapCI <- function(target_variable,
   # 
   sl_fit_full_resampled <- sl$train(resampled_data_task)
   sl_fit_nosubcat_resampled <- sl$train(resampled_data_task_no_subcat_covars)
-
-
+  
+  
   ## get the original data and reduce the target variable by perc
   data_resampled_reduced <- data_original
   target_min <- min(data_resampled_reduced[, target_variable])
-
+  
   for(i in 1:nrow(data_resampled_reduced)) {
     if(target_min < data_resampled_reduced[[i, target_variable]])
       data_resampled_reduced[[i, target_variable]] <- data_resampled_reduced[[i, target_variable]] - (data_resampled_reduced[[i, target_variable]] * perc)
@@ -213,14 +213,14 @@ bootstrapCI <- function(target_variable,
       data_resampled_reduced[[i, target_variable]] <- target_min
     }
   }
-
+  
   resampled_data_reduced_task <- make_sl3_Task(
     data = data_resampled_reduced,
     covariates = covars,
     outcome = outcome,
     folds = origami::make_folds(data_resampled_reduced, fold_fun = folds_vfold, V = 2)
   )
-
+  
   resampled_data_reduced_task_no_subcat_covars <- make_sl3_Task(
     data = data_resampled_reduced,
     covariates = c(covars[covars %notin% sub_cat_vars], target_variable),
@@ -229,34 +229,34 @@ bootstrapCI <- function(target_variable,
                                 fold_fun = folds_vfold, V = 2
     )
   )
-
-
+  
+  
   ## predict through superlearner for reduced data on resampled models
   sl_preds_reduced_full <- sl_fit_full_resampled$predict(resampled_data_reduced_task)
   # predict from no subcategories
   sl_preds_reduced_no_subcat <- sl_fit_nosubcat_resampled$predict(resampled_data_reduced_task_no_subcat_covars)
   # predict from univariate gam
   univariate_gam_predictions <- stats::predict(object = univar_gam_model, newdata = data_resampled_reduced)
-
+  
   results <- data.frame(sl_preds_reduced_full, sl_preds_reduced_no_subcat, as.vector(univariate_gam_predictions))
   colnames(results) <- c("SL_full_model", "SL_no_tgt_subcat_vars", "univariate_gam")
-
+  
   return(results)
 }
 
 ## run marginal predictions for each decrease in target variable from variable importance calculations
 bootstrap_marginal_predictions <- function(target_variable,
-                                          ML_pipeline_result,
-                                          outcome,
-                                          boot_df_sf_full,
-                                          boot_df_sf_no_subcat,
-                                          boot_df_univar_gam,
-                                          sub_cat_vars,
-                                          data_original,
-                                          covars,
-                                          percents,
-                                          pop,
-                                          boot_num){
+                                           ML_pipeline_result,
+                                           outcome,
+                                           boot_df_sf_full,
+                                           boot_df_sf_no_subcat,
+                                           boot_df_univar_gam,
+                                           sub_cat_vars,
+                                           data_original,
+                                           covars,
+                                           percents,
+                                           pop,
+                                           boot_num){
   
   initialize_data <- rep(NaN, dim(data_original)[1] * boot_num * length(percents))
   
@@ -370,13 +370,13 @@ data_original = data_original,
 covars = covars,
 percents = percents,
 pop = data_original$Population,
-boot_num = 1000
+boot_num = 300
 )
 
 end_time <- Sys.time()
 end_time - start_time
 
-saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_Aug_8_run1.RDS"))
+saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_Aug_8_run2.RDS"))
 
 stopCluster(cl)
 
