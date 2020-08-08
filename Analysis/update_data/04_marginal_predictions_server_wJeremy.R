@@ -376,7 +376,7 @@ boot_num = 1000
 end_time <- Sys.time()
 end_time - start_time
 
-saveRDS(results, here("Analysis/update_data/data/processed/BootResults_Aug_7_run1000.RDS"))
+saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_Aug_7_run1000.RDS"))
 
 stopCluster(cl)
 
