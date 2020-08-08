@@ -356,7 +356,7 @@ registerDoParallel(ncores)
 
 start_time <- Sys.time()
 
-boot_results <- pmap(list(
+boot_results <- purrr::pmap(list(
   target_variable = top_vars,
   ML_pipeline_result = ML_pipeline_results,
   outcome = target_outcomes,
