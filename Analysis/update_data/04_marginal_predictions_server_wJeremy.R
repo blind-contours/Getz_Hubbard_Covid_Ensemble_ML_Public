@@ -365,7 +365,7 @@ boot_results <- purrr::pmap(list(
   boot_df_univar_gam = boot_dfs_univar_gam,
   sub_cat_vars = top_var_subcat_vars
 ),
-.f = bootsrap_marginal_predictions,
+.f = bootstrap_marginal_predictions,
 data_original = data_original,
 covars = covars,
 percents = percents,
