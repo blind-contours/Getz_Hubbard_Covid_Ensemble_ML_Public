@@ -356,27 +356,41 @@ registerDoParallel(ncores)
 
 start_time <- Sys.time()
 
-boot_results <- purrr::pmap(list(
-  target_variable = top_vars,
-  ML_pipeline_result = ML_pipeline_results,
-  outcome = target_outcomes,
-  boot_df_sf_full = boot_dfs_sl_full,
-  boot_df_sf_no_subcat = boot_dfs_sl_no_subcat,
-  boot_df_univar_gam = boot_dfs_univar_gam,
-  sub_cat_vars = top_var_subcat_vars
-),
-.f = bootstrap_marginal_predictions,
-data_original = data_original,
-covars = covars,
-percents = percents,
-pop = data_original$Population,
-boot_num = 300
-)
+# boot_results <- purrr::pmap(list(
+#   target_variable = top_vars,
+#   ML_pipeline_result = ML_pipeline_results,
+#   outcome = target_outcomes,
+#   boot_df_sf_full = boot_dfs_sl_full,
+#   boot_df_sf_no_subcat = boot_dfs_sl_no_subcat,
+#   boot_df_univar_gam = boot_dfs_univar_gam,
+#   sub_cat_vars = top_var_subcat_vars
+# ),
+# .f = bootstrap_marginal_predictions,
+# data_original = data_original,
+# covars = covars,
+# percents = percents,
+# pop = data_original$Population,
+# boot_num = 300
+# )
+
+total_cases_by_minority_boot_results <- bootstrap_marginal_predictions(target_variable = "EPL_MINRTY", 
+                               ML_pipeline_result = ML_pipeline_results[[3]],
+                               outcome = target_outcomes[[3]],
+                               boot_df_sf_full = boot_dfs_sl_full[[2]],
+                               boot_df_sf_no_subcat = boot_dfs_sl_no_subcat[[2]],
+                               boot_df_univar_gam = boot_dfs_univar_gam[[2]],
+                               sub_cat_vars = top_var_subcat_vars[[3]],
+                               data_original = data_original,
+                               covars = covars,
+                               percents = percents,
+                               pop = data_original$Population,
+                               boot_num = 1000)
+                               
 
 end_time <- Sys.time()
 end_time - start_time
 
-saveRDS(boot_results, here("Analysis/update_data/data/processed/BootResults_Aug_8_run1.RDS"))
+saveRDS(boot_results, here("Analysis/update_data/data/processed/total_cases_by_minority_boot.RDS"))
 
 stopCluster(cl)
 
